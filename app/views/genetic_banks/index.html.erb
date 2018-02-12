@@ -1,0 +1,81 @@
+<h1 class="alert alert-success text-center">Genetic Bank</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Genetic bank', new_genetic_bank_path, class: "btn btn-primary btn-lg active" %></h3>
+    <button class="btn btn-primary btn-lg active" data-toggle="modal" data-target="#geneticBank-modal-modal">Create Bar Codes</button>
+
+    <div class="modal fade" id="geneticBank-modal-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Crate Bar Codes</h4>
+                </div>
+                <div class="modal-body">
+                    <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>
+                    <%= select_tag "geneticBank", options_from_collection_for_select(GeneticBank.all, "id", "code"),multiple: true %>
+                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
+                    <%end%>                
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<br>
+
+<%=
+    grid(@geneticBank) do |geneticBank|
+
+        geneticBank.column name: 'Code', attribute: 'code'
+        geneticBank.column name: 'Location', attribute: 'location'    
+        geneticBank.column name:"Trademark", attribute: 'trademark' 
+        geneticBank.column name:"Denomination", attribute: 'denomination'
+
+        geneticBank.column name: "Image" do |geneticBankImage|
+            if @pictures.exists?(:genetic_bank_id => geneticBankImage.id)   
+                arrayImage = @pictures.where(genetic_bank_id: geneticBankImage.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        geneticBank.column name:"Year", attribute: 'year' 
+        geneticBank.column name:"Breeder", attribute: 'breeder' 
+        geneticBank.column name:"Status", attribute: 'status' 
+        geneticBank.column name:"Scent", attribute:'scent' 
+        geneticBank.column name:"HeadSize", attribute: 'headSize'     
+        geneticBank.column name:"N.Petals", attribute:'numPetals'     
+        geneticBank.column name:  'Color', attribute: 'colorName',  assoc: :color    
+        geneticBank.column name:"Steamlenght", attribute: 'steamLenght'     
+        geneticBank.column name:"Production", attribute: 'production'     
+        geneticBank.column name:"Opening", attribute: 'production'     
+        geneticBank.column name:"Abnormality", attribute: 'abnormality'     
+        geneticBank.column name:"Remarks", attribute: 'remarks'      
+        geneticBank.column do |edit|
+            link_to('Edit', edit_genetic_bank_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        geneticBank.column do |show|
+            link_to('Show',genetic_bank_path(show.id),:class => "btn btn-success")
+        end
+
+        geneticBank.column do |delete|
+            link_to('Delete', genetic_bank_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+
+
+
+
+
+
+
+
+
+

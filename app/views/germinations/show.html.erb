@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @germination.seed.crossing.codeCross %>-<%= @germination.seed.crossing.numRepeat %></h2>
+            </div> 
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">codeCross:
+                        <span><strong><%= @germination.seed.crossing.codeCross %>-<%= @germination.seed.crossing.numRepeat%></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Week:
+                        <span><strong><%= @germination.week %></strong></span>
+                    </li>
+                    <li class="list-group-item">N°Germinations:
+                        <span><strong><%= @germination.numGerminations %></strong></span>
+                    </li>  
+
+                    <li class="list-group-item">Father Image:
+                        <span>
+                            <% @pictures.each do |picture| %>
+                            <% if @germination.seed.crossing.father_id  == picture.genetic_bank_id %>
+                            <div class="image-rose-show">
+                                <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
+                            </div>
+                            <%end%>
+                            <%end%>
+                        </span>
+                    </li>
+
+                    <li class="list-group-item">Mother Image:
+                        <span>
+                            <% @pictures.each do |picture| %>
+                            <% if @germination.seed.crossing.mother_id  == picture.genetic_bank_id %>
+                            <div class="image-rose-show">
+                                <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
+                            </div>
+                            <%end%>
+                            <%end%>
+                        </span>
+                    </li>
+                </ul>
+            </div>      
+            <div class="panel-footer">
+                <%= link_to('Edit', edit_germination_path(@germination), class: "btn btn-primary active") %>
+                <%= link_to('Back', germinations_path, class: "btn btn-primary active")%>
+            </div>     
+        </div>
+    </div>
+</div>
+
+
+
+

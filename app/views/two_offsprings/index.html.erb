@@ -1,0 +1,58 @@
+<h1 class="alert alert-success text-center">Two Offsprings</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Two offspring', new_two_offspring_path%></h3>
+</div>
+
+<%=
+    grid(@twoOffsprings) do |twoOffspring|
+        #        filter only by codeCross
+        twoOffspring.column name: "CodeCross-Individual", attribute: "codeCross", assoc: [:one_offspring ,:germination] do |k|
+            k.one_offspring.germination.seed.crossing.codeCross+"-#{k.one_offspring.individual}"
+        end
+
+        twoOffspring.column name: "Father.Img", html: {class: "image-rose-index"} do |fatherImg|
+            if @picturesParents.exists?(:genetic_bank_id => fatherImg.one_offspring.germination.seed.crossing.father_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: fatherImg.one_offspring.germination.seed.crossing.father_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        twoOffspring.column name: "Mother.Img", html: {class: "image-rose-index"}  do |motherImg|
+            if @picturesParents.exists?(:genetic_bank_id => motherImg.one_offspring.germination.seed.crossing.mother_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: motherImg.one_offspring.germination.seed.crossing.mother_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        twoOffspring.column name: "Image", html: {class: "image-rose-index"} do |twoOffspringImg|
+            if @pictures.exists?(:two_offspring_id => twoOffspringImg.id)
+                arrayImage = @pictures.where(two_offspring_id: twoOffspringImg.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@twoOffspringsImgPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+        twoOffspring.column name: "Color", attribute: "color"
+        twoOffspring.column name: "Status", attribute: "status"
+        twoOffspring.column name: "Headsize", attribute: "headSize"
+        twoOffspring.column name: "Flowering", attribute: "flowering"
+        twoOffspring.column name: "Numpetals", attribute: "numPetals"
+        twoOffspring.column name: "Form", attribute: "form"
+
+        twoOffspring.column do |edit|
+            link_to('Edit', edit_two_offspring_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        twoOffspring.column do |show|
+            link_to('Show',two_offspring_path(show.id),:class => "btn btn-success")
+        end
+
+        twoOffspring.column do |delete|
+            link_to('Delete', two_offspring_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+
+

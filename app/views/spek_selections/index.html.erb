@@ -1,0 +1,47 @@
+<h1 class="alert alert-success text-center">Spek Selections</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Spek selection', new_spek_selection_path %></h3>
+</div>
+
+<%=
+    grid(@spekSelectionsGrid) do |spek|    
+        spek.column name: "Code", attribute: "code" 
+        spek.column name: "Location", attribute: "location" 
+        spek.column name: "Trademark", attribute: "trademark" 
+        spek.column name: "Denomination", attribute: "denomination" 
+
+        spek.column name: "Image" do |spekImage|
+            if @pictures.exists?(:spek_selection_id => spekImage.id)
+                arrayImage = @pictures.where(spek_selection_id: spekImage.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@spekImagesPath+pictureFileName,:class =>"img-thumbnail")      
+            end            
+        end
+        spek.column name: "Year", attribute: "year" 
+        spek.column name: "Status", attribute: "status" 
+        spek.column name: "N° Plants", attribute: "numPlants" 
+        spek.column name: "Color", attribute: "colorName" , assoc: :color
+        spek.column name: "Head Size", attribute: "headSize" 
+        spek.column name: "N° Petals", attribute: "numPetals" 
+        spek.column name: "Production %", attribute: "production" 
+        spek.column name: "Opening %", attribute: "opening" 
+        spek.column name: "Abnormality", attribute: "abnormality" 
+        spek.column name: "Remarks", attribute: "remarks"   
+
+        spek.column do |spekSelection|
+            link_to("Edit",edit_spek_selection_path(spekSelection.id),:class => "btn btn-warning")
+        end
+
+        spek.column do |spekSelection|
+            link_to("Show",spek_selection_path(spekSelection.id),:class => "btn btn-success")
+        end
+
+        spek.column do |spekSelection|
+            link_to("Delete",spek_selection_path(spekSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-danger")
+        end
+    end
+-%>
+
+
+

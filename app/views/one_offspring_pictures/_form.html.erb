@@ -1,0 +1,17 @@
+<%= form_for(@one_offspring_picture) do |f| %>
+  <% if @one_offspring_picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@one_offspring_picture.errors.count, "error") %> prohibited this one_offspring_picture from being saved:</h2>
+
+      <ul>
+      <% @one_offspring_picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

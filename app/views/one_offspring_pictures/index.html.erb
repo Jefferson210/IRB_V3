@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing One Offspring Pictures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @one_offspring_pictures.each do |one_offspring_picture| %>
+      <tr>
+        <td><%= link_to 'Show', one_offspring_picture %></td>
+        <td><%= link_to 'Edit', edit_one_offspring_picture_path(one_offspring_picture) %></td>
+        <td><%= link_to 'Destroy', one_offspring_picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New One offspring picture', new_one_offspring_picture_path %>

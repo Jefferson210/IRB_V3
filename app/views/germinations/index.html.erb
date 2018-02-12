@@ -1,0 +1,112 @@
+<h1 class="alert alert-success text-center">Germinations</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Germination', new_germination_path %></h3>
+</div>
+
+<%=
+    grid(@germinationsGrid) do |germination|
+        germination.column name: "CodeCross", attribute: "codeCross", assoc: :seed do |seedCross|
+            seedCross.seed.crossing.codeCross+"-#{seedCross.seed.crossing.numRepeat}"
+        end
+        germination.column name: "Father Img", html: {class: "image-rose-index"}  do |germinationFatherImg|
+            if @pictures.exists?(:genetic_bank_id => germinationFatherImg.seed.crossing.father_id)
+                arrayImage = @pictures.where(genetic_bank_id: germinationFatherImg.seed.crossing.father_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        germination.column name: "Mother Img", html: {class: "image-rose-index"} do |germinationMotherImg|
+            if @pictures.exists?(:genetic_bank_id => germinationMotherImg.seed.crossing.mother_id)
+                arrayImage = @pictures.where(genetic_bank_id: germinationMotherImg.seed.crossing.mother_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+        germination.column name: "Week", attribute: "week"
+        germination.column name: "N°Germinations", attribute: "numGerminations"
+        #        germination.column name: "MissingSeed", attribute: "missingSeed"
+
+        germination.column do |germinationEdit|
+            link_to("Edit",edit_germination_path(germinationEdit.id),:class => "btn btn-warning")
+        end
+
+        germination.column do |germinationShow|
+            link_to("Show",germination_path(germinationShow.id),:class => "btn btn-success")
+        end
+
+        germination.column do |germinationDelete|
+            link_to("Delete",germination_path(germinationDelete.id),data: {confirm: "Are you SUre?"},method: :delete,:class => "btn btn-danger")
+        end
+    end
+-%>
+
+<!--
+<h4>Total CodeCrossNumRepeat = < sumaCodeCrossNumRepeat %></h4>
+<h4>Total CodeCross = < sumaCodeCross %></h4>
+<h4>percentajeSeedsNumRepeat  = < percentajeSeedsNumRepeat %></h4>
+<h4>percentajeSeedscodeCross  = < percentajeSeedscodeCross %></h4>
+-->
+
+<h2 class="alert alert-info">Results</h2>
+<!--resultadod por codigo(codeCross)-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>CodeCross</th>
+            <th>Total</th>
+            <th>Percentaje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% sumaCodeCross.each do |item| %>
+        <tr>
+            <td><%= item[0] %></td>
+            <td><%= item[1] %></td>
+            <td>
+                <%percentajeSeedscodeCross.each do |seed|%>
+                <%if seed[0] == item[0]%>
+                <%= (item[1] * 100) / seed[1] %>
+                <%end%>
+                <%end%>%                
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+
+
+</table>
+
+<!--resultados por codigo y numero de repeticion(CodeCrossNumRepeat)-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>CodeCrossNumRepeat</th>
+            <th>Total</th>
+            <th>Percentaje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% sumaCodeCrossNumRepeat.each do |item| %>
+        <tr>
+            <td><%= item[0] %></td>
+            <td><%= item[1] %></td>
+            <td>
+                <% percentajeSeedsNumRepeat.each do |seed| %>
+                <%if seed[0] == item[0]%>
+                <%= (item[1] * 100) / seed[1]  %>                    
+                <%end%>
+                <%end%>%
+            </td>
+
+        </tr>
+        <% end %>
+    </tbody>
+
+
+</table>
+<br>
+

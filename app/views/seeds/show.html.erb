@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @seed.crossing.codeCross %>-<%= @seed.crossing.numRepeat%></h2>
+            </div>
+
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">CodeCross:
+                        <span><strong><%= @seed.crossing.codeCross %>-<%= @seed.crossing.numRepeat%></strong></span>
+                    </li>
+
+                    <li class="list-group-item">SowDate:
+                        <span><strong><%= @seed.sowDate %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Origin:
+                        <span><strong><%= @seed.origin %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">NumSeeds:
+                        <span><strong><%= @seed.numSeeds %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">TotalWeight:
+                        <span><strong><%= @seed.totalWeight %> </strong></span>
+                    </li>
+
+                    <li class="list-group-item">Week:
+                        <span><strong><%= @seed.week %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Hydratation:
+                        <span><strong><%= @seed.hydratation %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Status:
+                        <span><strong><%= @seed.status %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">DateOut:
+                        <span><strong><%= @seed.dateOut %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Germination:
+                        <span><strong><%= @seed.germination %></strong></span>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="panel-footer">
+                <%= link_to 'Edit', edit_seed_path(@seed), class: "btn btn-primary active" %> 
+                <%= link_to 'Back', seeds_path,class: "btn btn-primary active" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

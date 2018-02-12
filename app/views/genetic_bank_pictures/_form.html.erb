@@ -1,0 +1,17 @@
+<%= form_for(@genetic_bank_picture) do |f| %>
+  <% if @genetic_bank_picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@genetic_bank_picture.errors.count, "error") %> prohibited this genetic_bank_picture from being saved:</h2>
+
+      <ul>
+      <% @genetic_bank_picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

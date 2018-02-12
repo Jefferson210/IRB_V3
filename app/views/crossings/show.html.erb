@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @crossing.codeCross %></h2>
+            </div>
+
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item">CrossCode:
+                        <span><strong><%= @crossing.codeCross %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">N.Order:
+                        <span><strong><%= @crossing.numOrder %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">N.Repeat:
+                        <span><strong><%= @crossing.numRepeat %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Year:
+                        <span><strong><%= @crossing.year %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Status:
+                        <span><strong><%= @crossing.status %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Father:
+                        <span><strong><%= @crossing.father.code %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Mother:
+                        <span><strong><%= @crossing.mother.code %></strong></span>
+                    </li>
+
+                    <li class="list-group-item">Crossweek:
+                        <span><strong><%= @crossing.crossWeek %></strong></span>
+                    </li>
+
+                    <li class="list-group-item" id="effectiveShowPage">Effective:
+                        <span><strong><%= @crossing.effective %></strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Numcrossings:
+                        <span><strong><%= @crossing.numCrossings %></strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Goodcrossings:
+                        <span><strong><%= @crossing.goodCrossings %></strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Badcrossings:
+                        <span><strong><%= @crossing.badCrossings %></strong></span>
+                    </li>                    
+
+                    <li class="list-group-item effectiveOption">Percentageeffective:
+                        <span><strong><%= @crossing.percentageEffective %>%</strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Dateharvest:
+                        <span><strong><%= @crossing.dateHarvest %></strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Weekharvest:
+                        <span><strong><%= @crossing.weekHarvest %></strong></span>
+                    </li>
+
+                    <li class="list-group-item effectiveOption">Numseeds:
+                        <span><strong><%= @crossing.numSeeds %></strong></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel-footer">
+                <%= link_to 'Edit', edit_crossing_path(@crossing), class: "btn btn-primary active" %> 
+                <%= link_to 'Back', crossings_path, class: "btn btn-primary active" %>
+            </div>
+        </div>
+    </div>
+</div>
+

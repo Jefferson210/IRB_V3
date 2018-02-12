@@ -1,0 +1,150 @@
+<div class="container">
+    <p id="notice"></p>
+    <div class="row">
+        <div class="col-offset-1 col-md-10">
+            <%= form_for(@crossing,:html=>{:class=>"form-horizontal"}) do |f| %>
+            <% if @crossing.errors.any? %>
+            <div id="error_explanation">
+                <h2><%= pluralize(@crossing.errors.count, "error") %> prohibited this crossing from being saved:</h2>
+
+                <ul>
+                    <% @crossing.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                    <% end %>
+                </ul>
+            </div>
+            <% end %>
+
+            <div class="form-group">
+                <%= f.label :father_id , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.collection_select(:father_id,GeneticBank.where(:status => "keep"),:id,:selectCodeTrademark,{:prompt => "Select code-trademark"},{:class => "form-control",:id => "father_id"})%> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :mother_id, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.collection_select(:mother_id,GeneticBank.where(:status => "keep"),:id,:selectCodeTrademark,{:prompt => "Select code-trademark"},{:class => "form-control",:id => "mother_id",disabled: true})%> 
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :year, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.select :year, (Time.zone.now.year - 5)..(Time.zone.now.year + 20), {:prompt => "Select"},{:class =>"form-control",disabled: true} %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :codeCross , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.text_field :codeCross,:class=>"form-control",:id=>"codeCrossId" ,:readonly => true %>
+                    <!--                    , :onchange=> "sameParents()"-->
+                </div>                
+            </div>
+
+            <div class="form-group">
+                <%= f.label :numRepeat , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">  
+                    <%= f.number_field :numRepeat, :class=>"form-control" ,min: 0 %>                  
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :numOrder , :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">  
+                    <%= f.number_field :numOrder, :class=>"form-control" ,min: 0 , :readonly => true %>                  
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :status, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <%= f.label :crossWeek, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.number_field :numCrossings,:class=>"form-control", min: 0 %>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <%= f.label :effective , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.select(:effective, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.effective), {:prompt => "Select"},{:class => 'form-control', :id => "effectiveId"})  %>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :numCrossings, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.number_field :numCrossings,:class=>"form-control",min: 0, :id => "numCrossingId" %>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :goodCrossings, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.number_field :goodCrossings,:class=>"form-control",min: 0,:id => "goodCrossingId" %>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :badCrossings, :class=>"col-md-2 control-label" %>
+                <div class="col-md-3">
+                    <%= f.number_field :badCrossings,:class=>"form-control",min: 0,:id => "badCrossingId", :readonly => true %>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :percentageEffective , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.text_field :percentageEffective ,:class=>"form-control", :id => "percEffectiveId",:readonly => true%>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :dateHarvest , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.date_field :dateHarvest ,:class=>"form-control",value: f.object.dateHarvest ,:prompt => "Select"%>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :weekHarvest , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">
+                    <%= f.number_field :weekHarvest, :class=>"form-control",min: 0  %>
+                </div>
+            </div>
+
+            <div class="form-group effectiveOption">
+                <%= f.label :numSeeds , :class=>"col-md-2 control-label"%>
+                <div class="col-md-3">  
+                    <%= f.number_field :numSeeds, :class=>"form-control",min: 0  %>                  
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="actions">
+                    <%= f.submit class: "btn btn-primary active" %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

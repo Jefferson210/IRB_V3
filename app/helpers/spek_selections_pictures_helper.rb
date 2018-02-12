@@ -1,0 +1,2 @@
+module SpekSelectionsPicturesHelper
+end

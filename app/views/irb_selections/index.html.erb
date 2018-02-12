@@ -1,0 +1,52 @@
+<h1 class="alert alert-success text-center">IRB Selections</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Irb selection', new_irb_selection_path %></h3>
+</div>
+
+<%=
+    grid(@irbSelections) do |irbSelection|
+        irbSelection.column name: "", attribute: "codeCross", assoc: [:three_offspring,:two_offspring,:one_offspring,:germination] do |k|
+            k.three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross+"-#{k.three_offspring.two_offspring.one_offspring.individual}"
+        end
+
+        irbSelection.column name: "Code", attribute: "code"
+        irbSelection.column name: "Locat", attribute: "location"
+        irbSelection.column name: "Trademark", attribute: "trademark"
+        irbSelection.column name: "Denomin", attribute: "denomination"
+
+        irbSelection.column name: "Image", html: {class: "image-rose-index"} do |irbSelectionImg|
+            if @pictures.exists?(:irb_selection_id => irbSelectionImg.id)
+                arrayImage = @pictures.where(irb_selection_id: irbSelectionImg.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@irbSelectionsImgPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        irbSelection.column name: "Year", attribute: "year"
+        irbSelection.column name: "Status", attribute: "status"
+        irbSelection.column name: "N.Plants", attribute: "numPlants"
+        irbSelection.column name: "Color", attribute: "color"
+        irbSelection.column name: "Scent", attribute: "scent"
+        irbSelection.column name: "Headsize", attribute: "headSize"
+        irbSelection.column name: "N.Petals", attribute: "numPetals"
+        irbSelection.column name: "Steamlenght", attribute: "steamLenght"
+        irbSelection.column name: "Produc", attribute: "production"
+        irbSelection.column name: "Opening", attribute: "opening"
+        irbSelection.column name: "Abnormality", attribute: "abnormality"
+        irbSelection.column name: "Remarks", attribute: "remarks"
+
+        irbSelection.column do |edit|
+            link_to('Edit', edit_irb_selection_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        irbSelection.column do |show|
+            link_to('Show',irb_selection_path(show.id),:class => "btn btn-success")
+        end
+
+        irbSelection.column do |delete|
+            link_to('Delete', irb_selection_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+

@@ -1,0 +1,84 @@
+<h1 class="alert alert-success text-center">Seeds</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Seed', new_seed_path %></h3>
+</div>
+
+<%=
+    grid(@seedsGrid) do |seed|
+        seed.column name: "CodeCross", attribute: "codeCross",html: {id: "codeCrossName"}, assoc: :crossing do |seedCrossing|
+            seedCrossing.crossing.codeCross + "-#{seedCrossing.crossing.numRepeat}"
+        end
+
+        seed.column name: "Sowdate", attribute: "sowDate",filter_type: :bootstrap_datepicker
+        seed.column name: "Origin", attribute: "origin"  
+        seed.column name: "Numseeds", attribute: "numSeeds"  
+        seed.column name: "Totalweight", attribute: "totalWeight"  
+        seed.column name: "Week", attribute: "week"  
+        seed.column name: "Hydratation", attribute: "hydratation"  
+        seed.column name: "Status", attribute: "status"  
+        seed.column name: "Dateout", attribute: "dateOut",filter_type: :bootstrap_datepicker  
+        seed.column name: "Germination", attribute: "germination"  
+        #        seed.column name: "totalCode", attribute: "totalCode"  
+        #        seed.column name: "totalNum", attribute: "totalNumRepeat" 
+
+        seed.column do |seedEdit|
+            link_to("Edit",edit_seed_path(seedEdit.id),:class => "btn btn-warning")
+        end
+
+        seed.column do |seedShow|
+            link_to("Show",seed_path(seedShow.id),:class => "btn btn-success")
+        end
+
+        seed.column do |seedDelete|
+            link_to("Delete",seed_path(seedDelete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+<!--
+<h4>suma by CodeCrossNumRepeat = < sumaCodeCrossNumRepeat %></h4>
+<h4>suma by Code = < sumaCode %></h4>
+-->
+
+<h2 class="alert alert-info">Results</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CodeCross</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% sumaCode.each do |item| %>
+        <tr>
+            <td><%= item[0] %></td>
+            <td><%= item[1] %></td>
+        </tr>
+        <% end %>
+    </tbody>
+
+
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CodeCrossNumRepeat</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% sumaCodeCrossNumRepeat.each do |item| %>
+        <tr>
+            <td><%= item[0] %></td>
+            <td><%= item[1] %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<br>
+
+

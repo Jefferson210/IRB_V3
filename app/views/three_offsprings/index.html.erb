@@ -1,0 +1,64 @@
+<h1 class="alert alert-success text-center">Three Offsprings</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New Three offspring', new_three_offspring_path %></h3>
+</div>
+<p id="notice"><%= notice %></p>
+
+<%=
+    grid(@threeOffsprings) do |threeOffspring|
+        #        filter only by codeCross
+        threeOffspring.column name: "CodeCross-Individual", attribute: "codeCross", assoc: [:two_offspring,:one_offspring,:germination] do |k|
+            k.two_offspring.one_offspring.germination.seed.crossing.codeCross+"-#{k.two_offspring.one_offspring.individual}"
+        end
+
+        threeOffspring.column name: "Father.Img", html: {class: "image-rose-index"} do |fatherImg|
+            if @picturesParents.exists?(:genetic_bank_id => fatherImg.two_offspring.one_offspring.germination.seed.crossing.father_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: fatherImg.two_offspring.one_offspring.germination.seed.crossing.father_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        threeOffspring.column name: "Mother.Img", html: {class: "image-rose-index"}  do |motherImg|
+            if @picturesParents.exists?(:genetic_bank_id => motherImg.two_offspring.one_offspring.germination.seed.crossing.mother_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: motherImg.two_offspring.one_offspring.germination.seed.crossing.mother_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end 
+
+        threeOffspring.column name: "Image", html: {class: "image-rose-index"} do |threeOffspringImg|
+            if @pictures.exists?(:three_offspring_id => threeOffspringImg.id)
+                arrayImage = @pictures.where(three_offspring_id: threeOffspringImg.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@threeOffspringsImgPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end       
+
+        threeOffspring.column name: "Color", attribute: "color"
+        threeOffspring.column name: "Status", attribute: "status"
+        threeOffspring.column name: "Headsize", attribute: "headSize"
+        threeOffspring.column name: "Flowering", attribute: "flowering"
+        threeOffspring.column name: "Numpetals", attribute: "numPetals"
+        threeOffspring.column name: "Form", attribute: "form"
+
+        threeOffspring.column do |edit|
+            link_to('Edit', edit_three_offspring_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        threeOffspring.column do |show|
+            link_to('Show',three_offspring_path(show.id),:class => "btn btn-success")
+        end
+
+        threeOffspring.column do |delete|
+            link_to('Delete', three_offspring_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+
+
+
+
+
+

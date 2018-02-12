@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <h1 class="alert alert-success text-center">Genetic Bank</h1>
+        <h4 class="alert alert-info text-center">select the elements to generate bar codes </h4>
+
+        <div>
+            <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>
+            <%= select_tag "geneticBank", options_from_collection_for_select(GeneticBank.all, "id", "code"),multiple: true %>
+            <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
+            <%end%>
+        </div>
+    </div>   
+
+</div>

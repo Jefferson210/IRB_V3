@@ -1,0 +1,2 @@
+module GeneticBankPicturesHelper
+end

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Genetic Bank Pictures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @genetic_bank_pictures.each do |genetic_bank_picture| %>
+      <tr>
+        <td><%= link_to 'Show', genetic_bank_picture %></td>
+        <td><%= link_to 'Edit', edit_genetic_bank_picture_path(genetic_bank_picture) %></td>
+        <td><%= link_to 'Destroy', genetic_bank_picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Genetic bank picture', new_genetic_bank_picture_path %>

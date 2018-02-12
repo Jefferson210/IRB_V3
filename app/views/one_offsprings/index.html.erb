@@ -1,0 +1,56 @@
+<h1 class="alert alert-success text-center">One Offsprings</h1>
+
+<div class="text-center">
+    <h3><%= link_to 'New One offspring', new_one_offspring_path %></h3>
+</div>
+
+<%=
+    grid(@oneOffsprings) do |oneOffspring|
+        oneOffspring.column name: "Codecross-numRepeat", attribute: "codeCross", assoc: :germination do |k|
+            k.germination.seed.crossing.codeCross + "#{-k.germination.seed.crossing.numRepeat}"
+        end
+        oneOffspring.column name: "Father.Img", html: {class: "image-rose-index"} do |fatherImg|
+            if @picturesParents.exists?(:genetic_bank_id => fatherImg.germination.seed.crossing.father_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: fatherImg.germination.seed.crossing.father_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        oneOffspring.column name: "Mother.Img", html: {class: "image-rose-index"}  do |motherImg|
+            if @picturesParents.exists?(:genetic_bank_id => motherImg.germination.seed.crossing.mother_id)
+                arrayImage = @picturesParents.where(genetic_bank_id: motherImg.germination.seed.crossing.mother_id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+
+        oneOffspring.column name: "Picture", html: {class: "image-rose-index"}  do |oneOffspringImg|
+            if @pictures.exists?(:one_offspring_id => oneOffspringImg.id)
+                arrayImage = @pictures.where(one_offspring_id: oneOffspringImg.id).to_a
+                pictureFileName = arrayImage[0][:picture_file_name]
+                image_tag(@oneOffspringImgPath+pictureFileName,:class => "img-thumbnail")
+            end
+        end
+        oneOffspring.column name: "N.Individual", attribute: "individual"
+        oneOffspring.column name: "Color", attribute: "colorName", assoc: :color
+        oneOffspring.column name: "Status", attribute: "status"
+        oneOffspring.column name: "Headsize", attribute: "headSize"
+        oneOffspring.column name: "Flowering", attribute: "flowering"
+        oneOffspring.column name: "Numpetals", attribute: "numPetals"
+        oneOffspring.column name: "Form", attribute: "form"
+
+        oneOffspring.column do |edit|
+            link_to('Edit', edit_one_offspring_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        oneOffspring.column do |show|
+            link_to('Show',one_offspring_path(show.id),:class => "btn btn-success")
+        end
+
+        oneOffspring.column do |delete|
+            link_to('Delete', one_offspring_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>
+
