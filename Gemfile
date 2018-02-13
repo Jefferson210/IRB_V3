@@ -62,3 +62,5 @@ gem 'chunky_png', '~> 1.3', '>= 1.3.5'   #lee y escribe imagenes PNG
 
 gem 'bootstrap-datepicker-rails' #para uso de datePicker
 gem 'bootstrap-multiselect-rails4', '~> 0.0.1'    #multiselect bootstrap
+
+gem 'cancan', '~> 1.6', '>= 1.6.10'

@@ -1,37 +1,40 @@
 Rails.application.routes.draw do
-    devise_for :users
+    #establecemos el controlador registrations personalizado para usarlo en Devise
+    devise_for :users, :controllers => {:registrations => "registrations"}
+    resources :user, :controller => "users"
+
     resources :colors
 
     resources :genetic_banks do
         resources :genetic_bank_pictures
     end
-    
+
     resources :crossings
     resources :seeds
     resources :germinations
-    
+
     resources :one_offsprings do
         resources :one_offspring_pictures
     end
-    
+
     resources :two_offsprings do
         resources :two_offspring_pictures
     end
-    
+
     resources :three_offsprings do
         resources :three_offspring_pictures
     end
-    
+
     resources :irb_selections do
         resources :irb_selections_pictures
     end
-    
+
     resources :spek_selections do
         resources :spek_selections_pictures
     end
-    
+
     resources :spek_selections_pictures
-    
+
     get 'geneticBankBarCodes'      => 'genetic_banks#generateBarCode'
 
     get 'getCrossing/:id' => 'crossings#getCrossing'
@@ -52,7 +55,7 @@ Rails.application.routes.draw do
     get 'selectColorThreeOffspring/:id' => 'three_offsprings#selectColor'
 
     get 'selectColorIrbSelections/:id' => 'irb_selections#selectColor'
-    
+
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
 

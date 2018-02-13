@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-xs-offset-1 col-sm-offset-3 col-md-offset-4">
+        <% @user.errors.full_messages.each do |message|%>
+        <div class="alert alert-danger">
+            <li><%= message %></li>
+        </div>
+        <%end%>
+        <div class="form-group ">
+            <p><%= f.label :Username %><br />
+                <%= f.text_field :username ,:class=>"form-control"%></p>
+        </div>
+
+        <div class="form-group  ">
+            <p><%= f.label :Email %><br />
+                <%= f.text_field :email ,:class=>"form-control"%></p>
+        </div>       
+
+        <div class="form-group  ">
+            <% if can? :manage, User%>
+            <%= f.collection_select(:role, User::Roles, :to_s, :humanize,{:prompt => "Select Role"},{:class => "form-control"}) %>
+            <% end %>
+        </div>
+        <div class="form-group  ">
+            <p><%= f.submit :class=>"btn btn-primary" %></p>
+            <%= link_to "Back", :back  %>
+        </div>	
+    </div>
+</div>

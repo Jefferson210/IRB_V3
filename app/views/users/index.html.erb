@@ -1,0 +1,22 @@
+<!--< if can? :manage, User %>-->
+<h1 class="alert alert-success text-center">Users</h1>
+<div class="text-center">
+    <h3><%= link_to 'New User', new_user_path, class: "btn btn-primary btn-lg active" %></h3>
+</div>
+
+<%=
+    grid(@userGrid) do |userProfile|
+
+        userProfile.column name: 'Username', attribute: 'username'
+        userProfile.column name: 'Email', attribute: 'email'    
+        userProfile.column name:"Role", attribute: 'role' 
+        
+        userProfile.column do |edit|
+            link_to('Edit', edit_user_path(edit.id),:class => "btn btn-warning")
+        end    
+
+        userProfile.column do |delete|
+            link_to('Delete', user_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+        end
+    end
+-%>

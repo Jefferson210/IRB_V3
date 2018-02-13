@@ -12,8 +12,13 @@ class ApplicationController < ActionController::Base
     protected
 
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-        devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
-        devise_parameter_sanitizer.permit(:account_update, keys: [:username])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :role])
+        #devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:username,:role])
+    end
+
+    #enviar mensaje de acceso denegado
+    rescue_from CanCan::AccessDenied do |exception|
+        redirect_to genetic_banks_path #,:flash => { :error => "You are not authorized to access this page." } 
     end
 end
