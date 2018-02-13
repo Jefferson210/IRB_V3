@@ -15,10 +15,12 @@
             <%= f.text_field :username,:class=>'form-control' %>
         </div>
         
+        <% if can? :manage, User %>
         <div class="form-group">
             <%= f.label :role %><br />
             <%= f.collection_select(:role, User::Roles, :to_s, :humanize,{:prompt => "Select Role"},{:class => "form-control"}) %>
         </div>
+        <%end%>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>

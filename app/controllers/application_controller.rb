@@ -13,12 +13,19 @@ class ApplicationController < ActionController::Base
 
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :role])
-        #devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
+        #        devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
         devise_parameter_sanitizer.permit(:account_update, keys: [:username,:role])
     end
 
     #enviar mensaje de acceso denegado
     rescue_from CanCan::AccessDenied do |exception|
         redirect_to genetic_banks_path #,:flash => { :error => "You are not authorized to access this page." } 
+    end
+
+    #para solucionar el error de parametros que tiene cancan con rails 4+
+    before_filter do
+        resource = controller_name.singularize.to_sym
+        method = "#{resource}_params"
+        params[resource] &&= send(method) if respond_to?(method, true)
     end
 end
