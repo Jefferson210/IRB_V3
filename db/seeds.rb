@@ -7,4 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Default admin user
-admin= User.create(:username => "admin", :email => "admin@gmail.com", :password => "123456", :password_confirmation => "123456")
+admin= User.create(:username => "admin", :email => "admin@gmail.com",:role => "administrator", :password => "123456", :password_confirmation => "123456")

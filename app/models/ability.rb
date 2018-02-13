@@ -5,7 +5,7 @@ class Ability
         user ||= User.new # usuario invitado (no logeado)
         can :manage, :all
         cannot :manage, User
-        if user.role == 'administrador'
+        if user.role == 'administrator'
             can :manage, :all
         else
             if user.role == 'breeder'

@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, :validatable
     
     #Posibles roles a asignar
-    Roles = %w[administrador breeder].freeze  
+    Roles = %w[administrator breeder].freeze  
 end
