@@ -1,0 +1,17 @@
+<%= form_for(@conectiflor_picture) do |f| %>
+<% if @conectiflor_picture.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@conectiflor_picture.errors.count, "error") %> prohibited this conectiflor_picture from being saved:</h2>
+
+    <ul>
+        <% @conectiflor_picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="actions">
+    <%= f.submit %>
+</div>
+<% end %>

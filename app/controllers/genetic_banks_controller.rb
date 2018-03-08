@@ -1,6 +1,6 @@
 class GeneticBanksController < ApplicationController
     before_action :set_genetic_bank, only: [:show, :edit, :update, :destroy]
-
+    
     def barcode_output( geneticBank )
         barcodeString = geneticBank.code 
         barcode = Barby::Code128B.new(barcodeString)

@@ -11,13 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213013146) do
+ActiveRecord::Schema.define(version: 20180228030916) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "conectiflor_pictures", force: :cascade do |t|
+    t.integer  "conectiflor_selection_id", limit: 4
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "picture_file_name",        limit: 255
+    t.string   "picture_content_type",     limit: 255
+    t.integer  "picture_file_size",        limit: 4
+    t.datetime "picture_updated_at"
+  end
+
+  add_index "conectiflor_pictures", ["conectiflor_selection_id"], name: "index_conectiflor_pictures_on_conectiflor_selection_id", using: :btree
+
+  create_table "conectiflor_selections", force: :cascade do |t|
+    t.string   "code",         limit: 255,                           null: false
+    t.string   "location",     limit: 255
+    t.string   "trademark",    limit: 255
+    t.string   "denomination", limit: 255
+    t.integer  "year",         limit: 4
+    t.string   "status",       limit: 255
+    t.integer  "numPlants",    limit: 4
+    t.integer  "color_id",     limit: 4
+    t.string   "scent",        limit: 255
+    t.string   "headSize",     limit: 255
+    t.integer  "numPetals",    limit: 4
+    t.decimal  "steamLenght",                precision: 5, scale: 2
+    t.string   "production",   limit: 255
+    t.string   "opening",      limit: 255
+    t.text     "abnormality",  limit: 65535
+    t.text     "remarks",      limit: 65535
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
+  add_index "conectiflor_selections", ["color_id"], name: "index_conectiflor_selections_on_color_id", using: :btree
 
   create_table "crossings", force: :cascade do |t|
     t.string   "codeCross",           limit: 255
@@ -286,6 +321,8 @@ ActiveRecord::Schema.define(version: 20180213013146) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "conectiflor_pictures", "conectiflor_selections"
+  add_foreign_key "conectiflor_selections", "colors"
   add_foreign_key "crossings", "genetic_banks", column: "father_id", name: "fk_father_id"
   add_foreign_key "crossings", "genetic_banks", column: "mother_id", name: "fk_mother_id"
   add_foreign_key "genetic_banks", "colors"

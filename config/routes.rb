@@ -33,7 +33,10 @@ Rails.application.routes.draw do
         resources :spek_selections_pictures
     end
 
-    resources :spek_selections_pictures
+
+    resources :conectiflor_selections  do
+        resources :conectiflor_pictures
+    end
 
     get 'geneticBankBarCodes'      => 'genetic_banks#generateBarCode'
 
@@ -55,6 +58,16 @@ Rails.application.routes.draw do
     get 'selectColorThreeOffspring/:id' => 'three_offsprings#selectColor'
 
     get 'selectColorIrbSelections/:id' => 'irb_selections#selectColor'
+
+    #    =============================ROUTES FOR API========================================
+    namespace :api , defaults: {format: 'json'} do
+        namespace :v1 do
+            resources :irb_selections_api
+            resources :spek_selections_api
+            resources :conectiflor_selections_api
+        end
+    end
+
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".

@@ -1,0 +1,119 @@
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @conectiflor_selection.code %></h2>
+            </div>
+
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group item">Code:
+                        <span><strong> <%= @conectiflor_selection.code %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Location:
+                        <span><strong><%= @conectiflor_selection.location %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Trademark:
+                        <span><strong><%= @conectiflor_selection.trademark %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Denomination:
+                        <span><strong> <%= @conectiflor_selection.denomination %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Year:
+                        <span><strong><%= @conectiflor_selection.year %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Status:
+                        <span><strong>   <%= @conectiflor_selection.status %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Numplants:
+                        <span><strong> <%= @conectiflor_selection.numPlants %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Color:
+                        <span><strong><%= @conectiflor_selection.color ? @conectiflor_selection.color.colorName : 'N/A' %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Scent:
+                        <span><strong> <%= @conectiflor_selection.scent %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Headsize:
+                        <span><strong><%= @conectiflor_selection.headSize %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Numpetals:
+                        <span><strong><%= @conectiflor_selection.numPetals %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Steamlenght:
+                        <span><strong><%= @conectiflor_selection.steamLenght %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Production:
+                        <span><strong><%= @conectiflor_selection.production %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Opening:
+                        <span><strong>  <%= @conectiflor_selection.opening %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Abnormality:
+                        <span><strong><%= @conectiflor_selection.abnormality %></strong></span>
+                    </li>
+
+                    <li class="list-group item">Remarks:
+                        <span><strong> <%= @conectiflor_selection.remarks %></strong></span>
+                    </li>
+                </ul>
+            </div>    
+
+            <div class="row">
+                <h2>Images</h2>
+                <% @conectiflor_selection.conectiflor_pictures.each do |picture| %>
+                <div class="col-md-3">
+                    <div class="image-rose">
+                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
+                        <p>
+                            <%= link_to [picture.conectiflor_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <%end%>
+                        </p>
+                    </div>
+                </div>             
+
+                <%end%>
+
+            </div>
+
+
+
+            <div class="row">
+                <h2>Add Image</h2>    
+                <%= form_for([@conectiflor_selection, @conectiflor_selection.conectiflor_pictures.build]) do |f| %>
+
+                <div class="form-group">
+                    <%= f.label :picture%>
+                    <%= f.file_field :picture %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.submit class: "btn btn-primary active"%>
+                </div>
+                <% end %>
+            </div>        
+
+
+
+            <div class="panel-footer">
+                <%= link_to 'Edit', edit_conectiflor_selection_path(@conectiflor_selection),class: "btn btn-primary active" %> 
+                <%= link_to 'Back', conectiflor_selections_path,class: "btn btn-primary active" %>
+            </div>
+        </div>
+    </div>
+</div>

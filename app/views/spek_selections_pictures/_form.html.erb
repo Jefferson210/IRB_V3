@@ -1,17 +1,17 @@
 <%= form_for(@spek_selections_picture) do |f| %>
-  <% if @spek_selections_picture.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@spek_selections_picture.errors.count, "error") %> prohibited this spek_selections_picture from being saved:</h2>
+<% if @spek_selections_picture.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@spek_selections_picture.errors.count, "error") %> prohibited this spek_selections_picture from being saved:</h2>
 
-      <ul>
-      <% @spek_selections_picture.errors.full_messages.each do |message| %>
+    <ul>
+        <% @spek_selections_picture.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <% end %>
+    </ul>
+</div>
+<% end %>
 
-  <div class="actions">
+<div class="actions">
     <%= f.submit %>
-  </div>
+</div>
 <% end %>

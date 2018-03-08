@@ -1,0 +1,2 @@
+module ConectiflorPicturesHelper
+end
