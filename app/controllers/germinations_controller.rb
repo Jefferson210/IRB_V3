@@ -1,5 +1,6 @@
 class GerminationsController < ApplicationController
     before_action :set_germination, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /germinations
     # GET /germinations.json

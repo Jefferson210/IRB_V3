@@ -1,6 +1,6 @@
 class SpekSelectionsController < ApplicationController
     before_action :set_spek_selection, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!
     # GET /spek_selections
     # GET /spek_selections.json
     def index

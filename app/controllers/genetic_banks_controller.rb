@@ -1,5 +1,6 @@
 class GeneticBanksController < ApplicationController
     before_action :set_genetic_bank, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
     
     def barcode_output( geneticBank )
         barcodeString = geneticBank.code 

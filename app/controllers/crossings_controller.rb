@@ -1,5 +1,6 @@
 class CrossingsController < ApplicationController
     before_action :set_crossing, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /crossings
     # GET /crossings.json

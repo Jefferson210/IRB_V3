@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     # :confirmable, :lockable, :timeoutable and :omniauthable
     devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
-    
+    include DeviseTokenAuth::Concerns::User
     #Posibles roles a asignar
     Roles = %w[administrator breeder].freeze  
 end

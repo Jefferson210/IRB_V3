@@ -1,6 +1,6 @@
 class SeedsController < ApplicationController
     before_action :set_seed, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!
     # GET /seeds
     # GET /seeds.json
     def index

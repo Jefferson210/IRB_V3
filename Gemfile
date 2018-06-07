@@ -64,3 +64,6 @@ gem 'bootstrap-datepicker-rails' #para uso de datePicker
 gem 'bootstrap-multiselect-rails4', '~> 0.0.1'    #multiselect bootstrap
 
 gem 'cancan', '~> 1.6', '>= 1.6.10'
+
+gem 'devise_token_auth'
+gem 'rack-cors', :require => 'rack/cors' #for allow cross origin requests.

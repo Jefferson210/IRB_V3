@@ -1,6 +1,6 @@
 class ThreeOffspringsController < ApplicationController
     before_action :set_three_offspring, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!
     # GET /three_offsprings
     # GET /three_offsprings.json
     def index

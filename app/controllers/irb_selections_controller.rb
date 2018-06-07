@@ -1,5 +1,6 @@
 class IrbSelectionsController < ApplicationController
     before_action :set_irb_selection, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /irb_selections
     # GET /irb_selections.json

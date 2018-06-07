@@ -6,71 +6,78 @@
             </div>
 
             <div class="panel-body">
-                <ul class="list-group">
-                    <li class="list-group item">Code:
-                        <span><strong> <%= @spek_selection.code %></strong></span>
-                    </li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group item">Code:
+                                <span><strong> <%= @spek_selection.code %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Location:
-                        <span><strong><%= @spek_selection.location %></strong></span>
-                    </li>
+                            <li class="list-group item">Location:
+                                <span><strong><%= @spek_selection.location %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Trademark:
-                        <span><strong><%= @spek_selection.trademark %></strong></span>
-                    </li>
+                            <li class="list-group item">Trademark:
+                                <span><strong><%= @spek_selection.trademark %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Denomination:
-                        <span><strong> <%= @spek_selection.denomination %></strong></span>
-                    </li>
+                            <li class="list-group item">Denomination:
+                                <span><strong> <%= @spek_selection.denomination %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Year:
-                        <span><strong><%= @spek_selection.year %></strong></span>
-                    </li>
+                            <li class="list-group item">Year:
+                                <span><strong><%= @spek_selection.year %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Status:
-                        <span><strong>   <%= @spek_selection.status %></strong></span>
-                    </li>
+                            <li class="list-group item">Status:
+                                <span><strong>   <%= @spek_selection.status %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Numplants:
-                        <span><strong> <%= @spek_selection.numPlants %></strong></span>
-                    </li>
+                            <li class="list-group item">Numplants:
+                                <span><strong> <%= @spek_selection.numPlants %></strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group item">Color:
+                                <span><strong><%= @spek_selection.color ? @spek_selection.color.colorName : 'N/A' %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Color:
-                        <span><strong><%= @spek_selection.color ? @spek_selection.color.colorName : 'N/A' %></strong></span>
-                    </li>
+                            <li class="list-group item">Scent:
+                                <span><strong> <%= @spek_selection.scent %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Scent:
-                        <span><strong> <%= @spek_selection.scent %></strong></span>
-                    </li>
+                            <li class="list-group item">Headsize:
+                                <span><strong><%= @spek_selection.headSize %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Headsize:
-                        <span><strong><%= @spek_selection.headSize %></strong></span>
-                    </li>
+                            <li class="list-group item">Numpetals:
+                                <span><strong><%= @spek_selection.numPetals %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Numpetals:
-                        <span><strong><%= @spek_selection.numPetals %></strong></span>
-                    </li>
+                            <li class="list-group item">Steamlenght:
+                                <span><strong><%= @spek_selection.steamLenght %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Steamlenght:
-                        <span><strong><%= @spek_selection.steamLenght %></strong></span>
-                    </li>
+                            <li class="list-group item">Production:
+                                <span><strong><%= @spek_selection.production %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Production:
-                        <span><strong><%= @spek_selection.production %></strong></span>
-                    </li>
+                            <li class="list-group item">Opening:
+                                <span><strong>  <%= @spek_selection.opening %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Opening:
-                        <span><strong>  <%= @spek_selection.opening %></strong></span>
-                    </li>
+                            <li class="list-group item">Abnormality:
+                                <span><strong><%= @spek_selection.abnormality %></strong></span>
+                            </li>
 
-                    <li class="list-group item">Abnormality:
-                        <span><strong><%= @spek_selection.abnormality %></strong></span>
-                    </li>
-
-                    <li class="list-group item">Remarks:
-                        <span><strong> <%= @spek_selection.remarks %></strong></span>
-                    </li>
-                </ul>
+                            <li class="list-group item">Remarks:
+                                <span><strong> <%= @spek_selection.remarks %></strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>             
             </div>    
 
             <div class="row">

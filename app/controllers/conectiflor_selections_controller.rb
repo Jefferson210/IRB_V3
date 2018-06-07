@@ -1,5 +1,6 @@
 class ConectiflorSelectionsController < ApplicationController
     before_action :set_conectiflor_selection, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /conectiflor_selections
     # GET /conectiflor_selections.json

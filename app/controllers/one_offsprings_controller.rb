@@ -1,5 +1,6 @@
 class OneOffspringsController < ApplicationController
     before_action :set_one_offspring, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user!
 
     # GET /one_offsprings
     # GET /one_offsprings.json

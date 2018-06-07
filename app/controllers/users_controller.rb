@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
     load_and_authorize_resource
+    before_action :authenticate_user!
     def index
         @user = User.order('id DESC')
         @userGrid = initialize_grid(User)  

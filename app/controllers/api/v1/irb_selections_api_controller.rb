@@ -1,5 +1,6 @@
-class Api::V1::IrbSelectionsApiController < ApplicationController
+class Api::V1::IrbSelectionsApiController < ApiController
     before_action :set_irb_selection, only: [:show]
+    before_action :authenticate_user!
 
     def index
         @irb_selections = IrbSelection.all
