@@ -1,39 +1,19 @@
 class GeneticBanksController < ApplicationController
     before_action :set_genetic_bank, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
-    
-    def barcode_output( geneticBank )
-        barcodeString = geneticBank.code 
-        barcode = Barby::Code128B.new(barcodeString)
-        data = barcode.to_image(height: 200, margin: 5).to_data_url
-    end 
 
     def generateBarCode
-        @barcode = [] 
+        @barcode = Hash.new
         @codeGeneticBanks = params[:geneticBank]
         if @codeGeneticBanks != nil
             @codeGeneticBanks.each do |geneticBankId|
                 if geneticBankId != "multiselect-all"
                     @geneticBank = GeneticBank.find(geneticBankId)
-                    @barcode << barcode_output(@geneticBank); 
+                    @barcode[@geneticBank.code] = barcodeOutPut(@geneticBank); 
                 end
             end
         end
-        respond_to do |format|
-            format.html         
-            format.pdf do 
-                render pdf: "PDF_#{'example'}",
-                template: 'genetic_banks/generateBarCode.pdf.erb',
-                layout:    'codeBar.pdf',
-                show_as_html: params[:debug].present?,                     
-                outline: {   outline:           true,
-                    outline_depth:     50 },
-                margin:  {   top:               20, # default 10 (mm)
-                    bottom:            20,
-                    left:              55,
-                    right:             35 }
-            end
-        end
+        respondToPDF("GeneticBank")  
     end
 
     # GET /genetic_banks
