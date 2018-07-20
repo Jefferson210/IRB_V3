@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController 
     before_action :authenticate_user!
-    def new
+    def new        
         redirect_to new_user_session_path
     end
 

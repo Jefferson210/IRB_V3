@@ -2,11 +2,11 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('page:load ready', function() {
-    return initWiceGrid();
+    return initWiceGrid();    
 });
 
 $(document).on('turbolinks:render', function() {
-    return initWiceGrid();
+    return initWiceGrid();    
 });
 
 $(document).on('turbolinks:load', function(){
@@ -15,5 +15,6 @@ $(document).on('turbolinks:load', function(){
         buttonWidth: '300px',
         includeSelectAllOption: true,
         enableFiltering: true
-    });
+    });    
 });
+

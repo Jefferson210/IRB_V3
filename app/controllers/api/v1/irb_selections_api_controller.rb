@@ -3,8 +3,10 @@ class Api::V1::IrbSelectionsApiController < ApiController
     before_action :authenticate_user!
 
     def index
-        @irb_selections = IrbSelection.all
+        @irb_selections = IrbSelection.all        
         render json:  @irb_selections, include: ["three_offspring"]
+        #        @irb_selections = IrbSelectionsPicture.all
+        #        render json:  @irb_selections, include: ["irb_selection"]
     end
 
     def show         

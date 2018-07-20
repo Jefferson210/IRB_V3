@@ -1,11 +1,9 @@
-<!--<p id="notice">< notice %></p>-->
 <div class="container">
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-left"><%= @genetic_bank.code %></h2>
             </div>
-
             <div class="panel-body">
                 <ul class="list-group">
                     <div class="col-md-6">
@@ -81,21 +79,19 @@
                     </div>
                 </ul>
             </div>
-
             <div class="row">
                 <h2>Images</h2>
-                <% @genetic_bank.genetic_bank_pictures.each do |picture| %>
-                <div class="col-md-3">
-                    <div class="image-rose">
-                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
-                        <p>
-                            <%= link_to [picture.genetic_bank,picture],method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <%end%>
-                        </p>
-                    </div>
+                <div class="gallery">
+                    <% @genetic_bank.genetic_bank_pictures.each do |picture| %>
+                    <figure>
+                        <%= image_tag picture.picture.url()%>
+                        <%= check_box_tag 'accept'%>
+                        <%= link_to [picture.genetic_bank,picture],method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <%end%>
+                    </figure>  
+                    <%end%>                      
                 </div>
-                <%end%>
             </div>
 
             <div class="row">
@@ -119,6 +115,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

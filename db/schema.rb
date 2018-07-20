@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180601205209) do
+ActiveRecord::Schema.define(version: 20180715225147) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 20180601205209) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.string   "username",               limit: 255,                     null: false
-    t.string   "role",                   limit: 255
+    t.string   "role",                   limit: 255,   default: "guest"
     t.string   "provider",               limit: 255,   default: "email", null: false
     t.string   "uid",                    limit: 255,   default: "",      null: false
     t.text     "tokens",                 limit: 65535
