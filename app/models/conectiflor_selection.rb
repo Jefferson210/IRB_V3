@@ -1,5 +1,6 @@
 class ConectiflorSelection < ActiveRecord::Base
     belongs_to :color
+    belongs_to :conectiflor_picture
     #    relacion para agregar varias imagenes a una variedad
     has_many :conectiflor_pictures, dependent: :destroy
 

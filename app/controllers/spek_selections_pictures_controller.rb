@@ -19,10 +19,14 @@ class SpekSelectionsPicturesController < ApplicationController
 
     #Delete image
     def destroy
-        @spek_selection = SpekSelection.find(params[:spek_selection_id])        
-        @picture = @spek_selection.spek_selections_pictures.find(params[:id])
-        @picture.destroy
-        redirect_to spek_selection_path(@spek_selection), notice: 'Picture deleted'
+        begin
+            @spek_selection = SpekSelection.find(params[:spek_selection_id])
+            @picture = @spek_selection.spek_selections_pictures.find(params[:id])
+            @picture.destroy
+            redirect_to spek_selection_path(@spek_selection), notice: "Picture Deleted"            
+        rescue ActiveRecord::DeleteRestrictionError => e 
+            redirect_to spek_selection_path(@spek_selection), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}
+        end      
     end
 
 

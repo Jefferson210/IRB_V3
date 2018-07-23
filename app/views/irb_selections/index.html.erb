@@ -1,10 +1,12 @@
-<h1 class="alert alert-success text-center">IRB Selections</h1>
+<div class="tab-content">
+    <div class="tab-pane active" id="tab_default_1">
+        <h1 class="alert alert-success text-center">IRB Selections</h1>
 
-<div class="text-center">
-    <h3><%= link_to 'New Irb selection', new_irb_selection_path %></h3>
-</div>
+        <div class="text-center">
+            <h3><%= link_to 'New Irb selection', new_irb_selection_path %></h3>
+        </div>
 
-<%=
+        <%=
     grid(@irbSelections) do |irbSelection|
         irbSelection.column name: "", attribute: "codeCross", assoc: [:three_offspring,:two_offspring,:one_offspring,:germination] do |k|
             k.three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross+"-#{k.three_offspring.two_offspring.one_offspring.individual}"
@@ -16,8 +18,8 @@
         irbSelection.column name: "Denomin", attribute: "denomination"
 
         irbSelection.column name: "Image", html: {class: "image-rose-index"} do |irbSelectionImg|
-            if @pictures.exists?(:irb_selection_id => irbSelectionImg.id)
-                arrayImage = @pictures.where(irb_selection_id: irbSelectionImg.id).to_a
+            if @pictures.exists?(:id => irbSelectionImg.irb_selections_picture_id)
+                arrayImage = @pictures.where(id: irbSelectionImg.irb_selections_picture_id).to_a
                 pictureFileName = arrayImage[0][:picture_file_name]
                 image_tag(@irbSelectionsImgPath+pictureFileName,:class => "img-thumbnail")
             end
@@ -49,4 +51,5 @@
         end
     end
 -%>
-
+    </div>
+</div>

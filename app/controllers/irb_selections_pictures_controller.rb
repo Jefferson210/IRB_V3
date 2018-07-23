@@ -16,13 +16,16 @@ class IrbSelectionsPicturesController < ApplicationController
     end
 
     def destroy
-        @irbSelection = IrbSelection.find(params[:irb_selection_id])
-        @picture = @irbSelection.irb_selections_pictures.find(params[:id])
-        @picture.destroy
-        redirect_to irb_selection_path(@irbSelection), notice: "Picture Deleted"
+        begin
+            @irbSelection = IrbSelection.find(params[:irb_selection_id])
+            @picture = @irbSelection.irb_selections_pictures.find(params[:id])
+            @picture.destroy
+            redirect_to irb_selection_path(@irbSelection), notice: "Picture Deleted"            
+        rescue ActiveRecord::DeleteRestrictionError => e 
+            redirect_to irb_selection_path(@irbSelection), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}
+        end
     end
-
-
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     #    private
     def irb_selections_picture_params

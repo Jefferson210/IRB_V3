@@ -75,6 +75,12 @@
                             <li class="list-group item">Remarks:
                                 <span><strong> <%= @spek_selection.remarks %></strong></span>
                             </li>
+
+                            <li class="list-group item">Main Picture:
+                                <span><strong> 
+                                    <%= @spek_selection.spek_selections_picture ? @spek_selection.spek_selections_picture.picture_file_name : "None" %>
+                                    </strong></span>
+                            </li>
                         </ul>
                     </div>
                 </div>             
@@ -87,6 +93,7 @@
                     <div class="image-rose">
                         <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
                         <p>
+                            <%= picture.picture_file_name %>
                             <%= link_to [picture.spek_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
                             <i class="glyphicon glyphicon-trash"></i>
                             <%end%>

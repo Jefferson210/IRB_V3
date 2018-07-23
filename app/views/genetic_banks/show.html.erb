@@ -1,5 +1,9 @@
 <div class="container">
     <div class="row">
+        <%= link_to ' Edit', edit_genetic_bank_path(@genetic_bank), class: "btn btn-default glyphicon glyphicon-pencil"%>
+        <%= link_to ' Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+        <br>
+        <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-left"><%= @genetic_bank.code %></h2>
@@ -79,38 +83,30 @@
                     </div>
                 </ul>
             </div>
-            <div class="row">
-                <h2>Images</h2>
+                <%= form_for([@genetic_bank, @genetic_bank.genetic_bank_pictures.build]) do |f| %>
+                <div class="form-group">
+                    <%= f.label :picture%>
+                    <%= f.file_field :picture %>
+                </div>
+                
+                <div class="form-group">
+                    <%= f.submit "Add Image",class: "btn btn-success" %>
+                </div>
+                <% end %>
+                
                 <div class="gallery">
                     <% @genetic_bank.genetic_bank_pictures.each do |picture| %>
                     <figure>
                         <%= image_tag picture.picture.url()%>
-                        <%= check_box_tag 'accept'%>
                         <%= link_to [picture.genetic_bank,picture],method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
                         <i class="glyphicon glyphicon-trash"></i>
                         <%end%>
                     </figure>  
                     <%end%>                      
                 </div>
-            </div>
-
-            <div class="row">
-                <h2>Add Image</h2>    
-                <%= form_for([@genetic_bank, @genetic_bank.genetic_bank_pictures.build]) do |f| %>
-
-                <div class="form-group">
-                    <%= f.label :picture%>
-                    <%= f.file_field :picture %>
-                </div>
-                <br>
-                <div class="form-group">
-                    <%= f.submit class: "btn btn-primary" %>
-                </div>
-                <% end %>
-            </div>
             <div class="panel-footer">
-                <%= link_to 'Edit', edit_genetic_bank_path(@genetic_bank), class: "btn btn-primary active"%>
-                <%= link_to 'Back', genetic_banks_path, class: "btn btn-primary active" %>
+                <%= link_to ' Edit', edit_genetic_bank_path(@genetic_bank), class: "btn btn-default glyphicon glyphicon-pencil"%>
+                <%= link_to ' Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
             </div>
         </div>
     </div>

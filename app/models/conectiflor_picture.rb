@@ -1,5 +1,6 @@
 class ConectiflorPicture < ActiveRecord::Base
     belongs_to :conectiflor_selection
+    has_many :conectiflor_selections, dependent: :restrict_with_exception
 
     has_attached_file :picture, :path => ":rails_root/public/assets/images/conectiflorSelections/:filename",
     :url => "/assets/images/conectiflorSelections/:filename"

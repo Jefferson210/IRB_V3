@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180715225147) do
+ActiveRecord::Schema.define(version: 20180723012800) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
@@ -32,27 +32,29 @@ ActiveRecord::Schema.define(version: 20180715225147) do
   add_index "conectiflor_pictures", ["conectiflor_selection_id"], name: "index_conectiflor_pictures_on_conectiflor_selection_id", using: :btree
 
   create_table "conectiflor_selections", force: :cascade do |t|
-    t.string   "code",         limit: 255,                           null: false
-    t.string   "location",     limit: 255
-    t.string   "trademark",    limit: 255
-    t.string   "denomination", limit: 255
-    t.integer  "year",         limit: 4
-    t.string   "status",       limit: 255
-    t.integer  "numPlants",    limit: 4
-    t.integer  "color_id",     limit: 4
-    t.string   "scent",        limit: 255
-    t.string   "headSize",     limit: 255
-    t.integer  "numPetals",    limit: 4
-    t.decimal  "steamLenght",                precision: 5, scale: 2
-    t.string   "production",   limit: 255
-    t.string   "opening",      limit: 255
-    t.text     "abnormality",  limit: 65535
-    t.text     "remarks",      limit: 65535
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.string   "code",                   limit: 255,                           null: false
+    t.string   "location",               limit: 255
+    t.string   "trademark",              limit: 255
+    t.string   "denomination",           limit: 255
+    t.integer  "year",                   limit: 4
+    t.string   "status",                 limit: 255
+    t.integer  "numPlants",              limit: 4
+    t.integer  "color_id",               limit: 4
+    t.string   "scent",                  limit: 255
+    t.string   "headSize",               limit: 255
+    t.integer  "numPetals",              limit: 4
+    t.decimal  "steamLenght",                          precision: 5, scale: 2
+    t.string   "production",             limit: 255
+    t.string   "opening",                limit: 255
+    t.text     "abnormality",            limit: 65535
+    t.text     "remarks",                limit: 65535
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+    t.integer  "conectiflor_picture_id", limit: 4
   end
 
   add_index "conectiflor_selections", ["color_id"], name: "index_conectiflor_selections_on_color_id", using: :btree
+  add_index "conectiflor_selections", ["conectiflor_picture_id"], name: "index_conectiflor_selections_on_conectiflor_picture_id", using: :btree
 
   create_table "crossings", force: :cascade do |t|
     t.string   "codeCross",           limit: 255
@@ -130,27 +132,29 @@ ActiveRecord::Schema.define(version: 20180715225147) do
   add_index "germinations", ["seed_id"], name: "fk_rails_6b14e2e2b3", using: :btree
 
   create_table "irb_selections", force: :cascade do |t|
-    t.integer  "three_offspring_id", limit: 4
-    t.string   "code",               limit: 255,                           null: false
-    t.string   "location",           limit: 255
-    t.string   "trademark",          limit: 255
-    t.string   "denomination",       limit: 255
-    t.integer  "year",               limit: 4
-    t.string   "status",             limit: 255
-    t.integer  "numPlants",          limit: 4
-    t.string   "color",              limit: 255
-    t.string   "scent",              limit: 255
-    t.string   "headSize",           limit: 255
-    t.integer  "numPetals",          limit: 4
-    t.decimal  "steamLenght",                      precision: 5, scale: 2
-    t.string   "production",         limit: 255
-    t.string   "opening",            limit: 255
-    t.text     "abnormality",        limit: 65535
-    t.text     "remarks",            limit: 65535
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.integer  "three_offspring_id",        limit: 4
+    t.string   "code",                      limit: 255,                           null: false
+    t.string   "location",                  limit: 255
+    t.string   "trademark",                 limit: 255
+    t.string   "denomination",              limit: 255
+    t.integer  "year",                      limit: 4
+    t.string   "status",                    limit: 255
+    t.integer  "numPlants",                 limit: 4
+    t.string   "color",                     limit: 255
+    t.string   "scent",                     limit: 255
+    t.string   "headSize",                  limit: 255
+    t.integer  "numPetals",                 limit: 4
+    t.decimal  "steamLenght",                             precision: 5, scale: 2
+    t.string   "production",                limit: 255
+    t.string   "opening",                   limit: 255
+    t.text     "abnormality",               limit: 65535
+    t.text     "remarks",                   limit: 65535
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "irb_selections_picture_id", limit: 4
   end
 
+  add_index "irb_selections", ["irb_selections_picture_id"], name: "index_irb_selections_on_irb_selections_picture_id", using: :btree
   add_index "irb_selections", ["three_offspring_id"], name: "fk_rails_6047393694", using: :btree
 
   create_table "irb_selections_pictures", force: :cascade do |t|
@@ -215,27 +219,29 @@ ActiveRecord::Schema.define(version: 20180715225147) do
   add_index "seeds", ["crossing_id"], name: "fk_rails_e30e334158", using: :btree
 
   create_table "spek_selections", force: :cascade do |t|
-    t.string   "code",         limit: 255,                           null: false
-    t.string   "location",     limit: 255
-    t.string   "trademark",    limit: 255
-    t.string   "denomination", limit: 255
-    t.integer  "year",         limit: 4
-    t.string   "status",       limit: 255
-    t.integer  "numPlants",    limit: 4
-    t.integer  "color_id",     limit: 4
-    t.string   "scent",        limit: 255
-    t.string   "headSize",     limit: 255
-    t.integer  "numPetals",    limit: 4
-    t.decimal  "steamLenght",                precision: 5, scale: 2
-    t.string   "production",   limit: 255
-    t.string   "opening",      limit: 255
-    t.text     "abnormality",  limit: 65535
-    t.text     "remarks",      limit: 65535
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.string   "code",                       limit: 255,                           null: false
+    t.string   "location",                   limit: 255
+    t.string   "trademark",                  limit: 255
+    t.string   "denomination",               limit: 255
+    t.integer  "year",                       limit: 4
+    t.string   "status",                     limit: 255
+    t.integer  "numPlants",                  limit: 4
+    t.integer  "color_id",                   limit: 4
+    t.string   "scent",                      limit: 255
+    t.string   "headSize",                   limit: 255
+    t.integer  "numPetals",                  limit: 4
+    t.decimal  "steamLenght",                              precision: 5, scale: 2
+    t.string   "production",                 limit: 255
+    t.string   "opening",                    limit: 255
+    t.text     "abnormality",                limit: 65535
+    t.text     "remarks",                    limit: 65535
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+    t.integer  "spek_selections_picture_id", limit: 4
   end
 
   add_index "spek_selections", ["color_id"], name: "index_spek_selections_on_color_id", using: :btree
+  add_index "spek_selections", ["spek_selections_picture_id"], name: "index_spek_selections_on_spek_selections_picture_id", using: :btree
 
   create_table "spek_selections_pictures", force: :cascade do |t|
     t.integer  "spek_selection_id",    limit: 4
@@ -327,10 +333,12 @@ ActiveRecord::Schema.define(version: 20180715225147) do
 
   add_foreign_key "conectiflor_pictures", "conectiflor_selections"
   add_foreign_key "conectiflor_selections", "colors"
+  add_foreign_key "conectiflor_selections", "conectiflor_pictures"
   add_foreign_key "crossings", "genetic_banks", column: "father_id", name: "fk_father_id"
   add_foreign_key "crossings", "genetic_banks", column: "mother_id", name: "fk_mother_id"
   add_foreign_key "genetic_banks", "colors"
   add_foreign_key "germinations", "seeds"
+  add_foreign_key "irb_selections", "irb_selections_pictures"
   add_foreign_key "irb_selections", "three_offsprings"
   add_foreign_key "irb_selections_pictures", "irb_selections"
   add_foreign_key "one_offspring_pictures", "one_offsprings"
@@ -338,6 +346,7 @@ ActiveRecord::Schema.define(version: 20180715225147) do
   add_foreign_key "one_offsprings", "germinations"
   add_foreign_key "seeds", "crossings"
   add_foreign_key "spek_selections", "colors"
+  add_foreign_key "spek_selections", "spek_selections_pictures"
   add_foreign_key "spek_selections_pictures", "spek_selections"
   add_foreign_key "three_offspring_pictures", "three_offsprings"
   add_foreign_key "three_offsprings", "two_offsprings"

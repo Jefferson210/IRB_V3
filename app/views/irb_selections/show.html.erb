@@ -5,75 +5,84 @@
                 <h2 class="text-left"><%= @irb_selection.code %></h2>
             </div>
 
-            <div class="panel-body">
+            <div class="panel-body">               
                 <ul class="list-group">
-                    <li class="list-group item">CodeCross:
-                        <span><strong> <%= @irb_selection.three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross%>-<%=@irb_selection.three_offspring.two_offspring.one_offspring.individual%></strong></span>
-                    </li>
+                    <div class="col-md-6">
+                        <li class="list-group item">CodeCross:
+                            <span><strong> <%= @irb_selection.three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross%>-<%=@irb_selection.three_offspring.two_offspring.one_offspring.individual%></strong></span>
+                        </li>
 
-                    <li class="list-group item">Code:
-                        <span><strong> <%= @irb_selection.code %></strong></span>
-                    </li>
+                        <li class="list-group item">Code:
+                            <span><strong> <%= @irb_selection.code %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Location:
-                        <span><strong><%= @irb_selection.location %></strong></span>
-                    </li>
+                        <li class="list-group item">Location:
+                            <span><strong><%= @irb_selection.location %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Trademark:
-                        <span><strong><%= @irb_selection.trademark %></strong></span>
-                    </li>
+                        <li class="list-group item">Trademark:
+                            <span><strong><%= @irb_selection.trademark %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Denomination:
-                        <span><strong> <%= @irb_selection.denomination %></strong></span>
-                    </li>
+                        <li class="list-group item">Denomination:
+                            <span><strong> <%= @irb_selection.denomination %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Year:
-                        <span><strong><%= @irb_selection.year %></strong></span>
-                    </li>
+                        <li class="list-group item">Year:
+                            <span><strong><%= @irb_selection.year %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Status:
-                        <span><strong>   <%= @irb_selection.status %></strong></span>
-                    </li>
+                        <li class="list-group item">Status:
+                            <span><strong>   <%= @irb_selection.status %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Numplants:
-                        <span><strong> <%= @irb_selection.numPlants %></strong></span>
-                    </li>
+                        <li class="list-group item">Numplants:
+                            <span><strong> <%= @irb_selection.numPlants %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Color:
-                        <span><strong><%= @irb_selection.color%></strong></span>
-                    </li>
+                        <li class="list-group item">Color:
+                            <span><strong><%= @irb_selection.color%></strong></span>
+                        </li>
+                    </div>
+                    <div class="col-md-6">
+                        <li class="list-group item">Scent:
+                            <span><strong> <%= @irb_selection.scent %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Scent:
-                        <span><strong> <%= @irb_selection.scent %></strong></span>
-                    </li>
+                        <li class="list-group item">Headsize:
+                            <span><strong><%= @irb_selection.headSize %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Headsize:
-                        <span><strong><%= @irb_selection.headSize %></strong></span>
-                    </li>
+                        <li class="list-group item">Numpetals:
+                            <span><strong><%= @irb_selection.numPetals %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Numpetals:
-                        <span><strong><%= @irb_selection.numPetals %></strong></span>
-                    </li>
+                        <li class="list-group item">Steamlenght:
+                            <span><strong><%= @irb_selection.steamLenght %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Steamlenght:
-                        <span><strong><%= @irb_selection.steamLenght %></strong></span>
-                    </li>
+                        <li class="list-group item">Production:
+                            <span><strong><%= @irb_selection.production %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Production:
-                        <span><strong><%= @irb_selection.production %></strong></span>
-                    </li>
+                        <li class="list-group item">Opening:
+                            <span><strong>  <%= @irb_selection.opening %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Opening:
-                        <span><strong>  <%= @irb_selection.opening %></strong></span>
-                    </li>
+                        <li class="list-group item">Abnormality:
+                            <span><strong><%= @irb_selection.abnormality %></strong></span>
+                        </li>
 
-                    <li class="list-group item">Abnormality:
-                        <span><strong><%= @irb_selection.abnormality %></strong></span>
-                    </li>
+                        <li class="list-group item">Remarks:
+                            <span><strong> <%= @irb_selection.remarks %></strong></span>
+                        </li> 
 
-                    <li class="list-group item">Remarks:
-                        <span><strong> <%= @irb_selection.remarks %></strong></span>
-                    </li>
+                        <li class="list-group item">Main Picture:
+                            <span><strong> 
+                                <%= @irb_selection.irb_selections_picture ? @irb_selection.irb_selections_picture.picture_file_name : "None" %>
+                                </strong></span>
+                        </li>
+                    </div>
                 </ul>
             </div>
 
@@ -82,11 +91,13 @@
                 <% @irb_selection.irb_selections_pictures.each do |picture| %>
                 <div class="col-md-3">
                     <div class="image-rose">
-                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>                                            <p>
-                        <%= link_to [picture.irb_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <%end%>
-                        </p>
+                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>  
+                        <p>
+                            <%= picture.picture_file_name %>
+                            <%= link_to [picture.irb_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                            <i class="glyphicon glyphicon-trash"></i>
+                            <%end%>
+                        </p>                                                                          
                     </div>
                 </div>
                 <%end%>

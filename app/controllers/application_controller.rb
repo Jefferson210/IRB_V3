@@ -6,6 +6,18 @@ class ApplicationController < ActionController::Base
     skip_before_filter  :verify_authenticity_token
     before_action :configure_permitted_parameters, if: :devise_controller?
 
+    def controllerName(controller)
+        case controller
+        when "genetic_banks"
+            nameToShow = "Genetic Bank"
+        when "Crossing"
+            nameToShow = "crossings"
+        when "Seed"
+            nameToShow = "seeds"
+        else
+            nameToShow = ""
+        end
+    end
     protected
     def configure_permitted_parameters
         devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :role])

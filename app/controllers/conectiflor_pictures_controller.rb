@@ -19,10 +19,14 @@ class ConectiflorPicturesController < ApplicationController
 
     #Delete image
     def destroy
-        @conectiflor_selection = ConectiflorSelection.find(params[:conectiflor_selection_id])        
-        @picture = @conectiflor_selection.conectiflor_pictures.find(params[:id])
-        @picture.destroy
-        redirect_to conectiflor_selection_path(@conectiflor_selection), notice: 'Picture deleted'
+        begin
+            @conectiflor_selection = ConectiflorSelection.find(params[:conectiflor_selection_id])
+            @picture = @conectiflor_selection.conectiflor_pictures.find(params[:id])
+            @picture.destroy
+            redirect_to conectiflor_selection_path(@conectiflor_selection), notice: "Picture Deleted"            
+        rescue ActiveRecord::DeleteRestrictionError => e 
+            redirect_to conectiflor_selection_path(@conectiflor_selection), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}
+        end     
     end
 
 

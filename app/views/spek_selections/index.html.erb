@@ -12,12 +12,13 @@
         spek.column name: "Denomination", attribute: "denomination" 
 
         spek.column name: "Image" do |spekImage|
-            if @pictures.exists?(:spek_selection_id => spekImage.id)
-                arrayImage = @pictures.where(spek_selection_id: spekImage.id).to_a
+            if @pictures.exists?(:id => spekImage.spek_selections_picture_id)
+                arrayImage = @pictures.where(id: spekImage.spek_selections_picture_id).to_a
                 pictureFileName = arrayImage[0][:picture_file_name]
                 image_tag(@spekImagesPath+pictureFileName,:class =>"img-thumbnail")      
             end            
         end
+        
         spek.column name: "Year", attribute: "year" 
         spek.column name: "Status", attribute: "status" 
         spek.column name: "N° Plants", attribute: "numPlants" 

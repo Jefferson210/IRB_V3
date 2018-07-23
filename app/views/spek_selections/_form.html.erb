@@ -124,6 +124,14 @@
                     <%= f.text_area :remarks ,:class=>"form-control" %>
                 </div>
             </div>
+
+            <div class="form-group">
+                <%= f.label :spek_selections_picture_id, :class=>"col-md-3 control-label" %>
+                <div class="col-md-3">
+                    <%= f.collection_select(:spek_selections_picture_id,SpekSelectionsPicture.where(spek_selection_id: @spek_selection.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="actions">
                     <%= f.submit class: "btn btn-primary active"%>

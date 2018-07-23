@@ -12,12 +12,13 @@
         conectiflor.column name: "Denomination", attribute: "denomination" 
 
         conectiflor.column name: "Image" do |conectiflorImage|
-            if @pictures.exists?(:conectiflor_selection_id => conectiflorImage.id)
-                arrayImage = @pictures.where(conectiflor_selection_id: conectiflorImage.id).to_a
+            if @pictures.exists?(:id => conectiflorImage.conectiflor_picture_id)
+                arrayImage = @pictures.where(id: conectiflorImage.conectiflor_picture_id).to_a
                 pictureFileName = arrayImage[0][:picture_file_name]
                 image_tag(@conectiflorImagesPath+pictureFileName,:class =>"img-thumbnail")      
             end            
-        end
+        end        
+        
         conectiflor.column name: "Year", attribute: "year" 
         conectiflor.column name: "Status", attribute: "status" 
         conectiflor.column name: "N° Plants", attribute: "numPlants" 

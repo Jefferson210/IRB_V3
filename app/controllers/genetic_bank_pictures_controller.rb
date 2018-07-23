@@ -20,7 +20,7 @@ class GeneticBankPicturesController < ApplicationController
         @geneticBank = GeneticBank.find(params[:genetic_bank_id])
         @picture = @geneticBank.genetic_bank_pictures.find(params[:id])
         @picture.destroy
-        redirect_to genetic_banks_path(@geneticBank), notice: "Picture Deleted"
+        redirect_to genetic_bank_path(@geneticBank), notice: "Picture Deleted"
     end
 
 

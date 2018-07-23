@@ -6,7 +6,7 @@ class ConectiflorSelectionsController < ApplicationController
     # GET /conectiflor_selections.json
     def index
         @conectiflor_selections = ConectiflorSelection.all
-        @pictures = ConectiflorPicture.group(:conectiflor_selection_id)
+        @pictures = ConectiflorPicture.all
         @conectiflorSelectionsGrid = initialize_grid(ConectiflorSelection,
             include:[:color])
         #                        group: ['spek_selections.code'])
@@ -75,6 +75,6 @@ class ConectiflorSelectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conectiflor_selection_params        
-        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks)
+        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:conectiflor_picture_id)
     end
 end
