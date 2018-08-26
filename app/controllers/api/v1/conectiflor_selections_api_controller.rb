@@ -33,6 +33,6 @@ class Api::V1::ConectiflorSelectionsApiController < ApplicationController
     end
 
     def conectiflor_selection_params        
-        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks)
+        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:likes)
     end
 end

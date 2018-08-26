@@ -75,6 +75,6 @@ class ConectiflorSelectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conectiflor_selection_params        
-        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:conectiflor_picture_id)
+        params.require(:conectiflor_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:conectiflor_picture_id,:likes)
     end
 end

@@ -74,6 +74,6 @@ class SpekSelectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def spek_selection_params
-        params.require(:spek_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:spek_selections_picture_id)
+        params.require(:spek_selection).permit(:code, :location, :trademark, :denomination, :year, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks,:spek_selections_picture_id,:likes)
     end
 end

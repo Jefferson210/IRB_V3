@@ -65,7 +65,7 @@ Rails.application.routes.draw do
             resources :irb_selections_api            
             resources :spek_selections_api
             resources :conectiflor_selections_api
-            resources :genetic_bank_pictures_api
+#            resources :genetic_bank_pictures_api
         end
     end
 
