@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180723012800) do
+ActiveRecord::Schema.define(version: 20180811035456) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20180723012800) do
     t.datetime "created_at",                                                      null: false
     t.datetime "updated_at",                                                      null: false
     t.integer  "irb_selections_picture_id", limit: 4
+    t.integer  "likes",                     limit: 4
   end
 
   add_index "irb_selections", ["irb_selections_picture_id"], name: "index_irb_selections_on_irb_selections_picture_id", using: :btree
