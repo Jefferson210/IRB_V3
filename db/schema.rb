@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180826215704) do
+ActiveRecord::Schema.define(version: 20181001195901) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
@@ -94,28 +94,33 @@ ActiveRecord::Schema.define(version: 20180826215704) do
   add_index "genetic_bank_pictures", ["genetic_bank_id"], name: "index_genetic_bank_pictures_on_genetic_bank_id", using: :btree
 
   create_table "genetic_banks", force: :cascade do |t|
-    t.string   "code",         limit: 255
-    t.string   "location",     limit: 255
-    t.string   "trademark",    limit: 255
-    t.string   "denomination", limit: 255
-    t.integer  "year",         limit: 4
-    t.string   "breeder",      limit: 255
-    t.string   "status",       limit: 255
-    t.integer  "numPlants",    limit: 4
-    t.string   "scent",        limit: 255
-    t.string   "headSize",     limit: 255
-    t.integer  "numPetals",    limit: 4
-    t.decimal  "steamLenght",                precision: 10
-    t.string   "production",   limit: 255
-    t.string   "opening",      limit: 255
-    t.text     "abnormality",  limit: 65535
-    t.text     "remarks",      limit: 65535
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
-    t.integer  "color_id",     limit: 4
+    t.string   "code",                     limit: 255
+    t.string   "location",                 limit: 255
+    t.string   "trademark",                limit: 255
+    t.string   "denomination",             limit: 255
+    t.integer  "year",                     limit: 4
+    t.string   "breeder",                  limit: 255
+    t.string   "status",                   limit: 255
+    t.integer  "numPlants",                limit: 4
+    t.string   "scent",                    limit: 255
+    t.string   "headSize",                 limit: 255
+    t.integer  "numPetals",                limit: 4
+    t.decimal  "steamLenght",                            precision: 10
+    t.string   "production",               limit: 255
+    t.string   "opening",                  limit: 255
+    t.text     "abnormality",              limit: 65535
+    t.text     "remarks",                  limit: 65535
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
+    t.integer  "color_id",                 limit: 4
+    t.integer  "genetic_banks_picture_id", limit: 4
+    t.integer  "genetic_bank_pictures_id", limit: 4
+    t.integer  "PictureId",                limit: 4
   end
 
   add_index "genetic_banks", ["color_id"], name: "index_genetic_banks_on_color_id", using: :btree
+  add_index "genetic_banks", ["genetic_bank_pictures_id"], name: "index_genetic_banks_on_genetic_bank_pictures_id", using: :btree
+  add_index "genetic_banks", ["genetic_banks_picture_id"], name: "index_genetic_banks_on_genetic_banks_picture_id", using: :btree
 
   create_table "germinations", force: :cascade do |t|
     t.integer  "seed_id",            limit: 4
@@ -194,6 +199,7 @@ ActiveRecord::Schema.define(version: 20180826215704) do
     t.string   "form",           limit: 255
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+    t.integer  "PictureId",      limit: 4
   end
 
   add_index "one_offsprings", ["color_id"], name: "index_one_offsprings_on_color_id", using: :btree
@@ -280,6 +286,7 @@ ActiveRecord::Schema.define(version: 20180826215704) do
     t.string   "form",             limit: 255
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
+    t.integer  "PictureId",        limit: 4
   end
 
   add_index "three_offsprings", ["two_offspring_id"], name: "fk_rails_780913f863", using: :btree
@@ -306,6 +313,7 @@ ActiveRecord::Schema.define(version: 20180826215704) do
     t.string   "form",             limit: 255
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
+    t.integer  "PictureId",        limit: 4
   end
 
   add_index "two_offsprings", ["one_offspring_id"], name: "fk_rails_87f1bea580", using: :btree

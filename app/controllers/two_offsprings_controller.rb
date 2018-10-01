@@ -89,6 +89,6 @@ class TwoOffspringsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def two_offspring_params
-        params.require(:two_offspring).permit(:one_offspring_id, :individual, :color, :status, :headSize, :flowering, :numPetals, :form)
+        params.require(:two_offspring).permit(:one_offspring_id, :individual, :color, :status, :headSize, :flowering, :numPetals, :form, :PictureId)
     end
 end

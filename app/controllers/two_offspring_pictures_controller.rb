@@ -19,8 +19,12 @@ class TwoOffspringPicturesController < ApplicationController
     def destroy
         @twoOffspring = TwoOffspring.find(params[:two_offspring_id])
         @picture = @twoOffspring.two_offspring_pictures.find(params[:id])
-        @picture.destroy
-        redirect_to two_offspring_path(@twoOffspring), notice: "Picture Deleted"
+        if @picture.id == @twoOffspring.PictureId 
+            redirect_to two_offspring_path(@twoOffspring), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}   
+        else
+            @picture.destroy
+            redirect_to two_offspring_path(@twoOffspring), notice: "Picture Deleted"
+        end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

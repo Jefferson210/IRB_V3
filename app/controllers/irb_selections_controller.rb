@@ -2,6 +2,20 @@ class IrbSelectionsController < ApplicationController
     before_action :set_irb_selection, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
 
+    def generateBarCode
+        @barcode = Hash.new
+        @codeIrbSelections = params[:irbSelection]        
+        if @codeIrbSelections != nil
+            @codeIrbSelections.each do |irbId|
+                if irbId != "multiselect-all"
+                    @irbSelection = IrbSelection.find(irbId)
+                    @barcode[@irbSelection.code] = barcodeOutPut(@irbSelection); 
+                end
+            end
+        end
+        respondToPDF("IrbSelection")  
+    end
+
     # GET /irb_selections
     # GET /irb_selections.json
     def index

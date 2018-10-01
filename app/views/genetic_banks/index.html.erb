@@ -1,11 +1,5 @@
+<%= render 'optionsMenu', model: "GeneticBank" %>
 <div class="text-center">    
-    <%= link_to new_genetic_bank_path, class: "btn btn-default btn-lg" do %>
-    <i class="glyphicon glyphicon-file"></i>New
-    <% end %>
-
-    <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#geneticBank-modal-modal">
-        <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
-
     <div class="modal fade" id="geneticBank-modal-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -13,16 +7,15 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">Create Bar Codes</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body">                    
                     <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>
                     <%= select_tag "geneticBank", options_from_collection_for_select(GeneticBank.all, "id", "code"),multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
-                    <%end%>                
+                    <%end%>  
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <br>
 <%=
@@ -32,15 +25,15 @@
         geneticBank.column name: 'Location', attribute: 'location'    
         geneticBank.column name:"Trademark", attribute: 'trademark' 
         geneticBank.column name:"Denomination", attribute: 'denomination'
-
-        geneticBank.column name: "Image" do |geneticBankImage|
-            if @pictures.exists?(:genetic_bank_id => geneticBankImage.id)   
-                arrayImage = @pictures.where(genetic_bank_id: geneticBankImage.id).to_a
+        
+         geneticBank.column name: "Image", html: {class: "image-rose-index"} do |geneticBankImage|
+             if @pictures.exists?(:id => geneticBankImage.PictureId)   
+                arrayImage = @pictures.where(id: geneticBankImage.PictureId).to_a
                 pictureFileName = arrayImage[0][:picture_file_name]
                 image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
             end
-        end
-
+        end     
+        
         geneticBank.column name:"Year", attribute: 'year' 
         geneticBank.column name:"Breeder", attribute: 'breeder' 
         geneticBank.column name:"Status", attribute: 'status' 
@@ -48,11 +41,11 @@
         geneticBank.column name:"HeadSize", attribute: 'headSize'     
         geneticBank.column name:"N.Petals", attribute:'numPetals'     
         geneticBank.column name: 'Color', attribute: 'colorName',  assoc: :color    
-#        geneticBank.column name:"Steamlenght", attribute: 'steamLenght'     
+        #        geneticBank.column name:"Steamlenght", attribute: 'steamLenght'     
         geneticBank.column name:"Production", attribute: 'production'     
         geneticBank.column name:"Opening", attribute: 'production'     
-#        geneticBank.column name:"Abnormality", attribute: 'abnormality'     
-#        geneticBank.column name:"Remarks", attribute: 'remarks'      
+        #        geneticBank.column name:"Abnormality", attribute: 'abnormality'     
+        #        geneticBank.column name:"Remarks", attribute: 'remarks'      
         geneticBank.column do |edit|
             link_to("",edit_genetic_bank_path(edit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
         end    

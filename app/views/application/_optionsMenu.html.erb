@@ -1,0 +1,100 @@
+<ul class="nav nav-pills">
+    <% case model %> 
+    <% when "User" %>
+    <li role="presentation" class="">
+        <%= link_to new_user_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>
+    <% when "GeneticBank" %>
+    <li role="presentation" class="">
+        <%= link_to new_genetic_bank_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#geneticBank-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li>
+    <% when "Crossing" %>
+    <li role="presentation" class="">
+        <%= link_to new_crossing_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>   
+
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#crossing-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li> 
+    <% when "Seed" %>
+    <li role="presentation" class="">
+        <%= link_to new_seed_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#seed-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li>
+    <% when "Germination" %>
+    <li role="presentation" class="">
+        <%= link_to new_germination_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>    
+    <% when "OneOffspring" %>
+    <li role="presentation" class="">
+        <%= link_to new_one_offspring_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>  
+    <% when "TwoOffspring" %>
+    <li role="presentation" class="">
+        <%= link_to new_two_offspring_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>  
+    <% when "ThreeOffspring" %>
+    <li role="presentation" class="">
+        <%= link_to new_three_offspring_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>  
+    <% when "IrbSelection" %>
+    <li role="presentation" class="">
+        <%= link_to new_irb_selection_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>  
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#irbSelection-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li>
+    <% when "SpekSelection" %> 
+    <li role="presentation" class="">
+        <%= link_to new_spek_selection_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li> 
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#spekSelection-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li>
+    <% when "ConectiflorSelection" %>
+    <li role="presentation" class="">
+        <%= link_to new_conectiflor_selection_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li> 
+    <li role="presentation">
+        <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#conectiflor-modal-modal">
+            <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
+    </li>
+    <% end %>
+
+</ul>
+<br>
+
+
+

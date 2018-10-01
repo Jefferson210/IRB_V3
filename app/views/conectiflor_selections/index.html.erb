@@ -1,9 +1,23 @@
-<h1 class="alert alert-success text-center">Conectiflor Selections</h1>
-
-<div class="text-center">
-    <h3><%= link_to 'New Conectiflor selection', new_conectiflor_selection_path %></h3>
+<%= render 'optionsMenu', model: "ConectiflorSelection" %>
+<div class="text-center">        
+    <div class="modal fade" id="conectiflor-modal-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Create Bar Codes</h4>
+                </div>
+                <div class="modal-body">                    
+                    <%= form_tag(conectiflorSelectionsBarCodes_path(format: "pdf"), method: :get) do %>
+                    <%= select_tag "conectiflor", options_from_collection_for_select(ConectiflorSelection.all, "id", "code"),multiple: true %>
+                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
+                    <%end%>  
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+<br>
 <%=
     grid(@conectiflorSelectionsGrid) do |conectiflor|    
         conectiflor.column name: "Code", attribute: "code" 
@@ -18,7 +32,7 @@
                 image_tag(@conectiflorImagesPath+pictureFileName,:class =>"img-thumbnail")      
             end            
         end        
-        
+
         conectiflor.column name: "Year", attribute: "year" 
         conectiflor.column name: "Status", attribute: "status" 
         conectiflor.column name: "N° Plants", attribute: "numPlants" 
@@ -28,18 +42,18 @@
         conectiflor.column name: "Production %", attribute: "production" 
         conectiflor.column name: "Opening %", attribute: "opening" 
         conectiflor.column name: "Abnormality", attribute: "abnormality" 
-        conectiflor.column name: "Remarks", attribute: "remarks"   
+#        conectiflor.column name: "Remarks", attribute: "remarks"   
 
         conectiflor.column do |conectiflorSelection|
-            link_to("Edit",edit_conectiflor_selection_path(conectiflorSelection.id),:class => "btn btn-warning")
+            link_to("",edit_conectiflor_selection_path(conectiflorSelection.id),:class => "btn btn-default glyphicon glyphicon-pencil")
         end
 
         conectiflor.column do |conectiflorSelection|
-            link_to("Show",conectiflor_selection_path(conectiflorSelection.id),:class => "btn btn-success")
+            link_to("",conectiflor_selection_path(conectiflorSelection.id),:class => "btn btn-default glyphicon glyphicon-eye-open")
         end
 
         conectiflor.column do |conectiflorSelection|
-            link_to("Delete",conectiflor_selection_path(conectiflorSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-danger")
+            link_to("",conectiflor_selection_path(conectiflorSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-default glyphicon glyphicon-trash")
         end
     end
 -%>

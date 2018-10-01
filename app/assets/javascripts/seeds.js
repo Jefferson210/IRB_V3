@@ -76,6 +76,11 @@ $( document ).on('turbolinks:load', function() {
             });  
         }
     });
+    $('#seeds').multiselect({
+        buttonWidth: '300px',
+        includeSelectAllOption: true,
+        enableFiltering: true
+    });    
 })
 
 

@@ -44,7 +44,11 @@ class GeneticBank < ActiveRecord::Base
     def selectCodeTrademark
         "#{GeneticBank.where(id: self.id).first.code}-#{GeneticBank.where(id: self.id).first.trademark}"
     end
-
+    
+#    obtener el nombre de una imagen
+    def getPictureName
+        "#{GeneticBankPicture.where(id: self.PictureId).first.picture_file_name}"
+    end
 
 
 end

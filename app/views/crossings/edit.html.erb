@@ -1,9 +1,7 @@
 <div class="container">
-    <h1>Editing crossing</h1>
-
-    <%= render 'form' %>
-    <div class="container">
-        <%= link_to 'Show', @crossing,class: "btn btn-primary active" %> 
-        <%= link_to 'Back', crossings_path,class: "btn btn-primary active" %>
-    </div>
+    <h1>Editing crossing</h1>    
+    <%= link_to 'Show', @crossing,class: "btn btn-default glyphicon glyphicon-eye-open" %> 
+    <%= link_to 'Back', crossings_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
 </div>
+<br>
+<%= render 'form' %>

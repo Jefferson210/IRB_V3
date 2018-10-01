@@ -95,6 +95,6 @@ class GeneticBanksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def genetic_bank_params
-        params.require(:genetic_bank).permit(:code, :location, :trademark, :denomination, :year, :breeder, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks)
+        params.require(:genetic_bank).permit(:code, :location, :trademark, :denomination, :year, :breeder, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks, :PictureId)
     end
 end

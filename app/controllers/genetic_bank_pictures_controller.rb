@@ -18,9 +18,13 @@ class GeneticBankPicturesController < ApplicationController
 
     def destroy
         @geneticBank = GeneticBank.find(params[:genetic_bank_id])
-        @picture = @geneticBank.genetic_bank_pictures.find(params[:id])
-        @picture.destroy
-        redirect_to genetic_bank_path(@geneticBank), notice: "Picture Deleted"
+        @picture = @geneticBank.genetic_bank_pictures.find(params[:id])        
+        if @picture.id == @geneticBank.PictureId
+            redirect_to genetic_bank_path(@geneticBank), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}   
+        else
+            @picture.destroy
+            redirect_to genetic_bank_path(@geneticBank), notice: "Picture Deleted"
+        end
     end
 
 

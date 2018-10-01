@@ -1,143 +1,136 @@
 <div class="container">
     <div class="row">
-        <div class="col-offset-1 col-md-10">
-            <%= form_for(@spek_selection,:html=>{:class=>"form-horizontal"}) do |f| %>
-            <% if @spek_selection.errors.any? %>
-            <div id="error_explanation">
-                <h2><%= pluralize(@spek_selection.errors.count, "error") %> prohibited this genetic_bank from being saved:</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    <%= form_for(@spek_selection,:html=>{:class=>"form-horizontal"}) do |f| %>
+                    <% if @spek_selection.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@spek_selection.errors.count, "error") %> prohibited this genetic_bank from being saved:</h2>
 
-                <ul>
-                    <% @spek_selection.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
+                        <ul>
+                            <% @spek_selection.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <% end %>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= f.label :code, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :code,:class=>"form-control" %>                    
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :location, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.select(:location, options_for_select([['S.Tabacundo','S.Tabacundo'],['S.Lazo','S.Lazo'],['S.Cayambe','S.Cayambe']], :selected => f.object.location), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :trademark, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :trademark,:class=>"form-control" %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :denomination, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :denomination,:class=>"form-control"  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :year, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.select :year, (Time.zone.now.year - 16)..(Time.zone.now.year + 10), {:prompt => "Select"},{:class =>"form-control"} %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :status, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :numPlants, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.number_field :numPlants,:class=>"form-control"  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :color_id, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-4">
+                                <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= f.label :scent, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.select(:scent, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.scent), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :headSize, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.select(:headSize, options_for_select([['2','2'],['2.5','2.5'],['3','3'],['3.5','3.5'],['4','4'],['4.5','4.5'],['5','5'],['5.5','5.5'],['6','6'],['6.5','6.5'],['7','7']], :selected => f.object.headSize), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :numPetals, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.number_field :numPetals,:class=>"form-control"  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :steamLenght, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :steamLenght ,:class=>"form-control" %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :production, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :production ,:class=>"form-control" %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :opening, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :opening ,:class=>"form-control" %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :abnormality, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_area :abnormality,:class=>"form-control"  %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :remarks, :class=>"col-md-2 control-label" %>
+                            <div class="col-md-3">
+                                <%= f.text_area :remarks ,:class=>"form-control" %>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :spek_selections_picture_id, :class=>"col-md-3 control-label" %>
+                            <div class="col-md-4">
+                                <%= f.collection_select(:spek_selections_picture_id,SpekSelectionsPicture.where(spek_selection_id: @spek_selection.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="actions">
+                                <%= f.submit class: "btn btn-primary active"%>
+                            </div>
+                        </div>                    
+                    </div>
                     <% end %>
                 </ul>
             </div>
-            <% end %>
-
-            <div class="form-group">
-                <%= f.label :code, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :code,:class=>"form-control" %>                    
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :location, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.select(:location, options_for_select([['S.Tabacundo','S.Tabacundo'],['S.Lazo','S.Lazo'],['S.Cayambe','S.Cayambe']], :selected => f.object.location), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :trademark, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :trademark,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :denomination, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :denomination,:class=>"form-control"  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :year, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.select :year, (Time.zone.now.year - 16)..(Time.zone.now.year + 10), {:prompt => "Select"},{:class =>"form-control"} %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :status, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :numPlants, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.number_field :numPlants,:class=>"form-control"  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :color_id, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%> 
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :scent, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.select(:scent, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.scent), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :headSize, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.select(:headSize, options_for_select([['2','2'],['2.5','2.5'],['3','3'],['3.5','3.5'],['4','4'],['4.5','4.5'],['5','5'],['5.5','5.5'],['6','6'],['6.5','6.5'],['7','7']], :selected => f.object.headSize), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :numPetals, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.number_field :numPetals,:class=>"form-control"  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :steamLenght, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :steamLenght ,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :production, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :production ,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :opening, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_field :opening ,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :abnormality, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_area :abnormality,:class=>"form-control"  %>
-                </div>
-            </div>
-            <div class="form-group">
-                <%= f.label :remarks, :class=>"col-md-2 control-label" %>
-                <div class="col-md-3">
-                    <%= f.text_area :remarks ,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :spek_selections_picture_id, :class=>"col-md-3 control-label" %>
-                <div class="col-md-3">
-                    <%= f.collection_select(:spek_selections_picture_id,SpekSelectionsPicture.where(spek_selection_id: @spek_selection.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="actions">
-                    <%= f.submit class: "btn btn-primary active"%>
-                </div>
-            </div>
-            <% end %>
         </div>
     </div>
 </div>

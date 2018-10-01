@@ -30,8 +30,6 @@ $( document ).on('turbolinks:load', function() {
         }
     });
 
-
-
     array = [
         "2012|A",
         "2013|B",
@@ -105,4 +103,11 @@ $( document ).on('turbolinks:load', function() {
             $("#irb_selection_code").val("");
         }
     })
+
+//    Configuracion para el modal de codigos de barra
+    $('#irbSelection').multiselect({
+        buttonWidth: '300px',
+        includeSelectAllOption: true,
+        enableFiltering: true
+    });   
 })

@@ -12,4 +12,9 @@ class TwoOffspring < ActiveRecord::Base
     def codeCross_name
         "#{one_offspring.germination.seed.crossing.codeCross}-#{one_offspring.individual}"
     end
+
+    #    obtener el nombre de una imagen
+    def getPictureName
+        "#{TwoOffspringPicture.where(id: self.PictureId).first.picture_file_name}"
+    end
 end

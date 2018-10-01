@@ -1,9 +1,7 @@
 <div class="container">
     <h1>Editing Seed</h1>
-
-    <%= render 'form' %>
-    <div class="container">
-        <%= link_to 'Show', @seed, class: "btn btn-primary active" %> 
-        <%= link_to 'Back', seeds_path, class: "btn btn-primary active" %>
-    </div>
+    <%= link_to ' Show', @seed, class: "btn btn-default glyphicon glyphicon-eye-open" %> 
+    <%= link_to ' Back', seeds_path ,class: "btn btn-default glyphicon glyphicon-arrow-left"%>        
 </div>
+<br>
+<%= render 'form' %>

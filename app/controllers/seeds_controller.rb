@@ -1,6 +1,21 @@
 class SeedsController < ApplicationController
     before_action :set_seed, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
+
+    def generateBarCode
+        @barcode = Hash.new
+        @codeSeeds = params[:seeds]
+        if @codeSeeds != nil            
+            @codeSeeds.each do |seedId|
+                if seedId != "multiselect-all"
+                    @seed = Seed.find(seedId)
+                    @barcode[@seed.codeCross + @seed.crossing_id.to_s] = barcodeOutPut(@seed); 
+                end
+            end
+        end
+        respondToPDF("Seed")  
+    end
+
     # GET /seeds
     # GET /seeds.json
     def index

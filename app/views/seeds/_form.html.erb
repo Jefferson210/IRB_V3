@@ -1,125 +1,133 @@
 <div class="container">
     <div class="row">
-        <div class="col-offset-1 col-md-10">
-            <%= form_for(@seed,:html=>{:class=>"form-horizontal"}) do |f| %>
-            <% if @seed.errors.any? %>
-            <div id="error_explanation">
-                <h2><%= pluralize(@seed.errors.count, "error") %> prohibited this seed from being saved:</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    <%= form_for(@seed,:html=>{:class=>"form-horizontal"}) do |f| %>
+                    <% if @seed.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@seed.errors.count, "error") %> prohibited this seed from being saved:</h2>
 
-                <ul>
-                    <% @seed.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
+                        <ul>
+                            <% @seed.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                    <% end %>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= f.label :crossing_id, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.collection_select(:crossing_id,Crossing.where(effective: "yes" ),:id,:selectCodeNumRepeat,{:prompt => "Select"},{:class => "form-control",:id => "crossing_id"})%>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :sowDate, :class=>"col-md-2" %>
+                            <div class="col-md-4">
+                                <%= f.date_field :sowDate,:class=>"form-control",value: f.object.sowDate ,:prompt => "Select" %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :origin, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.select(:origin, options_for_select([['Lazo','lazo'],['Tabacundo','tabacundo'],['Cayambe','cayambe']], :selected => f.object.origin), {:prompt => "Select"}, {:class => 'form-control'}) %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :numSeeds, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.number_field :numSeeds,:class=>"form-control", :id=>"numSeeds",:readonly => true  %>
+                                <!--                    :onchange=> "sumaNumRepeat()"-->
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :totalWeight, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :totalWeight ,:class=>"form-control"%>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :week, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.number_field :week,:class=>"form-control" %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :hydratation, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.select(:hydratation, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.hydratation), {:prompt => "Select"},{:class => 'form-control'})  %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= f.label :status, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"},{:class => 'form-control'})  %>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :dateOut, :class=>"col-md-2" %>
+                            <div class="col-md-4">
+                                <%= f.date_field :dateOut,:class=>"form-control",value: f.object.dateOut ,:prompt => "Select" %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :germination, :class=>"col-md-2" %>
+                            <div class="col-md-3">
+                                <%= f.select(:germination, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.hydratation), {:prompt => "Select"},{:class => 'form-control'})  %>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :totalCode, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%=f.text_field :totalCode, :class => "form-control", :id => "totalCode", :readonly => true%>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :totalNumRepeat, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%=f.text_field :totalNumRepeat, :class => "form-control", :id => "totalNumRepeat", :readonly => true%>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :codeCrossName, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%=f.text_field :codeCrossName, :class => "form-control", :id => "codeCrossName", :readonly => true%>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :codeCross, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%=f.text_field :codeCross, :class => "form-control", :id => "codeCross", :readonly => true%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="actions">
+                                <%= f.submit class: "btn btn-primary active"%>
+                            </div>
+                        </div>
+                    </div>
                     <% end %>
                 </ul>
             </div>
-            <% end %>
-
-            <div class="form-group">
-                <%= f.label :crossing_id, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.collection_select(:crossing_id,Crossing.where(effective: "yes" ),:id,:selectCodeNumRepeat,{:prompt => "Select"},{:class => "form-control",:id => "crossing_id"})%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :sowDate, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.date_field :sowDate,:class=>"form-control",value: f.object.sowDate ,:prompt => "Select" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :origin, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.select(:origin, options_for_select([['Lazo','lazo'],['Tabacundo','tabacundo'],['Cayambe','cayambe']], :selected => f.object.origin), {:prompt => "Select"}, {:class => 'form-control'}) %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :numSeeds, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.number_field :numSeeds,:class=>"form-control", :id=>"numSeeds",:readonly => true  %>
-                    <!--                    :onchange=> "sumaNumRepeat()"-->
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :totalWeight, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.text_field :totalWeight ,:class=>"form-control"%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :week, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.number_field :week,:class=>"form-control" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :hydratation, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.select(:hydratation, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.hydratation), {:prompt => "Select"},{:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :status, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"},{:class => 'form-control'})  %>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <%= f.label :dateOut, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.date_field :dateOut,:class=>"form-control",value: f.object.dateOut ,:prompt => "Select" %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :germination, :class=>"col-md-2" %>
-                <div class="col-md-3">
-                    <%= f.select(:germination, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.hydratation), {:prompt => "Select"},{:class => 'form-control'})  %>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :totalCode, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%=f.text_field :totalCode, :class => "form-control", :id => "totalCode", :readonly => true%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :totalNumRepeat, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%=f.text_field :totalNumRepeat, :class => "form-control", :id => "totalNumRepeat", :readonly => true%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :codeCrossName, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%=f.text_field :codeCrossName, :class => "form-control", :id => "codeCrossName", :readonly => true%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :codeCross, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%=f.text_field :codeCross, :class => "form-control", :id => "codeCross", :readonly => true%>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="actions">
-                    <%= f.submit class: "btn btn-primary active"%>
-                </div>
-            </div>
-            <% end %>
         </div>
     </div>
 </div>

@@ -15,10 +15,11 @@
 /log/*.log
 /tmp
 
-#Ignore images in geneticBank
+#Ignore images
 /public/**/geneticBank/*
 /public/**/irbSelections/*
 /public/**/oneOffspring/*
 /public/**/twoOffspring/*
 /public/**/threeOffspring/*
 /public/**/spekSelections/*
+/public/**/conectiflorSelections/*

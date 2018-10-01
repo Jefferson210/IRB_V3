@@ -1,9 +1,7 @@
 <div class="container">
-    <h1>Editing Three Offspring</h1>
-
-    <%= render 'form' %>
-    <div class="container">
-        <%= link_to 'Show', @three_offspring, class: "btn btn-primary active" %> 
-        <%= link_to 'Back', three_offsprings_path, class: "btn btn-primary active" %>
-    </div>
+    <h1>Editing Three Offspring</h1>   
+    <%= link_to 'Show', @three_offspring, class: "btn btn-default glyphicon glyphicon-eye-open" %> 
+    <%= link_to 'Back', three_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
 </div>
+<br>
+<%= render 'form' %>

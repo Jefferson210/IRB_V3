@@ -2,6 +2,21 @@ class CrossingsController < ApplicationController
     before_action :set_crossing, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
 
+    def generateBarCode
+        @barcode = Hash.new
+        @codeCrossings = params[:crossings]        
+        if @codeCrossings != nil            
+            @codeCrossings.each do |crossingId|
+                if crossingId != "multiselect-all"
+                    @crossing = Crossing.find(crossingId)                    
+                    @barcode[@crossing.codeCross + @crossing.numRepeat.to_s] = barcodeOutPut(@crossing); 
+#                    logger.debug "====================INSPECT: #{@barcode.inspect}"
+                end
+            end
+        end
+        respondToPDF("GeneticBank")  
+    end
+
     # GET /crossings
     # GET /crossings.json
     def index

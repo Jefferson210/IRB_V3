@@ -13,4 +13,9 @@ class ThreeOffspring < ActiveRecord::Base
         "#{two_offspring.one_offspring.germination.seed.crossing.codeCross}-#{two_offspring.one_offspring.individual}"
     end
 
+    #    obtener el nombre de una imagen
+    def getPictureName        
+        "#{ThreeOffspringPicture.where(id: self.PictureId).first.picture_file_name}"
+    end
+
 end

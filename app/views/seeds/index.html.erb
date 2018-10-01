@@ -1,9 +1,24 @@
-<h1 class="alert alert-success text-center">Seeds</h1>
+<%= render 'optionsMenu', model: "Seed" %>
+<div class="text-center">    
+    <div class="modal fade" id="seed-modal-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Create Bar Codes</h4>
+                </div>
+                <div class="modal-body">
+                    <%= form_tag(seedsBarCodes_path(format: "pdf"), method: :get) do %>
+                    <%= select_tag "seeds", options_from_collection_for_select(Seed.all, "id", :codeCross_numRepeat),multiple: true %>
+                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
+                    <%end%>                
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="text-center">
-    <h3><%= link_to 'New Seed', new_seed_path %></h3>
 </div>
-
+<br>
 <%=
     grid(@seedsGrid) do |seed|
         seed.column name: "CodeCross", attribute: "codeCross",html: {id: "codeCrossName"}, assoc: :crossing do |seedCrossing|
@@ -23,15 +38,15 @@
         #        seed.column name: "totalNum", attribute: "totalNumRepeat" 
 
         seed.column do |seedEdit|
-            link_to("Edit",edit_seed_path(seedEdit.id),:class => "btn btn-warning")
+            link_to("",edit_seed_path(seedEdit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
         end
 
         seed.column do |seedShow|
-            link_to("Show",seed_path(seedShow.id),:class => "btn btn-success")
+            link_to("",seed_path(seedShow.id),:class =>"btn btn-default glyphicon glyphicon-eye-open")
         end
 
         seed.column do |seedDelete|
-            link_to("Delete",seed_path(seedDelete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-danger')
+            link_to("",seed_path(seedDelete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
         end
     end
 -%>
@@ -40,7 +55,7 @@
 <h4>suma by Code = < sumaCode %></h4>
 -->
 
-<h2 class="alert alert-info">Results</h2>
+<h3 class="alert alert-info">Results</h3>
 
 <table class="table">
     <thead>
@@ -49,7 +64,6 @@
             <th>Total</th>
         </tr>
     </thead>
-
     <tbody>
         <% sumaCode.each do |item| %>
         <tr>
@@ -58,10 +72,7 @@
         </tr>
         <% end %>
     </tbody>
-
-
 </table>
-
 <table class="table">
     <thead>
         <tr>
@@ -69,7 +80,6 @@
             <th>Total</th>
         </tr>
     </thead>
-
     <tbody>
         <% sumaCodeCrossNumRepeat.each do |item| %>
         <tr>
@@ -79,6 +89,5 @@
         <% end %>
     </tbody>
 </table>
-<br>
 
 

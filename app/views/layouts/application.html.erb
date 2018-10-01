@@ -10,7 +10,7 @@
         <% if user_signed_in? %>
         <div class="container-fluid">
             <div class="row">
-                <nav class="navbar navbar-default navbar-static-top">  
+                <nav class="navbar navbar-default navbar-static-top nav-justified">  
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -26,7 +26,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="tabbable-panel">
                             <div class="tabbable-line">
-                                <ul class="nav navbar-nav">
+                                <ul class="nav nav-tabs">
                                     <!--<li><link_to "COLORS" ,colors_path%></li>-->
                                     <% if can? :manage, User %>
                                     <li><%=link_to "USERS" ,user_index_path%></li>
@@ -38,26 +38,28 @@
                                     <li><%=link_to "OFFSPRING1" ,one_offsprings_path%></li>
                                     <li><%=link_to "OFFSPRING2" ,two_offsprings_path%></li>
                                     <li><%=link_to "OFFSPRING3" ,three_offsprings_path%></li>
-                                    <li><%=link_to "IRB SELECTIONS" ,irb_selections_path%></li>
-                                    <li><%=link_to "SPEK SELECTIONS" ,spek_selections_path%></li>
-                                    <li><%=link_to "CONECTIFLOR SELECTIONS" ,conectiflor_selections_path%></li>
+                                    <li><%=link_to "IRB" ,irb_selections_path%></li>
+                                    <li><%=link_to "SPEK" ,spek_selections_path%></li>
+                                    <li><%=link_to "CONECTIFLOR" ,conectiflor_selections_path%></li>
+                                    <li class="dropdown">
+                                        <a class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown" href="#">
+                                            <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="#">Signed in as <strong><%= current_user.username %></strong></a>                                               
+                                            </li>
+                                            <li><%= link_to "Your Profile", edit_user_registration_path%></li>
+                                            <li><%= link_to "Sign out", destroy_user_session_path, method: :delete%></li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div><!-- /.navbar-collapse -->                    
-                </nav>                               
+                </nav>                     
             </div>
-            <div class="row">
-                <div class="col-md-4 text-left">
-                    <h4>Signed in as <strong><%= current_user.username %></strong></h4>
-                </div>
-                <div class="col-md-4 text-center">
-                    <h2 class="alert alert-success"><%= controller.controllerName(controller.controller_name) %></h2>
-                </div>
-                <div class="col-md-4 text-right">
-                    <h4><%= link_to "My Profile", edit_user_registration_path %> |
-                        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %></h4>    
-                </div>
+            <div class="row text-center">
+                <h4 class="alert alert-success"><%= controller.controllerName(controller.controller_name) %></h4>
             </div>            
         </div>        
         <%end %>

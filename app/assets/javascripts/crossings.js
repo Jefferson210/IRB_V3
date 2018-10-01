@@ -313,6 +313,12 @@ $(document).on('turbolinks:load', function(){
 
     })
 
+    $('#crossings').multiselect({
+        buttonWidth: '300px',
+        includeSelectAllOption: true,
+        enableFiltering: true
+    }); 
+
 })
 
 

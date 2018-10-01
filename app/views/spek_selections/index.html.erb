@@ -1,9 +1,23 @@
-<h1 class="alert alert-success text-center">Spek Selections</h1>
-
-<div class="text-center">
-    <h3><%= link_to 'New Spek selection', new_spek_selection_path %></h3>
+<%= render 'optionsMenu', model: "SpekSelection" %>
+<div class="text-center">    
+    <div class="modal fade" id="spekSelection-modal-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Create Bar Codes</h4>
+                </div>
+                <div class="modal-body">                    
+                    <%= form_tag(spekSelectionsBarCodes_path(format: "pdf"), method: :get) do %>
+                    <%= select_tag "spekSelection", options_from_collection_for_select(SpekSelection.all, "id", "code"),multiple: true %>
+                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
+                    <%end%>  
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+<br>
 <%=
     grid(@spekSelectionsGrid) do |spek|    
         spek.column name: "Code", attribute: "code" 
@@ -18,7 +32,7 @@
                 image_tag(@spekImagesPath+pictureFileName,:class =>"img-thumbnail")      
             end            
         end
-        
+
         spek.column name: "Year", attribute: "year" 
         spek.column name: "Status", attribute: "status" 
         spek.column name: "N° Plants", attribute: "numPlants" 
@@ -28,18 +42,18 @@
         spek.column name: "Production %", attribute: "production" 
         spek.column name: "Opening %", attribute: "opening" 
         spek.column name: "Abnormality", attribute: "abnormality" 
-        spek.column name: "Remarks", attribute: "remarks"   
+        #        spek.column name: "Remarks", attribute: "remarks"   
 
         spek.column do |spekSelection|
-            link_to("Edit",edit_spek_selection_path(spekSelection.id),:class => "btn btn-warning")
+            link_to("",edit_spek_selection_path(spekSelection.id),:class => "btn btn-default glyphicon glyphicon-pencil")
         end
 
         spek.column do |spekSelection|
-            link_to("Show",spek_selection_path(spekSelection.id),:class => "btn btn-success")
+            link_to("",spek_selection_path(spekSelection.id),:class => "btn btn-default glyphicon glyphicon-eye-open")
         end
 
         spek.column do |spekSelection|
-            link_to("Delete",spek_selection_path(spekSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-danger")
+            link_to("",spek_selection_path(spekSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-default glyphicon glyphicon-trash")
         end
     end
 -%>

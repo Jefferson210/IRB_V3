@@ -39,6 +39,11 @@ Rails.application.routes.draw do
     end
 
     get 'geneticBankBarCodes'      => 'genetic_banks#generateBarCode'
+    get 'crossingsBarCodes'      => 'crossings#generateBarCode'
+    get 'seedsBarCodes'      => 'seeds#generateBarCode'
+    get 'irbSelectionsBarCodes'      => 'irb_selections#generateBarCode'
+    get 'spekSelectionsBarCodes'      => 'spek_selections#generateBarCode'
+    get 'conectiflorSelectionsBarCodes'      => 'conectiflor_selections#generateBarCode'
 
     get 'getCrossing/:id' => 'crossings#getCrossing'
     get 'getCrossings'=> 'crossings#index'
@@ -65,17 +70,17 @@ Rails.application.routes.draw do
             resources :irb_selections_api            
             resources :spek_selections_api
             resources :conectiflor_selections_api
-#            resources :genetic_bank_pictures_api
+            #            resources :genetic_bank_pictures_api
         end
     end
 
-        namespace :api do
-            scope :v1 do
-                mount_devise_token_auth_for 'User', at: 'auth'
-            end
+    namespace :api do
+        scope :v1 do
+            mount_devise_token_auth_for 'User', at: 'auth'
         end
+    end
 
-#    mount_devise_token_auth_for 'User', at: 'api/v1/auth'
+    #    mount_devise_token_auth_for 'User', at: 'api/v1/auth'
 
 
 

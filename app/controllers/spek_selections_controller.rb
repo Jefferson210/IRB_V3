@@ -1,6 +1,21 @@
 class SpekSelectionsController < ApplicationController
     before_action :set_spek_selection, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
+
+    def generateBarCode
+        @barcode = Hash.new
+        @codeSpekSelections = params[:spekSelection]        
+        if @codeSpekSelections != nil
+            @codeSpekSelections.each do |spekId|
+                if spekId != "multiselect-all"
+                    @spekSelectio = SpekSelection.find(spekId)
+                    @barcode[@spekSelectio.code] = barcodeOutPut(@spekSelectio); 
+                end
+            end
+        end
+        respondToPDF("SpekSelection")  
+    end
+
     # GET /spek_selections
     # GET /spek_selections.json
     def index

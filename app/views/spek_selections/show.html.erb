@@ -1,5 +1,9 @@
 <div class="container">
     <div class="row">
+        <%= link_to 'Back', spek_selections_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+        <%= link_to 'Edit', edit_spek_selection_path(@spek_selection),class: "btn btn-default glyphicon glyphicon-pencil" %> 
+        <%= render 'uploadImage', model: "SpekSelection" %>    
+        <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-left"><%= @spek_selection.code %></h2>
@@ -86,47 +90,23 @@
                 </div>             
             </div>    
 
-            <div class="row">
-                <h2>Images</h2>
+            <div class="gallery">
                 <% @spek_selection.spek_selections_pictures.each do |picture| %>
-                <div class="col-md-3">
-                    <div class="image-rose">
-                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
-                        <p>
-                            <%= picture.picture_file_name %>
-                            <%= link_to [picture.spek_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <%end%>
-                        </p>
-                    </div>
-                </div>             
-
+                <figure>
+                    <%if picture.picture.url() != "/pictures/original/missing.png" %>
+                    <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
+                    <%= picture.picture_file_name %>
+                    <%= link_to [picture.spek_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <%end%>
+                    <%end%>
+                </figure>
                 <%end%>
-
             </div>
 
-
-
-            <div class="row">
-                <h2>Add Image</h2>    
-                <%= form_for([@spek_selection, @spek_selection.spek_selections_pictures.build]) do |f| %>
-
-                <div class="form-group">
-                    <%= f.label :picture%>
-                    <%= f.file_field :picture %>
-                </div>
-
-                <div class="form-group">
-                    <%= f.submit class: "btn btn-primary active"%>
-                </div>
-                <% end %>
-            </div>        
-
-
-
             <div class="panel-footer">
-                <%= link_to 'Edit', edit_spek_selection_path(@spek_selection),class: "btn btn-primary active" %> 
-                <%= link_to 'Back', spek_selections_path,class: "btn btn-primary active" %>
+                <%= link_to 'Back', spek_selections_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+                <%= link_to 'Edit', edit_spek_selection_path(@spek_selection),class: "btn btn-default glyphicon glyphicon-pencil" %> 
             </div>
         </div>
     </div>

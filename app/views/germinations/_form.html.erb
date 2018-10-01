@@ -1,80 +1,85 @@
 <div class="container">
     <div class="row">
-        <div class="col-offset-1 col-md-10">
-            <%= form_for(@germination,:html=>{:class=>"form-horizontal"}) do |f| %>
-            <% if @germination.errors.any? %>
-            <div id="error_explanation">
-                <h2><%= pluralize(@germination.errors.count, "error") %> prohibited this germination from being saved:</h2>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <ul class="list-group">
+                    <%= form_for(@germination,:html=>{:class=>"form-horizontal"}) do |f| %>
+                    <% if @germination.errors.any? %>
+                    <div id="error_explanation">
+                        <h2><%= pluralize(@germination.errors.count, "error") %> prohibited this germination from being saved:</h2>
 
-                <ul>
-                    <% @germination.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
+                        <ul>
+                            <% @germination.errors.full_messages.each do |message| %>
+                            <li><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
                     <% end %>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <%= f.label :seed_id,"Seed(codeCross-numRepeat)", :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%= f.collection_select(:seed_id,Seed.where(germination: 'yes'),:id,:codeCross_numRepeat,{:prompt => "Select"},{:class => "form-control", :id => "seed_id"})%>     
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :week, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :week,:class=>"form-control"  %>
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :numGerminations , :class=>"col-md-3"%>
+                            <div class="col-md-3">
+                                <%= f.number_field :numGerminations,:class=>"form-control" ,:id=>"numGerminations" , :onchange=> "germinationsTotal()"%>
+
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :missingSeed , :class=>"col-md-3"%>
+                            <div class="col-md-3">
+                                <%= f.number_field :missingSeed,:class=>"form-control" ,:id=>"missingSeedId" , :readonly => true%>                    
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :totalCode , :class=>"col-md-3"%>
+                            <div class="col-md-3">
+                                <%= f.text_field :totalCode,:class=>"form-control" ,:id=>"totalCode", :readonly => true %>
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :totalNumRepeat , :class=>"col-md-3"%>
+                            <div class="col-md-3">
+                                <%= f.text_field :totalNumRepeat,:class=>"form-control" ,:id=>"totalNumRepeat", :readonly => true %>
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :codeCross, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :codeCross,:class=>"form-control", :id => "codeCross" , :readonly => true %>
+                            </div>    
+                        </div>
+
+                        <div class="form-group">
+                            <%= f.label :codeCrossNumRepeat, :class=>"col-md-3" %>
+                            <div class="col-md-3">
+                                <%= f.text_field :codeCrossNumRepeat,:class=>"form-control" , :id => "codeCrossNumRepeat", :readonly => true %>
+                            </div>    
+                        </div>
+
+                        <div class="actions">
+                            <%= f.submit class: "btn btn-primary active"%>
+                        </div>
+                        <% end %>
+                    </div>
                 </ul>
             </div>
-            <% end %>
-
-            <div class="form-group">
-                <%= f.label :seed_id,"Seed(codeCross-numRepeat)", :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%= f.collection_select(:seed_id,Seed.where(germination: 'yes'),:id,:codeCross_numRepeat,{:prompt => "Select"},{:class => "form-control", :id => "seed_id"})%>     
-                </div>
-            </div>
-
-            <div class="form-group">
-                <%= f.label :week, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%= f.text_field :week,:class=>"form-control"  %>
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :numGerminations , :class=>"col-md-3"%>
-                <div class="col-md-3">
-                    <%= f.number_field :numGerminations,:class=>"form-control" ,:id=>"numGerminations" , :onchange=> "germinationsTotal()"%>
-
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :missingSeed , :class=>"col-md-3"%>
-                <div class="col-md-3">
-                    <%= f.number_field :missingSeed,:class=>"form-control" ,:id=>"missingSeedId" , :readonly => true%>                    
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :totalCode , :class=>"col-md-3"%>
-                <div class="col-md-3">
-                    <%= f.text_field :totalCode,:class=>"form-control" ,:id=>"totalCode", :readonly => true %>
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :totalNumRepeat , :class=>"col-md-3"%>
-                <div class="col-md-3">
-                    <%= f.text_field :totalNumRepeat,:class=>"form-control" ,:id=>"totalNumRepeat", :readonly => true %>
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :codeCross, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%= f.text_field :codeCross,:class=>"form-control", :id => "codeCross" , :readonly => true %>
-                </div>    
-            </div>
-
-            <div class="form-group">
-                <%= f.label :codeCrossNumRepeat, :class=>"col-md-3" %>
-                <div class="col-md-3">
-                    <%= f.text_field :codeCrossNumRepeat,:class=>"form-control" , :id => "codeCrossNumRepeat", :readonly => true %>
-                </div>    
-            </div>
-
-            <div class="actions">
-                <%= f.submit class: "btn btn-primary active"%>
-            </div>
-            <% end %>
         </div>
     </div>
 </div>

@@ -2,6 +2,21 @@ class ConectiflorSelectionsController < ApplicationController
     before_action :set_conectiflor_selection, only: [:show, :edit, :update, :destroy]
     before_action :authenticate_user!
 
+    def generateBarCode
+        @barcode = Hash.new
+        @codeConecSelections = params[:conectiflor]           
+        if @codeConecSelections != nil
+            @codeConecSelections.each do |conectiflorId|
+                if conectiflorId != "multiselect-all"
+                    @conecSelection = ConectiflorSelection.find(conectiflorId)
+                    @barcode[@conecSelection.code] = barcodeOutPut(@conecSelection); 
+                end
+            end
+        end
+        respondToPDF("ConectiflorSelection")  
+    end
+
+
     # GET /conectiflor_selections
     # GET /conectiflor_selections.json
     def index

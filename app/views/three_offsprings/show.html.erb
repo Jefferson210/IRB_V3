@@ -1,78 +1,69 @@
 <div class="container">
     <div class="row">
+        <%= link_to 'Back', three_offsprings_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+        <%= link_to 'Edit', edit_three_offspring_path(@three_offspring),class: "btn btn-default glyphicon glyphicon-pencil" %>   
+        <%= render 'uploadImage', model: "ThreeOffspring" %>      
+        <br>    
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-left"><%= @three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross%>-<%=@three_offspring.two_offspring.one_offspring.individual%></h2>
             </div>
-
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">Codecross:
-                        <span><strong><%= @three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross %>-<%=@three_offspring.two_offspring.one_offspring.individual%></strong></span>
-                    </li>
+                    <div class="col-md-6">
+                        <li class="list-group-item">Codecross:
+                            <span><strong><%= @three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross %>-<%=@three_offspring.two_offspring.one_offspring.individual%></strong></span>
+                        </li>
 
-                    <li class="list-group-item">Color:
-                        <span><strong><%= @three_offspring.color %></strong></span>
-                    </li>
+                        <li class="list-group-item">Color:
+                            <span><strong><%= @three_offspring.color %></strong></span>
+                        </li>
 
-                    <li class="list-group-item">Status:
-                        <span><strong><%= @three_offspring.status %></strong></span>
-                    </li>
+                        <li class="list-group-item">Status:
+                            <span><strong><%= @three_offspring.status %></strong></span>
+                        </li>
 
-                    <li class="list-group-item">HeadSize
-                        <span><strong><%= @three_offspring.headSize %></strong></span>
-                    </li>
+                        <li class="list-group-item">HeadSize
+                            <span><strong><%= @three_offspring.headSize %></strong></span>
+                        </li>
 
-                    <li class="list-group-item">Flowering:
-                        <span><strong><%= @three_offspring.flowering %></strong></span>
-                    </li>
+                        <li class="list-group-item">Flowering:
+                            <span><strong><%= @three_offspring.flowering %></strong></span>
+                        </li>
 
-                    <li class="list-group-item">NumPetals:
-                        <span><strong><%= @three_offspring.numPetals %></strong></span>
-                    </li>
+                        <li class="list-group-item">NumPetals:
+                            <span><strong><%= @three_offspring.numPetals %></strong></span>
+                        </li>
 
-                    <li class="list-group-item">Form:
-                        <span><strong><%= @three_offspring.form %></strong></span>
-                    </li>
+                        <li class="list-group-item">Form:
+                            <span><strong><%= @three_offspring.form %></strong></span>
+                        </li>
+                        
+                        <li class="list-group-item">Main Picture:
+                            <span><strong> 
+                                <%= @three_offspring.PictureId ? @three_offspring.getPictureName : "None" %>
+                                </strong></span>
+                        </li>
+                    </div>
 
                 </ul>
             </div>
-
-            <div class="row">
-                <h2>Images</h2>
+            <div class="gallery">
                 <% @three_offspring.three_offspring_pictures.each do |picture| %>
-                <div class="col-md-3">
-                    <div class="image-rose">
-                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
-                        <p>
-                            <%= link_to [picture.three_offspring,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
-                            <i class="glyphicon glyphicon-trash"></i>
-                            <%end%>
-                        </p>
-                    </div>
-                </div>
-
-                <%end%>
+                <figure>
+                    <%if picture.picture.url() != "/pictures/original/missing.png" %>
+                    <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>   
+                    <%= picture.picture_file_name %>                         
+                    <%= link_to [picture.three_offspring,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <%end%>                            
+                    <%end%>                            
+                </figure>
+                <%end%>            
             </div>
-
-            <div class="row">
-                <h2>Add Image</h2>    
-                <%= form_for([@three_offspring, @three_offspring.three_offspring_pictures.build]) do |f| %>
-
-                <div class="form-group">
-                    <%= f.label :picture%>
-                    <%= f.file_field :picture %>
-                </div>
-
-                <div class="form-group">
-                    <%= f.submit class: "btn btn-primary active"%>
-                </div>
-                <% end %>
-            </div>
-
             <div class="panel-footer">
-                <%= link_to 'Edit', edit_three_offspring_path(@three_offspring), class: "btn btn-primary active" %> 
-                <%= link_to 'Back', three_offsprings_path, class: "btn btn-primary active" %>
+                <%= link_to 'Back', three_offsprings_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+                <%= link_to 'Edit', edit_three_offspring_path(@three_offspring),class: "btn btn-default glyphicon glyphicon-pencil" %>  
             </div>
         </div>
     </div>

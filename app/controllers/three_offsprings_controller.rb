@@ -88,6 +88,6 @@ class ThreeOffspringsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def three_offspring_params
-        params.require(:three_offspring).permit(:two_offspring_id, :color, :status, :headSize, :flowering, :numPetals, :form)
+        params.require(:three_offspring).permit(:two_offspring_id, :color, :status, :headSize, :flowering, :numPetals, :form, :PictureId)
     end
 end

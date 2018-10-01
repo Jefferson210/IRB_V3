@@ -28,5 +28,10 @@ class OneOffspring < ActiveRecord::Base
         "#{germination.seed.crossing.codeCross}-#{OneOffspring.where(id: self.id).first.individual}"
     end
 
+    #    obtener el nombre de una imagen
+    def getPictureName
+        "#{OneOffspringPicture.where(id: self.PictureId).first.picture_file_name}"
+    end
+
 end
 

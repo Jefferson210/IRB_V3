@@ -1,9 +1,4 @@
-<h1 class="alert alert-success text-center">Germinations</h1>
-
-<div class="text-center">
-    <h3><%= link_to 'New Germination', new_germination_path %></h3>
-</div>
-
+<%= render 'optionsMenu', model: "Germination" %>
 <%=
     grid(@germinationsGrid) do |germination|
         germination.column name: "CodeCross", attribute: "codeCross", assoc: :seed do |seedCross|
@@ -29,15 +24,15 @@
         #        germination.column name: "MissingSeed", attribute: "missingSeed"
 
         germination.column do |germinationEdit|
-            link_to("Edit",edit_germination_path(germinationEdit.id),:class => "btn btn-warning")
+            link_to("",edit_germination_path(germinationEdit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
         end
 
         germination.column do |germinationShow|
-            link_to("Show",germination_path(germinationShow.id),:class => "btn btn-success")
+            link_to("",germination_path(germinationShow.id),:class => "btn btn-default glyphicon glyphicon-eye-open")
         end
 
         germination.column do |germinationDelete|
-            link_to("Delete",germination_path(germinationDelete.id),data: {confirm: "Are you SUre?"},method: :delete,:class => "btn btn-danger")
+            link_to("",germination_path(germinationDelete.id),data: {confirm: "Are you SUre?"},method: :delete,:class => "btn btn-default glyphicon glyphicon-trash")
         end
     end
 -%>
@@ -59,7 +54,6 @@
             <th>Percentaje</th>
         </tr>
     </thead>
-
     <tbody>
         <% sumaCodeCross.each do |item| %>
         <tr>
@@ -75,8 +69,6 @@
         </tr>
         <% end %>
     </tbody>
-
-
 </table>
 
 <!--resultados por codigo y numero de repeticion(CodeCrossNumRepeat)-->
@@ -88,7 +80,6 @@
             <th>Percentaje</th>
         </tr>
     </thead>
-
     <tbody>
         <% sumaCodeCrossNumRepeat.each do |item| %>
         <tr>
@@ -105,8 +96,5 @@
         </tr>
         <% end %>
     </tbody>
-
-
 </table>
-<br>
 

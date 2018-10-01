@@ -11,14 +11,28 @@ class ApplicationController < ActionController::Base
 
     def controllerName(controller)
         case controller
+        when "users"
+            nameToShow = "Users"
         when "genetic_banks"
             nameToShow = "Genetic Bank"
-        when "Crossing"
-            nameToShow = "crossings"
-        when "Seed"
-            nameToShow = "seeds"
-        else
-            nameToShow = ""
+        when "crossings"
+            nameToShow = "Crossings"
+        when "seeds"
+            nameToShow = "Seeds"
+        when "germinations"
+            nameToShow = "Germinations"        
+        when "one_offsprings"
+            nameToShow = "Offspring 1"
+        when "two_offsprings"
+            nameToShow = "Offspring 2"
+        when "three_offsprings"
+            nameToShow = "Offspring 3"
+        when "irb_selections"
+            nameToShow = "International Rose Breeder(IRB)"
+        when "spek_selections"
+            nameToShow = "Spek Rosen"
+        when "conectiflor_selections"
+            nameToShow = "Conectiflor"                
         end
     end
     protected
@@ -49,9 +63,13 @@ class ApplicationController < ActionController::Base
         when "Crossing"
             controllerPath = "crossings"
         when "Seed"
-            controllerPath = "seeds"
-        else
-            controllerPath = ""
+            controllerPath = "seeds"   
+        when "IrbSelection"
+            controllerPath = "irb_selections"
+        when "SpekSelection"
+            controllerPath = "spek_selections"
+        when "ConectiflorSelection"
+            controllerPath = "conectiflor_selections"         
         end
         respond_to do |format|
             format.html         
@@ -72,17 +90,21 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    #    Transforma el codigo(s) a una url para que la gema wicked_PDF imprima el codigo de barra en su hoja
+    #    Transforma el/los codigo(s) a una url para que la gema wicked_PDF imprima el codigo de barra en su hoja
     def barcodeOutPut( modelObject )  
         case modelObject.class.name
         when "GeneticBank"
             barcodeString = modelObject.code
         when "Crossing"
-            barcodeString = modelObject.codeCross+"-"+modelObject.numRepeat
+            barcodeString = modelObject.codeCross+"-"+modelObject.numRepeat.to_s
         when "Seed"
-            barcodeString = modelObject.codeCross+"-"+modelObject.crossing_id
-        else
-            barcodeString = ""
+            barcodeString = modelObject.codeCross+"-"+modelObject.crossing_id.to_s   
+        when "IrbSelection"
+            barcodeString = modelObject.code 
+        when "SpekSelection"
+            barcodeString = modelObject.code 
+        when "ConectiflorSelection"
+            barcodeString = modelObject.code         
         end
         barcode = Barby::Code128B.new(barcodeString)
         data = barcode.to_image(height: 200, margin: 5).to_data_url        
