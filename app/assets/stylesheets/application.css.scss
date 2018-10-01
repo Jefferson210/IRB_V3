@@ -21,3 +21,26 @@
 @import  "bootstrap-datepicker";
 @import "bootstrap-multiselect";
 
+@media screen and (max-width: 992px) {
+    .form-control {
+        height: 50px;
+        font-size: 50px;
+    }
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+        height: 70px;
+        width: 100%;
+        font-size: 40px;
+    }
+    label {
+        font-size: 40px;
+    }
+    h2 {
+        font-size: 60px;
+    }
+    #user_remember_me {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+
