@@ -5,12 +5,17 @@ class SessionsController < Devise::SessionsController
 
     def create        
         @user = User.where(email: sign_in_params[:email])
-        arrayUser = @user.to_a
-        if arrayUser[0][:role] != "guest"
-            super
+        if  @user.exists?
+            arrayUser = @user.to_a
+            if arrayUser[0][:role] != "guest"
+                super
+            else
+                flash[:alert] = "Invalid email or password" 
+                redirect_to action: "new"
+            end   
         else
-            flash[:error] = "Invalid email or password" 
+            flash[:alert] = "Invalid email or password" 
             redirect_to action: "new"
-        end        
+        end
     end
 end
