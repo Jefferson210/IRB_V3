@@ -9,7 +9,7 @@
     </head> 
     <body>
         <% if user_signed_in? %>       
-        <nav class="navbar navbar-default nav-justified">  
+        <nav class="navbar navbar-default navbar-fixed-top navbar-right">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -19,13 +19,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand page-scroll logo logo_black" href="#">                        
+                    <a class="navbar-brand page-scroll logo logo_black" href="#">   
+                    <%= controller.controllerName(controller.controller_name)%>
                     </a>
                 </div>
-
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                   
-                    <ul class="nav navbar-nav navbar-left">
+                    <ul class="nav navbar-nav navbar-right">
                         <!--<li><link_to "COLORS" ,colors_path%></li>-->
                         <% if can? :manage, User %>
                         <li><%=link_to "USERS" ,user_index_path%></li>
@@ -54,12 +54,11 @@
                     </ul>                     
                 </div>
             </div>
-        </nav>
-
-        <div class="row text-center">
-            <h4 class="alert alert-success"><%= controller.controllerName(controller.controller_name) %></h4>
-        </div>            
-        <%end %>
+        </nav>    
+        <br>                
+        <br>                
+        <br>                
+        <%end %>        
         <div class="container-fluid">
             <div class="row text-center">
                 <div class="col-xs-12 col-md-8 col-lg-10 col-md-offset-2 col-lg-offset-1">
