@@ -9,10 +9,19 @@ class ApplicationController < ActionController::Base
     skip_before_filter  :verify_authenticity_token
     before_action :configure_permitted_parameters, if: :devise_controller?
 
+    $imgPathIrb = "public/assets/images/irbSelections/"
+    $imgPathSpek = "public/assets/images/spekSelections/"
+    $imgPathConect = "public/assets/images/conectiflorSelections/"
+    $imgPathCompany = "public/assets/images/company/"
+    
     def controllerName(controller)
         case controller
         when "users"
             nameToShow = "Users"
+        when "companies"
+            nameToShow = "Companies"
+        when "colors"
+            nameToShow = "Colors"
         when "genetic_banks"
             nameToShow = "Genetic Bank"
         when "crossings"

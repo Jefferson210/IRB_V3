@@ -1,4 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <div class="row">
+        <%= link_to 'Back', colors_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+        <%= link_to 'Edit', edit_color_path(@color), class: "btn btn-default glyphicon glyphicon-pencil"%>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left">
+                    <%= @color.colorName %>
+                </h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <div class="col-md-6">
+                        <li class="list-group item">Code:
+                            <span><strong>
+                                    <%= @color.colorName %></strong></span>
+                        </li>
+                    </div>
+                </ul>
+            </div>
 
-<%= link_to 'Edit', edit_color_path(@color) %> |
-<%= link_to 'Back', colors_path %>
+            <div class="panel-footer">
+                <%= link_to 'Back', colors_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+                <%= link_to 'Edit', edit_color_path(@color), class: "btn btn-default glyphicon glyphicon-pencil"%>
+            </div>
+        </div>
+    </div>
+</div>

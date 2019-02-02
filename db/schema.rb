@@ -11,12 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181001195901) do
+ActiveRecord::Schema.define(version: 20190201170550) do
 
   create_table "colors", force: :cascade do |t|
     t.string   "colorName",  limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.text     "description",        limit: 65535
+    t.text     "address",            limit: 65535
+    t.text     "peopleContact",      limit: 65535
+    t.text     "mission",            limit: 65535
+    t.text     "vision",             limit: 65535
+    t.string   "phone",              limit: 255
+    t.string   "cellPhone",          limit: 255
+    t.string   "facebookContact",    limit: 255
+    t.string   "email",              limit: 255
+    t.string   "skypeContact",       limit: 255
+    t.string   "webContact",         limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
   create_table "conectiflor_pictures", force: :cascade do |t|

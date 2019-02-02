@@ -6,6 +6,7 @@ class ColorsController < ApplicationController
     # GET /colors.json
     def index
         @colors = Color.all
+        @colorGrid = initialize_grid(Color)  
     end
 
     # GET /colors/1
@@ -70,6 +71,6 @@ class ColorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def color_params
-        params.fetch(:color, {})
+        params.require(:color).permit(:colorName)
     end
 end

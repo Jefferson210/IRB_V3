@@ -1,25 +1,18 @@
-<p id="notice"><%= notice %></p>
+<%= render 'optionsMenu', model: "Color" %>
+<%=
+    grid(@colorGrid) do |color|
 
-<h1>Listing Colors</h1>
+        color.column name: 'Color Name', attribute: 'colorName'        
+        color.column do |edit|
+            link_to("",edit_color_path(edit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
+        end    
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+        color.column do |show|
+            link_to('',color_path(show.id),:class => "btn btn-default glyphicon glyphicon-eye-open")            
+        end
 
-  <tbody>
-    <% @colors.each do |color| %>
-      <tr>
-        <td><%= link_to 'Show', color %></td>
-        <td><%= link_to 'Edit', edit_color_path(color) %></td>
-        <td><%= link_to 'Destroy', color, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Color', new_color_path %>
+        color.column do |delete|
+            link_to('', color_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
+        end
+    end
+-%>

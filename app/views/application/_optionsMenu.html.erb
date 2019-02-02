@@ -90,7 +90,14 @@
     <li role="presentation">
         <button class="btn btn-default btn-lg" data-toggle="modal" data-target="#conectiflor-modal-modal">
             <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
-    </li>
+    </li>    
+    <% when "Color" %>
+    <li role="presentation" class="">
+        <%= link_to new_color_path, class: "btn btn-default btn-lg" do %>
+        <i class="glyphicon glyphicon-file"></i>New
+        <% end %>  
+    </li>     
+
     <% end %>
 
 </ul>

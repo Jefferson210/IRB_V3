@@ -1,0 +1,77 @@
+<div class="container">    
+    <div class="row">
+        <%= link_to 'Back', companies_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+        <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-default glyphicon glyphicon-pencil"%>                
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @company.name %></h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <div class="col-md-6">
+                        <li class="list-group item">Company Name:
+                            <span><strong> <%= @company.name %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Phone:
+                            <span><strong>   <%= @company.phone %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Cellphone:
+                            <span><strong> <%= @company.cellPhone %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Email:
+                            <span><strong> <%= @company.email %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Facebook:
+                            <span><strong><%= @company.facebookContact%></strong></span>
+                        </li>
+
+                        <li class="list-group item">Skypecontact:
+                            <span><strong><%= @company.skypeContact %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Webcontact:
+                            <span><strong><%= @company.webContact %></strong></span>
+                        </li>                                         
+
+                        <li class="list-group item">Description:
+                            <span><strong><%= @company.description %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Address:
+                            <span><strong><%= @company.address %></strong></span>
+                        </li>                        
+
+                        <li class="list-group item">Mission:
+                            <span><strong><%= @company.mission %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Vision:
+                            <span><strong> <%= @company.vision %></strong></span>
+                        </li>
+
+                        <li class="list-group item">Peoplecontact:
+                            <span><strong> <%= @company.peopleContact %></strong></span>
+                        </li>                                             
+                    </div>    
+                    <% if @company.image_file_name != nil %> 
+                    <div class="col-md-6">
+                        <li class="group item">
+                            <%= image_tag @company.image.url(:medium) %>
+                        </li>
+                    </div>    
+                    <% end %>           
+                </ul>
+            </div>            
+            
+            <div class="panel-footer">
+                <%= link_to 'Edit', edit_company_path(@company), class: "btn btn-default glyphicon glyphicon-pencil"%>
+                <%= link_to 'Back', companies_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+            </div>
+        </div>
+    </div>
+</div>

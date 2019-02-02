@@ -1,9 +1,10 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do    
     #establecemos el controlador registrations personalizado para usarlo en Devise
     devise_for :users, :controllers => {:registrations => "registrations", sessions: "sessions"}
     resources :user, :controller => "users"
 
     resources :colors
+    resources :companies, only: [:show, :update, :index,:edit] 
 
     resources :genetic_banks do
         resources :genetic_bank_pictures
@@ -67,9 +68,10 @@ Rails.application.routes.draw do
     #    =============================ROUTES FOR API========================================
     namespace :api , defaults: {format: 'json'} do
         namespace :v1 do
-            resources :irb_selections_api            
-            resources :spek_selections_api
-            resources :conectiflor_selections_api
+            resources :irb_selections_api, only: [:show, :index]            
+            resources :spek_selections_api, only: [:show, :index]
+            resources :conectiflor_selections_api, only: [:show, :index]
+            resources :companies_api, only: [:show, :index]
             #            resources :genetic_bank_pictures_api
         end
     end

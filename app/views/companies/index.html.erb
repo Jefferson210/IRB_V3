@@ -1,0 +1,19 @@
+<!-- <%= render 'optionsMenu', model: "Company" %> disable create more companies -->
+
+<%=
+    grid(@companyGrid) do |company|
+
+        company.column name: 'Name', attribute: 'name'
+        company.column name: 'Phone', attribute: 'phone'    
+        company.column name: 'Cell Phone', attribute: 'cellPhone'    
+        company.column name:"Email", attribute: 'email'           
+
+        company.column do |edit|
+            link_to('', edit_company_path(edit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
+        end    
+
+        company.column do |show|
+            link_to('',company_path(show.id),:class => "btn btn-default glyphicon glyphicon-eye-open")
+        end        
+    end
+-%>
