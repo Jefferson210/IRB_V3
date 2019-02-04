@@ -1,4 +1,4 @@
-class Api::V1::CompaniesApiController < ApplicationController
+class Api::V1::CompaniesApiController < ApiController
     before_action :set_company, only: [:show]
     before_action :authenticate_user!
 
