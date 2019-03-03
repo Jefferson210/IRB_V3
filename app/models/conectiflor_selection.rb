@@ -25,7 +25,7 @@ class ConectiflorSelection < ActiveRecord::Base
     end
     # get main picture from selection
     def mainPicture
-        mainPicture = ConectiflorPicture.where(id: self.conectiflor_selection_id)       
+        mainPicture = ConectiflorPicture.where(id: self.conectiflor_picture_id)       
         mainPicture.map{|u|             
             if u.picture                      
                 imageBase64 = getBase64(u.picture_file_name)                

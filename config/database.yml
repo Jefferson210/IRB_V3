@@ -23,7 +23,6 @@ defaults: &defaults
 #defaults: &defaults
 #  adapter: mysql2
 #  encoding: utf8
-#  database: c9
 #  username: <%=ENV['C9_USER']%>
 #  host: <%=ENV['IP']%>
 
@@ -34,5 +33,6 @@ development:
 test: &test
   <<: *defaults
 
-production:
+production:  
   <<: *defaults
+  database: IRBDB_V3_Prod
