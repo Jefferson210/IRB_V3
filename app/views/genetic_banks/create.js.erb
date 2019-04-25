@@ -1,0 +1,26 @@
+$('#alertMessage p').remove();
+<% if @genetic_bank.errors.empty? %> //validamos si tiene errores, si no ocultamos el modal e insertamos en la tabla del index
+  console.log("create");
+  $('table tbody').prepend(' <%= j render "row", geneticBank: @genetic_bank %>');  
+  $('.alert-success').html("Genetic Bank was created success").show();
+  $('#geneticBank-modal').modal('hide');
+<% else %>        //si tiene errores los mostramos
+  $(".form-group").removeClass("has-error");
+  $("p.field_with_errors").remove();
+ 
+  <% @genetic_bank.errors.full_messages_for(:code).each do |message| %>                 
+    $("#genetic_bank_code").closest(".form-group").addClass("has-error");
+    $("#genetic_bank_code" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %> 
+
+  <% @genetic_bank.errors.full_messages_for(:location).each do |message| %>          
+    $("#genetic_bank_location").closest(".form-group").addClass("has-error");
+    $("#genetic_bank_location" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %> 
+
+  <% @genetic_bank.errors.full_messages_for(:status).each do |message| %>                     
+    $("#genetic_bank_status").closest(".form-group").addClass("has-error");
+    $("#genetic_bank_status" ).after('<p class="field_with_errors"><%= message %></p>');              
+  <% end %> 
+<% end %>
+

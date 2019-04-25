@@ -1,18 +1,32 @@
 <%= render 'optionsMenu', model: "Color" %>
-<%=
-    grid(@colorGrid) do |color|
-
-        color.column name: 'Color Name', attribute: 'colorName'        
-        color.column do |edit|
-            link_to("",edit_color_path(edit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
-        end    
-
-        color.column do |show|
-            link_to('',color_path(show.id),:class => "btn btn-default glyphicon glyphicon-eye-open")            
-        end
-
-        color.column do |delete|
-            link_to('', color_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
-        end
-    end
--%>
+<div class="container">
+    <div class="alert alert-success" role="alert" style="display: none;"></div>
+    <div class="panel panel-primary filterable">
+        <div class="panel-heading">
+            <h2 class="panel-title">Colors</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Color Name</th>
+                    </tr>
+                    <tr class="filters">
+                        <th><input type="text" class="form-control"></th>
+                        <th>
+                            <span class="glyphicon glyphicon-filter">Filters</span>
+                        </th>
+                        <th>
+                            <button id="clearFilters" class="btn"><i class="glyphicon glyphicon-refresh"></i></button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @colors.each do |color| %>
+                    <%= render "row", color: color %>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

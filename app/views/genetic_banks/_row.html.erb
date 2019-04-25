@@ -1,0 +1,52 @@
+<tr id="<%= geneticBank.id %>">
+    <td>
+        <%= link_to geneticBank.code,genetic_bank_path(geneticBank)%>
+    </td>
+    <td>
+        <%= geneticBank.location %>
+    </td>
+    <td>
+        <%= geneticBank.trademark %>
+    </td>
+    <td>
+        <%= geneticBank.denomination %>
+    </td>
+    <td>
+        <% unless geneticBank.color.nil? %>
+        <%= geneticBank.color.colorName %>
+        <%end%>
+    </td>
+    <td>
+        <%= geneticBank.year %>
+    </td>
+    <td>
+        <%= geneticBank.breeder %>
+    </td>
+    <td>
+        <%= geneticBank.status %>
+    </td>
+    <td>
+        <%= geneticBank.scent %>
+    </td>
+    <td>
+        <%= geneticBank.headSize %>
+    </td>
+    <td>
+        <%= geneticBank.numPetals %>
+    </td>
+    <td>
+        <%= geneticBank.steamLenght %>
+    </td>
+    <td>
+        <%= geneticBank.opening %>
+    </td>
+    <td>
+        <%= link_to "", edit_genetic_bank_path(geneticBank), remote: true,class:"btn btn-default glyphicon glyphicon-pencil" %>
+    </td>
+    <td>
+        <%= link_to '',genetic_bank_path(geneticBank), remote: true,class:"btn btn-default glyphicon glyphicon-eye-open" %>
+    </td>
+    <td>
+        <%= link_to "", geneticBank, method: :delete, data: { confirm: "Are you sure?" },remote: true, class:'delete btn btn-default glyphicon glyphicon-trash'%>
+    </td>
+</tr>

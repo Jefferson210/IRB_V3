@@ -1,94 +1,139 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Rails4Example</title>
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-        <%= csrf_meta_tags %>   
-        <meta name="viewport" content="width=device-width, initial-scale=1">                   
-    </head> 
-    <body>        
-        <% if user_signed_in? %>       
-        <nav class="navbar navbar-default navbar-fixed-top">            
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <b><a class="navbar-brand page-scroll logo logo_black" href="#">   
-                    <%= controller.controllerName(controller.controller_name)%>
-                    </a></b>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">                   
-                    <ul class="nav navbar-nav navbar-right">                                                              
-                        <% if can? :manage, User %>                       
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
-                                <span class="dropdown-toggle glyphicon glyphicon-th-list"></span>
-                               ADMINISTRATION<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><%=link_to "USERS" ,user_index_path%></li>
-                                <li><%=link_to "COMPANIES" ,companies_path%></li>
-                                <li><%=link_to "COLORS" ,colors_path%></li>
-                            </ul>
-                        </li>
-                        <%end%>
-                        <li><%=link_to "GENETIC BANK" ,genetic_banks_path%></li>
-                        <li><%=link_to "CROSSINGS" ,crossings_path%></li>
-                        <li><%=link_to "SEEDS" ,seeds_path%></li>
-                        <li><%=link_to "GERMINATIONS" ,germinations_path%></li>
-                        <li><%=link_to "OFFSPRING1" ,one_offsprings_path%></li>
-                        <li><%=link_to "OFFSPRING2" ,two_offsprings_path%></li>
-                        <li><%=link_to "OFFSPRING3" ,three_offsprings_path%></li>
-                        <li><%=link_to "IRB" ,irb_selections_path%></li>
-                        <li><%=link_to "SPEK" ,spek_selections_path%></li>
-                        <li><%=link_to "CONECTIFLOR" ,conectiflor_selections_path%></li>
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" href="#">
-                                <span class="dropdown-toggle glyphicon glyphicon-user"></span>
-                                <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="#">Signed in as <strong><%= current_user.username %></strong></a>                                               
-                                </li>
-                                <li><%= link_to "Your Profile", edit_user_registration_path%></li>
-                                <li><%= link_to "Sign out", destroy_user_session_path, method: :delete%></li>
-                            </ul>
-                        </li>
-                    </ul>                     
-                </div>
-            </div>
-        </nav>    
-        <br>                
-        <br>                
-        <br>                
-        <%end %>            
+
+<head>
+    <title>Rails4Example</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+</head>
+
+<body>
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
-            <div class="row text-center">
-                <div class="col-xs-12 col-md-8 col-lg-10 col-md-offset-2 col-lg-offset-1">
-                    <% if notice %>
-                    <h4 class="alert alert-success"><%= notice %></h4>
-                    <% end %>
-                    <% if alert %>
-                    <h4 class="alert alert-warning"><%= alert %></h4>
-                    <% end %>
-                    <% if flash[:success] %>
-                    <h4 class="alert alert-success"><%= flash[:success] %></h4>
-                    <% end %>
-                    <% if flash[:error] %>
-                    <h4 class="alert alert-danger"><%= flash[:error] %></h4>
-                    <% end %>
-                    <% if flash[:info] %>
-                    <h4 class="alert alert-info"><%= flash[:info] %></h4>
-                    <% end %>  
-                </div>
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <b><a class="navbar-brand page-scroll logo logo_black" href="#">
+                        <%= controller.controllerName(controller.controller_name)%>
+                    </a></b>
             </div>
-            <%= yield %>    
-        </div>        
-    </body>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <% if can? :manage, User %>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="#">
+                            <span class="dropdown-toggle glyphicon glyphicon-th-list"></span>
+                            ADMINISTRATION<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <%=link_to "USERS" ,user_index_path%>
+                            </li>
+                            <li>
+                                <%=link_to "COMPANIES" ,companies_path%>
+                            </li>
+                            <li>
+                                <%=link_to "COLORS" ,colors_path%>
+                            </li>
+                        </ul>
+                    </li>
+                    <%end%>
+                    <li>
+                        <%=link_to "GENETIC BANK" ,genetic_banks_path%>
+                    </li>
+                    <li>
+                        <%=link_to "CROSSINGS" ,crossings_path%>
+                    </li>
+                    <li>
+                        <%=link_to "SEEDS" ,seeds_path%>
+                    </li>
+                    <li>
+                        <%=link_to "GERMINATIONS" ,germinations_path%>
+                    </li>
+                    <li>
+                        <%=link_to "OFFSPRING1" ,one_offsprings_path%>
+                    </li>
+                    <li>
+                        <%=link_to "OFFSPRING2" ,two_offsprings_path%>
+                    </li>
+                    <li>
+                        <%=link_to "OFFSPRING3" ,three_offsprings_path%>
+                    </li>
+                    <li>
+                        <%=link_to "IRB" ,irb_selections_path%>
+                    </li>
+                    <li>
+                        <%=link_to "SPEK" ,spek_selections_path%>
+                    </li>
+                    <li>
+                        <%=link_to "CONECTIFLOR" ,conectiflor_selections_path%>
+                    </li>
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" href="#">
+                            <span class="dropdown-toggle glyphicon glyphicon-user"></span>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Signed in as <strong>
+                                        <%= current_user.username %></strong></a>
+                            </li>
+                            <li>
+                                <%= link_to "Your Profile", edit_user_registration_path%>
+                            </li>
+                            <li>
+                                <%= link_to "Sign out", destroy_user_session_path, method: :delete%>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <%end %>
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-xs-12 col-md-8 col-lg-10 col-md-offset-2 col-lg-offset-1">
+                <% if notice %>
+                <h4 class="alert alert-success">
+                    <%= notice %>
+                </h4>
+                <% end %>
+                <% if alert %>
+                <h4 class="alert alert-warning">
+                    <%= alert %>
+                </h4>
+                <% end %>
+                <% if flash[:success] %>
+                <h4 class="alert alert-success">
+                    <%= flash[:success] %>
+                </h4>
+                <% end %>
+                <% if flash[:error] %>
+                <h4 class="alert alert-danger">
+                    <%= flash[:error] %>
+                </h4>
+                <% end %>
+                <% if flash[:info] %>
+                <h4 class="alert alert-info">
+                    <%= flash[:info] %>
+                </h4>
+                <% end %>
+            </div>
+        </div>
+        <%= yield %>
+    </div>
+    <%= render 'sweetify/alert' %>
+    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+</body>
 </html>

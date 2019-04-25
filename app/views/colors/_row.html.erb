@@ -1,0 +1,14 @@
+<tr id="<%= color.id %>">
+    <td>
+        <%= color.colorName %>
+    </td>
+    <td>
+        <%= link_to "", edit_color_path(color), remote: true ,class:"btn btn-default glyphicon glyphicon-pencil" %>
+    </td>
+    <td>
+        <%= link_to '',color_path(color),remote: true,class:"btn btn-default glyphicon glyphicon-eye-open" %>
+    </td>
+    <td>
+        <%= link_to "", color, method: :delete, data: { confirm: "Are you sure?" },remote: true, class:'delete btn btn-default glyphicon glyphicon-trash'%>
+    </td>    
+</tr>

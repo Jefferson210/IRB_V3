@@ -22,7 +22,9 @@ class GeneticBanksController < ApplicationController
         @genetic_banks = GeneticBank.all
         @pictures = GeneticBankPicture.group(:genetic_bank_id)
         @geneticBank = initialize_grid(GeneticBank,
-            include: [:color])                       
+            include: [:color],
+            order: 'created_at',
+            order_direction: 'desc')                       
         @geneticBankImagesPath = "/assets/images/geneticBank/"
 
     end
@@ -45,14 +47,18 @@ class GeneticBanksController < ApplicationController
     # POST /genetic_banks.json
     def create
         @genetic_bank = GeneticBank.new(genetic_bank_params)
-
-        respond_to do |format|
-            if @genetic_bank.save
-                format.html { redirect_to @genetic_bank, notice: 'Genetic bank was successfully created.' }
-                format.json { render :show, status: :created, location: @genetic_bank }
+        respond_to do |format|            
+            if @genetic_bank.save                
+                format.html { redirect_to @genetic_bank} 
+                format.json { render json: {                       
+                        :message => 'Genetic bank was successfully created.'
+                    }
+                } 
+                format.js   
             else
-                format.html { render :new }
-                format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }
+                format.html { render :new }                
+                format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }  
+                format.js                                                                                 
             end
         end
     end
@@ -63,7 +69,10 @@ class GeneticBanksController < ApplicationController
         respond_to do |format|
             if @genetic_bank.update(genetic_bank_params)
                 format.html { redirect_to @genetic_bank, notice: 'Genetic bank was successfully updated.' }
-                format.json { render :show, status: :ok, location: @genetic_bank }
+                format.json { render json: {                       
+                        :message => 'Genetic bank was successfully updated.'
+                    }
+                } 
             else
                 format.html { render :edit }
                 format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }
@@ -73,16 +82,18 @@ class GeneticBanksController < ApplicationController
 
     # DELETE /genetic_banks/1
     # DELETE /genetic_banks/1.json
-    def destroy
+    def destroy        
         begin
             @genetic_bank.destroy
+            sweetalert_success('', 'Deleted', persistent: 'Ok!')
             respond_to do |format|
-                format.html {redirect_to genetic_banks_url, :flash =>{:success => 'Genetic bank was successfully destroyed.'}}
+                format.html {redirect_to genetic_banks_url}
                 format.json {head :no_content}
             end
         rescue ActiveRecord::DeleteRestrictionError => e 
+            sweetalert_error('Cannot delete the record because it is a parent in a crossing.', 'Error', persistent: 'Ok!')
             respond_to do |format|
-                format.html {redirect_to genetic_banks_url, alert: "Cannot delete the record because it is a parent in a crossing" }
+                format.html {redirect_to genetic_banks_url}                
             end
         end
     end
@@ -98,3 +109,4 @@ class GeneticBanksController < ApplicationController
         params.require(:genetic_bank).permit(:code, :location, :trademark, :denomination, :year, :breeder, :status, :numPlants, :color_id, :scent, :headSize, :numPetals, :steamLenght, :production, :opening, :abnormality, :remarks, :PictureId)
     end
 end
+

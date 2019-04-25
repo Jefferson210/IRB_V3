@@ -1,71 +1,74 @@
 <%= render 'optionsMenu', model: "GeneticBank" %>
-<div class="text-center">    
+<div class="text-center">
     <div class="modal fade" id="geneticBank-modal-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
                     <h4 class="modal-title">Create Bar Codes</h4>
                 </div>
-                <div class="modal-body">                    
+                <div class="modal-body">
                     <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>
                     <%= select_tag "geneticBank", options_from_collection_for_select(GeneticBank.all, "id", "code"),multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
-                    <%end%>  
+                    <%end%>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
-<%=
-    grid(@geneticBank) do |geneticBank|
 
-        geneticBank.column name: 'Code', attribute: 'code'
-        geneticBank.column name: 'Location', attribute: 'location'    
-        geneticBank.column name:"Trademark", attribute: 'trademark' 
-        geneticBank.column name:"Denomination", attribute: 'denomination'
-        
-         geneticBank.column name: "Image", html: {class: "image-rose-index"} do |geneticBankImage|
-             if @pictures.exists?(:id => geneticBankImage.PictureId)   
-                arrayImage = @pictures.where(id: geneticBankImage.PictureId).to_a
-                pictureFileName = arrayImage[0][:picture_file_name]
-                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
-            end
-        end     
-        
-        geneticBank.column name:"Year", attribute: 'year' 
-        geneticBank.column name:"Breeder", attribute: 'breeder' 
-        geneticBank.column name:"Status", attribute: 'status' 
-        geneticBank.column name:"Scent", attribute:'scent' 
-        geneticBank.column name:"HeadSize", attribute: 'headSize'     
-        geneticBank.column name:"N.Petals", attribute:'numPetals'     
-        geneticBank.column name: 'Color', attribute: 'colorName',  assoc: :color    
-        #        geneticBank.column name:"Steamlenght", attribute: 'steamLenght'     
-        geneticBank.column name:"Production", attribute: 'production'     
-        geneticBank.column name:"Opening", attribute: 'production'     
-        #        geneticBank.column name:"Abnormality", attribute: 'abnormality'     
-        #        geneticBank.column name:"Remarks", attribute: 'remarks'      
-        geneticBank.column do |edit|
-            link_to("",edit_genetic_bank_path(edit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
-        end    
-
-        geneticBank.column do |show|
-            link_to('',genetic_bank_path(show.id),:class => "btn btn-default glyphicon glyphicon-eye-open")            
-        end
-
-        geneticBank.column do |delete|
-            link_to('', genetic_bank_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
-        end
-    end
--%>
-
-
-
-
-
-
-
-
-
-
+<div class="alert alert-success" role="alert" style="display: none;"></div>
+<div class="panel panel-primary filterable">
+    <div class="panel-heading">
+        <h2 class="panel-title">Genetic Bank</h2>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Location</th>
+                    <th>Trademark</th>
+                    <th>Denomination</th>
+                    <th>Color</th>
+                    <th>Year</th>
+                    <th>Breeder</th>
+                    <th>Status</th>
+                    <th>Scent</th>
+                    <th>HeadSize</th>
+                    <th>NumPetals</th>
+                    <th>SteamLenght</th>
+                    <th>Opening</th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th>
+                        <span class="glyphicon glyphicon-filter">Filters</span>
+                    </th>
+                    <th>
+                        <button id="clearFilters" class="btn"><i class="glyphicon glyphicon-refresh"></i></button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @genetic_banks.each do |geneticBank| %>
+                <%= render "row", geneticBank: geneticBank %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

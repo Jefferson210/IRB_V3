@@ -11,8 +11,8 @@ class GeneticBank < ActiveRecord::Base
     #    self.primary_keys = :location
 
     #    VALIDATIONS
-    validates :code, :allow_blank => true, uniqueness: {case_sensitive: false, message:"already exists"}    
-    validates :location, presence:{ message:"Obligatory"}, :allow_blank => false, uniqueness: {case_sensitive: false, message:"already exists"} 
+    validates :code, presence:{message: "Obligatory"}, :allow_blank => false, uniqueness: {case_sensitive: false, message:"already exists"}    
+    validates :location, presence:{ message:"Obligatory"}, :allow_blank => false
 
     validates :trademark,:allow_blank => true, uniqueness: {case_sensitive: false, message:"already exists"}
     validates :denomination,:allow_blank => true, uniqueness: {case_sensitive: false, message:"already exists"}

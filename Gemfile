@@ -67,3 +67,8 @@ gem 'cancan', '~> 1.6', '>= 1.6.10'
 
 gem 'devise_token_auth'
 gem 'rack-cors', :require => 'rack/cors' #for allow cross origin requests.
+
+gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'  #para sobrescribir el diseño del dialogo de confirmacion al eliminar
+gem 'sweet-alert2-rails' #para sobrescribir el diseño del dialogo de confirmacion al eliminar
+
+gem 'sweetify' #para sobrescribir el diseño del dialogo de confirmacion al eliminar

@@ -1,133 +1,130 @@
-<div class="container">   
+<!-- <div class="container">
     <div class="row">
+        <div class="message"></div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <ul class="list-group">
-                    <%= form_for(@genetic_bank,:html=>{:class=>"form-horizontal"}) do |f| %>
-                    <% if @genetic_bank.errors.any? %>
-                    <div id="error_explanation">
-                        <h2><%= pluralize(@genetic_bank.errors.count, "error") %> prohibited this genetic_bank from being saved:</h2>
-                        <ul>
-                            <% @genetic_bank.errors.full_messages.each do |message| %>
-                            <li><%= message %></li>
-                            <% end %>
-                        </ul>
-                    </div>
-                    <% end %>
+                    <%= form_for(@genetic_bank,remote: true,:html=>{:id => "genetic_bank-form",:class=>"form-horizontal", :"data-type"=>"json"}) do |f| %>
+                    <span id="error_box">
+                        <ul></ul>
+                    </span>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :code, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
-                                <%= f.text_field :code,:class=>"form-control" %>                    
+                                <%= f.text_field :code,:class=>"form-control" %>
+                                <span id="codeId"></span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :location, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :location,:class=>"form-control" %>
-                            </div>              
+                                <span id="locationId"></span>
+                            </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :trademark, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :trademark,:class=>"form-control" %>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :denomination, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :denomination,:class=>"form-control"  %>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :year, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.select :year, (Time.zone.now.year - 16)..(Time.zone.now.year + 10), {:prompt => "Select"},{:class =>"form-control"} %>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :breeder, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :breeder,:class=>"form-control"  %>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :status, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                                <span id="statusId"></span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :numPlants, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.number_field :numPlants,:class=>"form-control"  %>
                             </div>
-                        </div>   
+                        </div>
 
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :scent, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.select(:scent, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.scent), {:prompt => "Select"}, {:class => 'form-control'})  %>
                             </div>
-                        </div>                     
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :headSize, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.select(:headSize, options_for_select([['2','2'],['2.5','2.5'],['3','3'],['3.5','3.5'],['4','4'],['4.5','4.5'],['5','5'],['5.5','5.5'],['6','6'],['6.5','6.5'],['7','7']], :selected => f.object.headSize), {:prompt => "Select"}, {:class => 'form-control'})  %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :numPetals, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.number_field :numPetals,:class=>"form-control"  %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :steamLenght, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :steamLenght ,:class=>"form-control" %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :production, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :production ,:class=>"form-control" %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :opening, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_field :opening ,:class=>"form-control" %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :abnormality, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_area :abnormality,:class=>"form-control"  %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :remarks, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
                                 <%= f.text_area :remarks ,:class=>"form-control" %>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label :color_id, :class=>"col-md-2 control-label" %>
                             <div class="col-md-3">
-                                <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%> 
+                                <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <%= f.label "Main Picture", :class=>"col-md-2 control-label" %>
                             <div class="col-md-4">
                                 <%= f.collection_select(:PictureId,GeneticBankPicture.where(genetic_bank_id: @genetic_bank.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
@@ -135,15 +132,116 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="form-group col-xs-5">
                             <div class="actions">
                                 <%= f.submit class: "btn btn-primary" %>
                             </div>
                         </div>
-                    </div>    
+                    </div>
                     <% end %>
                 </ul>
             </div>
+        </div>
+    </div>
+</div> -->
+<!-- =============================================== -->
+<div id="geneticBank-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">New Genetic Bank</h4>
+            </div>
+            <%= form_for @genetic_bank,remote: true do |f| %>
+            <div class="modal-body">                
+                <span id="error_box">
+                    <ul></ul>
+                </span>
+                <div class="form-group col-xs-5">
+                    <%= f.label :code %>
+                    <%= f.text_field :code, class: "form-control"%>                    
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :location%>
+                    <%= f.text_field :location,:class=>"form-control"  %>                    
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :trademark %>
+                    <%= f.text_field :trademark,:class=>"form-control" %>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :denomination%>
+                    <%= f.text_field :denomination,:class=>"form-control" %>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :year %>
+                    <%= f.select :year, (Time.zone.now.year - 16)..(Time.zone.now.year + 10), {:prompt => "Select"},{:class =>"form-control"} %>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :breeder%>
+                    <%= f.text_field :breeder,:class=>"form-control" %>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :status %>
+                    <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>                    
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :numPlants %>
+                    <%= f.number_field :numPlants,:class=>"form-control" %>
+                </div>
+
+                <div class="form-group col-xs-5">
+                    <%= f.label :scent %>
+                    <%= f.select(:scent, options_for_select([['Not','not'],['Yes','yes']], :selected => f.object.scent), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :headSize%>
+                    <%= f.select(:headSize, options_for_select([['2','2'],['2.5','2.5'],['3','3'],['3.5','3.5'],['4','4'],['4.5','4.5'],['5','5'],['5.5','5.5'],['6','6'],['6.5','6.5'],['7','7']], :selected => f.object.headSize), {:prompt => "Select"}, {:class => 'form-control'})  %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :numPetals %>
+                    <%= f.number_field :numPetals,:class=>"form-control" %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :steamLenght %>
+                    <%= f.text_field :steamLenght ,:class=>"form-control" %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :production %>
+                    <%= f.text_field :production ,:class=>"form-control" %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :opening %>
+                    <%= f.text_field :opening ,:class=>"form-control" %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :abnormality %>
+                    <%= f.text_area :abnormality,:class=>"form-control" %>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :remarks %>
+                    <%= f.text_area :remarks ,:class=>"form-control"%>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label :color_id %>
+                    <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%>
+                </div>
+                <div class="form-group col-xs-5">
+                    <%= f.label "Main Picture" %>
+                    <%= f.collection_select(:PictureId,GeneticBankPicture.where(genetic_bank_id: @genetic_bank.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <%= f.submit class: "btn btn-primary btn-lg btn-block" %>
+            </div>
+            <% end %>
         </div>
     </div>
 </div>

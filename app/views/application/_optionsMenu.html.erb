@@ -1,4 +1,4 @@
-<ul class="nav nav-pills">
+<ul class="nav nav-pills nav-static-top">        
     <% case model %> 
     <% when "User" %>
     <li role="presentation" class="">
@@ -8,7 +8,7 @@
     </li>
     <% when "GeneticBank" %>
     <li role="presentation" class="">
-        <%= link_to new_genetic_bank_path, class: "btn btn-default btn-lg" do %>
+        <%= link_to new_genetic_bank_path, remote: true, class: "btn btn-default btn-lg" do %>
         <i class="glyphicon glyphicon-file"></i>New
         <% end %>  
     </li>
@@ -92,10 +92,10 @@
             <span class="glyphicon glyphicon-barcode"></span> BarCodes</button>
     </li>    
     <% when "Color" %>
-    <li role="presentation" class="">
-        <%= link_to new_color_path, class: "btn btn-default btn-lg" do %>
+    <li role="presentation" class="">        
+        <%= link_to new_color_path, remote: true, class: "btn btn-default btn-lg" do  %>
         <i class="glyphicon glyphicon-file"></i>New
-        <% end %>  
+        <% end %>                    
     </li>     
 
     <% end %>

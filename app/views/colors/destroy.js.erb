@@ -1,0 +1,8 @@
+$('#alertMessage p').remove();
+<% if @color.errors.empty? %>
+  $('table tbody tr#<%= @color.id %>').remove();
+  $('.alert-success').html("Color was deleted").show();
+  $('#color-modal').modal('hide');
+<% else %>   
+  $('#alertMessage').append('<p class="alert alert-danger"><%= j @color.errors.full_messages[0] %></p>');
+<% end %>
