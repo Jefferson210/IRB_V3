@@ -1,12 +1,11 @@
-<% if @genetic_bank.errors.empty? %>  
-  $('table tbody').prepend(' <%= j render "row", geneticBank: @genetic_bank %>');  
-  $('.alert-success').html("Created success").show();
-  $('#geneticBank-modal').modal('hide');
-<% else %>     
-  $(".form-group").removeClass("has-error");
-  $("p.field_with_errors").remove();
- 
-  <% @genetic_bank.errors.full_messages_for(:code).each do |message| %>                 
+$('.alert-success').hide();
+$(".form-group").removeClass("has-error");
+$("p.field_with_errors").remove();
+<% if @genetic_bank.errors.empty? %> 
+  $('table tbody tr#<%= @genetic_bank.id %>').replaceWith(' <%= j render "row", geneticBank: @genetic_bank  %>');
+  $('.alert-success').html("Updated success").show();  
+<% else %>       
+  <% @genetic_bank.errors.full_messages_for(:code).each do |message| %>       
     $("#genetic_bank_code").closest(".form-group").addClass("has-error");
     $("#genetic_bank_code" ).after('<p class="field_with_errors"><%= message %></p>'); 
   <% end %> 

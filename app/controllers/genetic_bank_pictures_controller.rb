@@ -1,9 +1,7 @@
 class GeneticBankPicturesController < ApplicationController
     def create
         @genetic_bank = GeneticBank.find(params[:genetic_bank_id])
-        @picture = @genetic_bank.genetic_bank_pictures.create(genetic_bank_picture_params)
-        #        redirect_to genetic_bank_path(@genetic_bank)
-
+        @picture = @genetic_bank.genetic_bank_pictures.create(genetic_bank_picture_params)               
         if params[:genetic_bank_picture]
             if @picture.save
                 redirect_to genetic_bank_path(@genetic_bank), notice: 'Picture uploaded.'

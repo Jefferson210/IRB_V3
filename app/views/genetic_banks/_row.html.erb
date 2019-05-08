@@ -1,6 +1,6 @@
 <tr id="<%= geneticBank.id %>">
     <td>
-        <%= link_to geneticBank.code,genetic_bank_path(geneticBank)%>
+        <%= geneticBank.code %>
     </td>
     <td>
         <%= geneticBank.location %>
@@ -40,13 +40,16 @@
     <td>
         <%= geneticBank.opening %>
     </td>
-    <td>
-        <%= link_to "", edit_genetic_bank_path(geneticBank), remote: true,class:"btn btn-default glyphicon glyphicon-pencil" %>
+    <td>        
+        <%= link_to edit_genetic_bank_path(geneticBank), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>             
+        <% end %>
     </td>
     <td>
-        <%= link_to '',genetic_bank_path(geneticBank), remote: true,class:"btn btn-default glyphicon glyphicon-eye-open" %>
+        <%= link_to '',genetic_bank_path(geneticBank),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>        
     </td>
     <td>
-        <%= link_to "", geneticBank, method: :delete, data: { confirm: "Are you sure?" },remote: true, class:'delete btn btn-default glyphicon glyphicon-trash'%>
+        <%= link_to "", geneticBank, method: :delete, data: { confirm: "Are you sure?" },remote: true, class:'delete btn btn-default glyphicon glyphicon-trash' , :title => "Delete"%>
     </td>
 </tr>

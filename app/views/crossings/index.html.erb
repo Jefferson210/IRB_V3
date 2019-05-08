@@ -1,73 +1,33 @@
-<%= render 'optionsMenu', model: "Crossing" %> 
-<div class="text-center">    
-    <div class="modal fade" id="crossing-modal-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Create Bar Codes</h4>
-                </div>
-                <div class="modal-body">                   
-                    <%= form_tag(crossingsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "crossings", options_from_collection_for_select(Crossing.all, "id", :selectCodeNumRepeat),multiple: true %>
-                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
-                    <%end%>                                            
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h2>Crossings</h2>
+    <div class="well">
+        <%= link_to "New Crossing", new_crossing_path, remote: true, class: "btn btn-primary" %>
     </div>
+    <div class="new-crossing"></div>
+
+    <table id class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>CodeCross</th>
+                <th>NumRepeat</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Father Code</th>
+                <th>Mother Code</th>
+                <th>CrossWeek</th>
+                <th>Effective</th>
+                <th>NumCrossings</th>
+                <th>GoodCrossings</th>
+                <th>BadCrossings</th>
+                <th>PercentageEffective</th>
+                <th>NumSeeds</th>
+            </tr>
+        </thead>
+        <tbody id="crossings">            
+            <% @crossings.each do |crossing| %>
+            <%= render "crossing", crossing: crossing %>
+            <% end %>
+        </tbody>
+    </table>
+    <%= render 'dialog' %>
 </div>
-<br>
-<%=
-    grid(@crossingsGrid) do |crossing|
-        crossing.column name: "CrossCode", attribute: "codeCross"
-        #        crossing.column name: "N°Order", attribute: "numOrder"
-        crossing.column name: "N°Repeat", attribute: "numRepeat"
-        crossing.column name: "Year", attribute: "year"
-        crossing.column name: "Status", attribute: "status"        
-
-        crossing.column name: "Father", attribute: "code", assoc: :father do |father|
-            father.father.code
-        end
-
-        crossing.column name: "Father Picture" do |fatherPicture|
-            if @pictures.exists?(:genetic_bank_id => fatherPicture.father.id)
-                arrayImage = @pictures.where(genetic_bank_id: fatherPicture.father.id).to_a
-                pictureFileName = arrayImage[0][:picture_file_name]
-                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
-            end
-        end         
-        crossing.column name: "Mother", attribute: "code", assoc: :mother do |mother|
-            mother.mother.code
-        end
-
-        crossing.column name: "Mother Picture" do |motherPicture|
-            if @pictures.exists?(:genetic_bank_id => motherPicture.mother.id)
-                arrayImage = @pictures.where(genetic_bank_id: motherPicture.mother.id).to_a
-                pictureFileName = arrayImage[0][:picture_file_name]
-                image_tag(@geneticBankImagesPath+pictureFileName,:class => "img-thumbnail")
-            end
-        end
-        crossing.column name: "Crossweek", attribute: "crossWeek"
-        crossing.column name: "Effective", attribute: "effective"
-        crossing.column name: "N°Cross", attribute: "numCrossings"
-        crossing.column name: "Good Cross", attribute: "goodCrossings"
-        crossing.column name: "Bad Cross", attribute: "badCrossings"
-        crossing.column name: "%Effective", attribute: "percentageEffective"
-        #        crossing.column name: "Dateharvest", attribute: "dateHarvest",filter_type: :bootstrap_datepicker
-        #        crossing.column name: "Weekharvest", attribute: "weekHarvest"
-        crossing.column name: "N°Seeds", attribute: "numSeeds"    
-
-        crossing.column do |crossingEdit|
-            link_to("",edit_crossing_path(crossingEdit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
-        end
-
-        crossing.column do |crossingShow|
-            link_to("",crossing_path(crossingShow.id),:class => "btn btn-default glyphicon glyphicon-eye-open")
-        end
-
-        crossing.column do |crossingDelete|
-            link_to("",crossing_path(crossingDelete.id),data:{confirm: "Are you Sure?"}, method: :delete,:class => "btn btn-default glyphicon glyphicon-trash")
-        end
-    end
--%>

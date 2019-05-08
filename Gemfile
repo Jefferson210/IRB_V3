@@ -72,3 +72,5 @@ gem 'rails-assets-sweetalert2', '~> 5.1.1', source: 'https://rails-assets.org'  
 gem 'sweet-alert2-rails' #para sobrescribir el diseño del dialogo de confirmacion al eliminar
 
 gem 'sweetify' #para sobrescribir el diseño del dialogo de confirmacion al eliminar
+
+gem 'remotipart', '~> 1.2'

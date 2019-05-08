@@ -1,131 +1,25 @@
-<div class="container">    
-    <div class="row">
-        <%= link_to 'Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
-        <%= link_to 'Edit', edit_genetic_bank_path(@genetic_bank), class: "btn btn-default glyphicon glyphicon-pencil"%>        
-        <%= render 'uploadImage', model: "GeneticBank" %>
-        <br>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="text-left"><%= @genetic_bank.code %></h2>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <div class="col-md-6">
-                        <li class="list-group item">Code:
-                            <span><strong> <%= @genetic_bank.code %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Location:
-                            <span><strong><%= @genetic_bank.location %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Trademark:
-                            <span><strong><%= @genetic_bank.trademark %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Denomination:
-                            <span><strong> <%= @genetic_bank.denomination %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Year:
-                            <span><strong><%= @genetic_bank.year %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Breeder:
-                            <span><strong> <%= @genetic_bank.breeder %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Status:
-                            <span><strong>   <%= @genetic_bank.status %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Numplants:
-                            <span><strong> <%= @genetic_bank.numPlants %></strong></span>
-                        </li>
-                        
-                        <li class="list-group item">Color:
-                            <span><strong><%= @genetic_bank.color ? @genetic_bank.color.colorName : 'N/A' %></strong></span>
-                        </li>
-                    </div>
-
-                    <div class="col-md-6">
-                        <li class="list-group item">Scent:
-                            <span><strong> <%= @genetic_bank.scent %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Headsize:
-                            <span><strong><%= @genetic_bank.headSize %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Numpetals:
-                            <span><strong><%= @genetic_bank.numPetals %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Steamlenght:
-                            <span><strong><%= @genetic_bank.steamLenght %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Production:
-                            <span><strong><%= @genetic_bank.production %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Opening:
-                            <span><strong>  <%= @genetic_bank.opening %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Abnormality:
-                            <span><strong><%= @genetic_bank.abnormality %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Remarks:
-                            <span><strong> <%= @genetic_bank.remarks %></strong></span>
-                        </li>
-                        
-                        <li class="list-group item">Main Picture:
-                            <span><strong> 
-                                <%= @genetic_bank.PictureId ? @genetic_bank.getPictureName : "None" %>
-                                </strong></span>
-                        </li>
-                    </div>
-                </ul>
-            </div>            
-
-            <div class="gallery">                
+<div class="container">
+    <%= link_to 'Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+    <%= render 'uploadImage', model: "GeneticBank" %>
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading ">
+            <h3><%= @genetic_bank.code %> Gallery</h3>
+        </div>
+        <div class="panel-body">
+            <div class="gallery">
                 <% @genetic_bank.genetic_bank_pictures.each do |picture| %>
                 <figure>
                     <%if picture.picture.url() != "/pictures/original/missing.png" %>
                     <%= image_tag picture.picture.url()%>
-                    <%= picture.picture_file_name %> 
-                    <%= link_to [picture.genetic_bank,picture],method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
+                    <%= picture.picture_file_name %>
+                    <%= link_to [picture.genetic_bank,picture],remote: true, method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
                     <i class="glyphicon glyphicon-trash"></i>
                     <%end%>
                     <%end%>
-                </figure>  
-                <%end%>                      
-            </div>
-
-            <div class="panel-footer">
-                <%= link_to 'Edit', edit_genetic_bank_path(@genetic_bank), class: "btn btn-default glyphicon glyphicon-pencil"%>
-                <%= link_to 'Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+                </figure>
+                <%end%>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

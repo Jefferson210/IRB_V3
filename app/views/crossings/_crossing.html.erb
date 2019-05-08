@@ -1,0 +1,51 @@
+
+<tr id="crossing_<%= crossing.id %>">
+    <td>
+        <%= crossing.codeCross %>
+    </td>
+    <td>
+        <%=crossing.numRepeat %>
+    </td>
+    <td>
+        <%=crossing.year %>
+    </td>
+    <td>
+        <%=crossing.status %>
+    </td>
+    <td>
+        <%=crossing.father%>
+    </td>
+    <td>
+        <%=crossing.mother %>
+    </td>
+    <td>
+        <%=crossing.crossWeek %>
+    </td>
+    <td>
+        <%=crossing.effective %>
+    </td>
+    <td>
+        <%=crossing.numCrossings %>
+    </td>
+    <td>
+        <%=crossing.goodCrossings %>
+    </td>
+    <td>
+        <%=crossing.badCrossings %>
+    </td>
+    <td>
+        <%=crossing.percentageEffective %>
+    </td>
+    <td>
+        <%=crossing.numSeeds %>
+    </td>
+    <td>
+        <%= link_to edit_crossing_path(crossing), remote: true,class:"btn btn-default", :title => "Edit/View" do %>        
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>   
+    <td>        
+        <%= link_to '', crossing, remote: true, :method => :delete, data: {confirm: "Delete crossing: #{crossing.codeCross} #{crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
+    </td>
+</tr>

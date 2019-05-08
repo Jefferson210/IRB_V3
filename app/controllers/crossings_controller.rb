@@ -20,7 +20,7 @@ class CrossingsController < ApplicationController
     # GET /crossings
     # GET /crossings.json
     def index
-        @crossings = Crossing.all
+        @crossings = Crossing.all.order(created_at: :desc)            
         #Para traer todas las imagenes
         @pictures = GeneticBankPicture.group(:genetic_bank_id)
         @crossingsGrid = initialize_grid(Crossing,
@@ -46,11 +46,6 @@ class CrossingsController < ApplicationController
     end
 
     def codeCrossParents
-        #        @parents = Crossing.where(:codeCross => params[:text]).first
-        #        respond_to do |format|
-        #            format.json { render :json => @parents }
-        #        end
-
         @parents = Crossing.where(:codeCross => params[:text]).first
         @fatherId = @parents.father_id
         puts "Id padre @fatherId #{@fatherId}"
@@ -67,7 +62,6 @@ class CrossingsController < ApplicationController
         @numRepetition=@infor[1]
 
         @CrossingExist = Crossing.where(codeCross:@code,numRepeat:@numRepetition)
-
 
         respond_to do |format|
             format.json { render :json => @CrossingExist }
@@ -102,9 +96,11 @@ class CrossingsController < ApplicationController
             if @crossing.save
                 format.html { redirect_to @crossing, notice: 'Crossing was successfully created.' }
                 format.json { render :show, status: :created, location: @crossing }
+                format.js
             else
-                format.html { render :new }
-                format.json { render json: @crossing.errors, status: :unprocessable_entity }
+                format.json { render json: @crossing.errors.full_messages, 
+                                status: :unprocessable_entity }        
+                format.js            
             end
         end
     end
@@ -114,11 +110,12 @@ class CrossingsController < ApplicationController
     def update
         respond_to do |format|
             if @crossing.update(crossing_params)
-                format.html { redirect_to @crossing, notice: 'Crossing was successfully updated.' }
-                format.json { render :show, status: :ok, location: @crossing }
+                format.json { head :no_content }
+                format.js
             else
-                format.html { render :edit }
-                format.json { render json: @crossing.errors, status: :unprocessable_entity }
+                format.json { render json: @customer.errors.full_messages,
+                                       status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -128,14 +125,16 @@ class CrossingsController < ApplicationController
     def destroy
         begin
             @crossing.destroy
+            sweetalert_success('', 'Deleted', persistent: 'Ok!')
             respond_to do |format|
                 format.html {redirect_to crossings_url, :flash =>{:success => 'Crossing was successfully destroyed.'}}
                 format.json {head :no_content}
+                format.js
             end
         rescue StandardError => e 
-            #        rescue ActiveRecord::DeleteRestrictionError => e 
+            sweetalert_error('Cannot delete record because of dependent seeds', 'Error', persistent: 'Ok!')            
             respond_to do |format|
-                format.html {redirect_to crossings_url, alert: "Cannot delete record because of dependent seeds"}
+                format.html {redirect_to crossings_url}
             end
         end
     end

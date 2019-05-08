@@ -19,7 +19,7 @@ class GeneticBanksController < ApplicationController
     # GET /genetic_banks
     # GET /genetic_banks.json
     def index
-        @genetic_banks = GeneticBank.all
+        @genetic_banks = GeneticBank.all.order(created_at: :desc)
         @pictures = GeneticBankPicture.group(:genetic_bank_id)
         @geneticBank = initialize_grid(GeneticBank,
             include: [:color],
@@ -44,41 +44,51 @@ class GeneticBanksController < ApplicationController
     end
 
     # POST /genetic_banks
-    # POST /genetic_banks.json
+    # POST /genetic_banks.json   
     def create
-        @genetic_bank = GeneticBank.new(genetic_bank_params)
-        respond_to do |format|            
-            if @genetic_bank.save                
-                format.html { redirect_to @genetic_bank} 
-                format.json { render json: {                       
-                        :message => 'Genetic bank was successfully created.'
-                    }
-                } 
-                format.js   
-            else
-                format.html { render :new }                
-                format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }  
-                format.js                                                                                 
-            end
+        @genetic_bank = GeneticBank.new(genetic_bank_params)            
+        respond_to do |format|
+          if @genetic_bank.save    
+            if params[:images]              
+              params[:images].each { |image|
+                @genetic_bank.genetic_bank_pictures.create(picture: image)
+              }
+            end    
+            format.html { redirect_to @genetic_bank} 
+            format.json { render json: @genetic_bank, status: :created, location: @genetic_bank }
+            format.js  
+          else
+            format.html { render action: "new" }
+            format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }
+            format.js  
+          end
         end
     end
 
     # PATCH/PUT /genetic_banks/1
-    # PATCH/PUT /genetic_banks/1.json
-    def update    
+    # PATCH/PUT /genetic_banks/1.json    
+    def update       
         respond_to do |format|
-            if @genetic_bank.update(genetic_bank_params)
-                format.html { redirect_to @genetic_bank, notice: 'Genetic bank was successfully updated.' }
-                format.json { render json: {                       
+          if @genetic_bank.update_attributes(genetic_bank_params)
+            if params[:images]              
+              params[:images].each { |image|                
+                @genetic_bank.genetic_bank_pictures.create(picture: image)                                
+              }
+            end            
+            format.html { redirect_to @genetic_bank, notice: 'Genetic bank was successfully updated.' }
+            format.json { render json: {                       
                         :message => 'Genetic bank was successfully updated.'
                     }
-                } 
-            else
-                format.html { render :edit }
-                format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }
-            end
-        end
-    end
+                }             
+            format.js
+          else
+            format.html { render :edit }
+            format.json { render json: @genetic_bank.errors, status: :unprocessable_entity }
+            format.js
+          end
+        end       
+      end
+
 
     # DELETE /genetic_banks/1
     # DELETE /genetic_banks/1.json
@@ -89,6 +99,7 @@ class GeneticBanksController < ApplicationController
             respond_to do |format|
                 format.html {redirect_to genetic_banks_url}
                 format.json {head :no_content}
+                format.js
             end
         rescue ActiveRecord::DeleteRestrictionError => e 
             sweetalert_error('Cannot delete the record because it is a parent in a crossing.', 'Error', persistent: 'Ok!')

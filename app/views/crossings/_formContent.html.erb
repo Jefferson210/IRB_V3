@@ -1,11 +1,11 @@
-<%= form_for(@crossing, remote: true, :html => { :role => "form" }) do |f| %>
-<div id="error_explanation" class="bg-danger text-danger">
-</div>
-
-<div class="row">
+<%= form_for @crossing, :html => { :multipart => true ,'data-model' => 'crossing'}, :remote => true do |f| %>
+<div class="modal-body">
+    <span id="error_box">
+        <ul></ul>
+    </span>
     <div class="form-group col-xs-5 col-md-4">
         <%= f.label :father_id %>
-        <%= f.collection_select(:father_id,GeneticBank.where(:status => "keep"),:id,:selectCodeTrademark,{:prompt => "Select code-trademark"},{:class => "form-control first_input",:id => "father_id"})%>
+        <%= f.collection_select(:father_id,GeneticBank.where(:status => "keep"),:id,:selectCodeTrademark,{:prompt => "Select code-trademark"},{:class => "form-control",:id => "father_id"})%>
     </div>
 
     <div class="form-group col-xs-5 col-md-4">
@@ -80,8 +80,8 @@
         <%= f.label :numSeeds , :class=>"col-md-2 control-label"%>
         <%= f.number_field :numSeeds, :class=>"form-control",min: 0  %>
     </div>
-    <div class="form-group">
-        <%= f.submit  @crossing.new_record? ? "Create" : "Update", :class => "btn btn-primary" %>
-    </div>
+</div>
+<div class="modal-footer">
+        <%= f.submit class: "btn btn-primary btn-lg btn-block" %>
 </div>
 <% end %>

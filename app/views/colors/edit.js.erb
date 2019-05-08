@@ -1,5 +1,5 @@
 $('.alert-success').hide();
-$('<%= j render "form", title: "Modificar Color" %>').on('hidden.bs.modal', function (e) {
+$('<%= j render "form" %>').on('hidden.bs.modal', function (e) {
   $(this).remove();
   $('.modal-backdrop').remove();
 }).modal();
