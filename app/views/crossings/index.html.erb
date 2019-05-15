@@ -1,33 +1,55 @@
-<div class="container">
-    <h2>Crossings</h2>
-    <div class="well">
-        <%= link_to "New Crossing", new_crossing_path, remote: true, class: "btn btn-primary" %>
+<%= render 'optionsMenu', model: "Crossing" %>
+<%= render 'modalBarCode', model: "Crossing" %>
+<div class="panel panel-primary filterable">
+    <div class="panel-heading">
+        <h2 class="panel-title">Crossings</h2>
     </div>
-    <div class="new-crossing"></div>
-
-    <table id class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>CodeCross</th>
-                <th>NumRepeat</th>
-                <th>Year</th>
-                <th>Status</th>
-                <th>Father Code</th>
-                <th>Mother Code</th>
-                <th>CrossWeek</th>
-                <th>Effective</th>
-                <th>NumCrossings</th>
-                <th>GoodCrossings</th>
-                <th>BadCrossings</th>
-                <th>PercentageEffective</th>
-                <th>NumSeeds</th>
-            </tr>
-        </thead>
-        <tbody id="crossings">            
-            <% @crossings.each do |crossing| %>
-            <%= render "crossing", crossing: crossing %>
-            <% end %>
-        </tbody>
-    </table>
-    <%= render 'dialog' %>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>CodeCross</th>
+                    <th>NumRepeat</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>Father Code</th>
+                    <th>Mother Code</th>
+                    <th>CrossWeek</th>
+                    <th>Effective</th>
+                    <th>NumCrossings</th>
+                    <th>GoodCrossings</th>
+                    <th>BadCrossings</th>
+                    <th>PercentageEffective</th>
+                    <th>NumSeeds</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr class="filters">
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th><input type="text" class="form-control"></th>
+                    <th>
+                        <span class="glyphicon glyphicon-filter">Filters</span>
+                    </th>
+                    <th>
+                        <button id="clearFilters" class="btn"><i class="glyphicon glyphicon-refresh" title="Clean filters"></i></button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="crossings">
+                <% @crossings.each do |crossing| %>
+                <%= render "crossing", crossing: crossing %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>
+<%= render 'dialog' %>

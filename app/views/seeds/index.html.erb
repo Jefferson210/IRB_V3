@@ -1,24 +1,5 @@
 <%= render 'optionsMenu', model: "Seed" %>
-<div class="text-center">    
-    <div class="modal fade" id="seed-modal-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Create Bar Codes</h4>
-                </div>
-                <div class="modal-body">
-                    <%= form_tag(seedsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "seeds", options_from_collection_for_select(Seed.all, "id", :codeCross_numRepeat),multiple: true %>
-                    <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
-                    <%end%>                
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-<br>
+<%= render 'modalBarCode', model: "Seed" %>
 <%=
     grid(@seedsGrid) do |seed|
         seed.column name: "CodeCross", attribute: "codeCross",html: {id: "codeCrossName"}, assoc: :crossing do |seedCrossing|

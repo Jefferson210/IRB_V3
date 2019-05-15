@@ -1,8 +1,7 @@
-
-<% if @crossing.errors.empty? %>  
+<% if @crossing.errors.empty? %>    
     $('#dialog').modal('toggle');
     $('#crossings').append('<%= j render (@crossing) %>');
-<% else %>     
+<% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();
  
@@ -29,6 +28,11 @@
   <% @crossing.errors.full_messages_for(:mother_id).each do |message| %>                     
     $("#mother_id").closest(".form-group").addClass("has-error");
     $("#mother_id" ).after('<p class="field_with_errors"><%= message %></p>');              
+  <% end %> 
+
+  <% @crossing.errors.full_messages_for(:numSeeds).each do |message| %>                     
+    $("#crossing_numSeeds").closest(".form-group").addClass("has-error");
+    $("#crossing_numSeeds" ).after('<p class="field_with_errors"><%= message %></p>');              
   <% end %> 
 <% end %>
 

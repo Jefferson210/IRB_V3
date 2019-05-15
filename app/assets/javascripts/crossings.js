@@ -1,6 +1,15 @@
 //# Place all the behaviors and hooks related to the matching controller here.
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on('turbolinks:load', function () {
+  //cargar los elementos a la list box para imprimir codigo de barras
+  $('#crossings').multiselect({
+    buttonWidth: '300px',
+    includeSelectAllOption: true,
+    enableFiltering: true
+  });
+});
+
 function crossingsValidations(action) { 
   $("#codeCrossId").change(function () {
     var codeCross = $("#codeCrossId").val();
@@ -80,12 +89,14 @@ function crossingsValidations(action) {
   })
 
   //mostrar campos segun la opcion de Effective
-  $("#effectiveId").change(function () {
+  $("#effectiveId").change(function () {    
     var str = "";
     $("#effectiveId option:selected").each(function () {
       str += $(this).text();
       //alert(str)
       if (str == "Not" || str == "Select") {
+        $("#crossing_numSeeds .form-group").removeClass("has-error");
+        $("#crossing_numSeeds p.field_with_errors").remove();
         $(".effectiveOption").hide();
         //borramos los datos despues de editar la propiedad a Not
         $("#numCrossingId").val("");
@@ -99,7 +110,8 @@ function crossingsValidations(action) {
         $(".effectiveOption").show();
       }
     });
-  }).trigger("change");
+  })
+  .trigger("change");
 
   if ($("#effectiveShowPage span").text() == "not") {
     $(".effectiveOption").hide();

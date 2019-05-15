@@ -1,4 +1,3 @@
-
 <tr id="crossing_<%= crossing.id %>">
     <td>
         <%= crossing.codeCross %>
@@ -13,10 +12,10 @@
         <%=crossing.status %>
     </td>
     <td>
-        <%=crossing.father%>
+        <%=crossing.father.code%>
     </td>
     <td>
-        <%=crossing.mother %>
+        <%=crossing.mother.code %>
     </td>
     <td>
         <%=crossing.crossWeek %>
@@ -40,12 +39,12 @@
         <%=crossing.numSeeds %>
     </td>
     <td>
-        <%= link_to edit_crossing_path(crossing), remote: true,class:"btn btn-default", :title => "Edit/View" do %>        
+        <%= link_to edit_crossing_path(crossing), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="glyphicon glyphicon-eye-open"></span>
         <% end %>
-    </td>   
-    <td>        
+    </td>
+    <td>       
         <%= link_to '', crossing, remote: true, :method => :delete, data: {confirm: "Delete crossing: #{crossing.codeCross} #{crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
     </td>
 </tr>
