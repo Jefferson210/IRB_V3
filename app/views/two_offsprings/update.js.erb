@@ -1,6 +1,7 @@
 <% if @two_offspring.errors.empty? %>      
     $('#dialog').modal('toggle');
-    $('#two_offsprings_<%= @two_offspring.id %>').replaceWith('<%= j render "two_offsprings", two_offsprings: @two_offspring %>')    
+    $('#two_offsprings_<%= @two_offspring.id %>').replaceWith('<%= j render "two_offsprings", two_offsprings: @two_offspring %>')  
+    window.location.reload();
 <% else %>       
     $(".form-group").removeClass("has-error");
     $("p.field_with_errors").remove();

@@ -20,15 +20,15 @@ defaults: &defaults
   socket: /opt/lampp/var/mysql/mysql.sock
 
 #Default configuration to CLOUD9, database c9
-#defaults: &defaults
-#  adapter: mysql2
-#  encoding: utf8
-#  username: <%=ENV['C9_USER']%>
-#  host: <%=ENV['IP']%>
+defaults: &defaults
+  adapter: mysql2
+  encoding: utf8
+  username: <%=ENV['C9_USER']%>
+  host: <%=ENV['IP']%>
 
 development:
   <<: *defaults
-  database: IRBDB_v3
+  database: c9
 
 test: &test
   <<: *defaults

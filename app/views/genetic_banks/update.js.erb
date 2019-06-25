@@ -1,7 +1,7 @@
 <% if @genetic_bank.errors.empty? %> 
     $('#dialog').modal('toggle');
-    $('#geneticBank_<%= @genetic_bank.id %>').replaceWith('<%= j render "geneticBank", geneticBank: @genetic_bank %>')
-    console.log("sin error");
+    $('#geneticBank_<%= @genetic_bank.id %>').replaceWith('<%= j render "geneticBank", geneticBank: @genetic_bank %>');
+    window.location.reload();
 <% else %>     
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();  

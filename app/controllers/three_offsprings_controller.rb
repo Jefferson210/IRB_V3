@@ -41,11 +41,18 @@ class ThreeOffspringsController < ApplicationController
 
         respond_to do |format|
             if @three_offspring.save
+                if params[:images]              
+                    params[:images].each { |image|
+                      @three_offspring.three_offspring_pictures.create(picture: image)
+                    }
+                end  
                 format.html { redirect_to @three_offspring, notice: 'Three offspring was successfully created.' }
                 format.json { render :show, status: :created, location: @three_offspring }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @three_offspring.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -55,11 +62,18 @@ class ThreeOffspringsController < ApplicationController
     def update
         respond_to do |format|
             if @three_offspring.update(three_offspring_params)
+                if params[:images]              
+                    params[:images].each { |image|                
+                      @three_offspring.three_offspring_pictures.create(picture: image)                                
+                    }
+                end 
                 format.html { redirect_to @three_offspring, notice: 'Three offspring was successfully updated.' }
                 format.json { render :show, status: :ok, location: @three_offspring }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @three_offspring.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -72,10 +86,12 @@ class ThreeOffspringsController < ApplicationController
             respond_to do |format|
                 format.html { redirect_to three_offsprings_url, notice: 'Three offspring was successfully destroyed.' }
                 format.json { head :no_content }
+                format.js
             end
         rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
             respond_to do |format|
-                format.html {redirect_to three_offsprings_url, alert: "#{e}"}
+                format.html {redirect_to three_offsprings_url}
             end
         end
     end

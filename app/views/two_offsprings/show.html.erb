@@ -1,25 +1,25 @@
 <div class="container">
-        <%= link_to 'Back', two_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
-        <%= render 'uploadImage', model: "TwoOffspring" %>
-        <br>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="text-left"><%= @two_offspring.one_offspring.germination.seed.crossing.codeCross %> Gallery</h3>
-            </div>
-            <div class="panel-body">
-                <div class="gallery">
-                    <% @two_offspring.two_offspring_pictures.each do |picture| %>
-                    <figure>
-                        <%if picture.picture.url() != "/pictures/original/missing.png" %>
-                        <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
-                        <%= picture.picture_file_name %>
-                        <%= link_to [picture.two_offspring,picture],remote: true,method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>                    
-                        <i class="glyphicon glyphicon-trash"></i>
-                        <%end%>
-                        <%end%>
-                    </figure>
-                    <%end%>
-                </div>
-            </div>       
+    <%= link_to 'Back', two_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+    <%= render 'uploadImage', model: "TwoOffspring" %>
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="text-left"><%= @two_offspring.one_offspring.germination.seed.crossing.codeCross %> Gallery</h3>
         </div>
+        <div class="panel-body">
+            <div class="gallery">
+                <% @two_offspring.two_offspring_pictures.each do |picture| %>
+                <figure>
+                    <%if picture.picture.url() != "/pictures/original/missing.png" %>
+                    <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
+                    <%= picture.picture_file_name %>
+                    <%= link_to [picture.two_offspring,picture],remote: true,method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>                    
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <%end%>
+                    <%end%>
+                </figure>
+                <%end%>
+            </div>
+        </div>       
     </div>
+</div>

@@ -1,0 +1,13 @@
+<% if @three_offspring.errors.empty? %>      
+    $('#dialog').modal('toggle');
+    $('#three_offsprings_<%= @three_offspring.id %>').replaceWith('<%= j render "three_offsprings", three_offsprings: @three_offspring %>')    
+    window.location.reload();
+<% else %>       
+    $(".form-group").removeClass("has-error");
+    $("p.field_with_errors").remove();
+    <% @three_offspring.errors.full_messages_for(:two_offspring_id).each do |message| %>          
+    $("#two_offspring_id").closest(".form-group").addClass("has-error");
+    $("#two_offspring_id" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>             
+<% end %>
+

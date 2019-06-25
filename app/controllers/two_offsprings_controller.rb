@@ -92,7 +92,7 @@ class TwoOffspringsController < ApplicationController
         rescue ActiveRecord::DeleteRestrictionError => e
             sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
             respond_to do |format|
-                format.html {redirect_to two_offsprings_url, alert: "#{e}"}
+                format.html {redirect_to two_offsprings_url}
             end
         end
     end

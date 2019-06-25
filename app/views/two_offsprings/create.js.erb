@@ -1,6 +1,7 @@
 <% if @two_offspring.errors.empty? %>    
     $('#dialog').modal('toggle');
-    $('#twoOffspringsBody').append('<%= j render "two_offsprings", two_offsprings: @two_offspring %>');        
+    $('#twoOffspringsBody').append('<%= j render "two_offsprings", two_offsprings: @two_offspring %>');     
+    window.location.reload();
 <% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();

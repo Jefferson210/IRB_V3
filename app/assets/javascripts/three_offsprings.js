@@ -2,7 +2,7 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).on("turbolinks:load", function(){
+function threeOffspringsValidations(action) {
     $("#two_offspring_id").on('change',function(){
         if ($("#two_offspring_id").val() != ""){
             var id = $("#two_offspring_id option:selected").val();
@@ -29,5 +29,4 @@ $(document).on("turbolinks:load", function(){
             $("#colorId").val("");
         }
     });
-});
-
+}
