@@ -3,13 +3,13 @@ class CrossingsController < ApplicationController
     before_action :authenticate_user!
 
     def generateBarCode
-        @barcode = Hash.new
-        @codeCrossings = params[:crossings]        
+        @barcode = Hash.new          
+        @codeCrossings = params[:barCodeSelect]        
         if @codeCrossings != nil            
             @codeCrossings.each do |crossingId|
                 if crossingId != "multiselect-all"
-                    @crossing = Crossing.find(crossingId)                    
-                    @barcode[@crossing.codeCross + @crossing.numRepeat.to_s] = barcodeOutPut(@crossing); 
+                    @crossing = Crossing.find(crossingId)                                        
+                    @barcode[@crossing.codeCross + "-" + @crossing.numRepeat.to_s] = barcodeOutPut(@crossing); 
 #                    logger.debug "====================INSPECT: #{@barcode.inspect}"
                 end
             end
@@ -20,7 +20,7 @@ class CrossingsController < ApplicationController
     # GET /crossings
     # GET /crossings.json
     def index
-        @crossings = Crossing.all.order(created_at: :desc)            
+        @crossings = Crossing.all  
         #Para traer todas las imagenes
         @pictures = GeneticBankPicture.group(:genetic_bank_id)
         @crossingsGrid = initialize_grid(Crossing,

@@ -1,78 +1,25 @@
 <div class="container">
-    <div class="row">
-        <%= link_to 'Back', one_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
-        <%= link_to 'Edit', edit_one_offspring_path(@one_offspring), class: "btn btn-default glyphicon glyphicon-pencil" %>         
-        <%= render 'uploadImage', model: "OneOffspring" %>
-        <br>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h2 class="text-left"><%= @one_offspring.germination.seed.crossing.codeCross %></h2>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-                    <div class="col-md-6">
-                        <li class="list-group-item">Codecross:
-                            <span><strong><%= @one_offspring.germination.seed.crossing.codeCross %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">Individual:
-                            <span><strong><%= @one_offspring.individual %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">Color:
-                            <span><strong><%= @one_offspring.color ? @one_offspring.color.colorName : 'N/A' %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">Status:
-                            <span><strong><%= @one_offspring.status %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">HeadSize
-                            <span><strong><%= @one_offspring.headSize %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">Flowering:
-                            <span><strong><%= @one_offspring.flowering %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">NumPetals:
-                            <span><strong><%= @one_offspring.numPetals %></strong></span>
-                        </li>
-
-                        <li class="list-group-item">Form:
-                            <span><strong><%= @one_offspring.form %></strong></span>
-                        </li>
-                        <li class="list-group-item">Main Picture:
-                            <span><strong> 
-                                <%= @one_offspring.PictureId ? @one_offspring.getPictureName : "None" %>
-                                </strong></span>
-                        </li>
-                    </div>
-                </ul>
-            </div>          
-
+    <%= link_to 'Back', one_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+    <%= render 'uploadImage', model: "OneOffspring" %>
+    <br>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="text-left"><%= @one_offspring.germination.seed.crossing.codeCross %> Gallery</h3>
+        </div>
+        <div class="panel-body">
             <div class="gallery">
                 <% @one_offspring.one_offspring_pictures.each do |picture| %>
                 <figure>
                     <%if picture.picture.url() != "/pictures/original/missing.png" %>
                     <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>
-                    <%= picture.picture_file_name %> 
-                    <%= link_to [picture.one_offspring,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                    <%= picture.picture_file_name %>
+                    <%= link_to [picture.one_offspring,picture],remote: true,method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>                    
                     <i class="glyphicon glyphicon-trash"></i>
-                    <%end%>                    
-                    <%end%>                    
+                    <%end%>
+                    <%end%>
                 </figure>
                 <%end%>
             </div>
-            <div class="panel-footer">
-                <%= link_to 'Edit', edit_one_offspring_path(@one_offspring), class: "btn btn-default glyphicon glyphicon-pencil" %> 
-                <%= link_to 'Back', one_offsprings_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
-            </div>
-        </div>
+        </div>       
     </div>
 </div>
-
-
-
-
-

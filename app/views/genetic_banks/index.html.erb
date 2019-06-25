@@ -4,10 +4,16 @@
     <div class="panel-heading">
         <h2 class="panel-title">Genetic Bank</h2>
     </div>
+    <br>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-striped filterTable">
+            <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+            </button>
+            <br>
+            <br>
             <thead>
-                <tr>
+                <tr class="filters">
                     <th>Code</th>
                     <th>Location</th>
                     <th>Trademark</th>
@@ -19,36 +25,19 @@
                     <th>Scent</th>
                     <th>HeadSize</th>
                     <th>NumPetals</th>
-                    <th>SteamLenght</th>
-                    <th>Opening</th>
-                </tr>
-                <tr class="filters">
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th>
-                        <span class="glyphicon glyphicon-filter">Filters</span>
-                    </th>
-                    <th>
-                        <button id="clearFilters" class="btn"><i class="glyphicon glyphicon-refresh" title="Clean filters"></i></button>
-                    </th>
+                    <!-- <th>SteamLenght</th>
+                                    <th>Opening</th> -->
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="geneticBankBody">
                 <% @genetic_banks.each do |geneticBank| %>
-                <%= render "row", geneticBank: geneticBank %>
+                <%= render "geneticBank", geneticBank: geneticBank %>
                 <% end %>
             </tbody>
         </table>
     </div>
 </div>
+<%= render 'dialog' %>

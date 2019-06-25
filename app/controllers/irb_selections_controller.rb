@@ -4,7 +4,7 @@ class IrbSelectionsController < ApplicationController
 
     def generateBarCode
         @barcode = Hash.new
-        @codeIrbSelections = params[:irbSelection]        
+        @codeIrbSelections = params[:barCodeSelect]        
         if @codeIrbSelections != nil
             @codeIrbSelections.each do |irbId|
                 if irbId != "multiselect-all"

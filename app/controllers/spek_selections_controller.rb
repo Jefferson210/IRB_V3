@@ -3,8 +3,8 @@ class SpekSelectionsController < ApplicationController
     before_action :authenticate_user!
 
     def generateBarCode
-        @barcode = Hash.new
-        @codeSpekSelections = params[:spekSelection]        
+        @barcode = Hash.new        
+        @codeSpekSelections = params[:barCodeSelect]        
         if @codeSpekSelections != nil
             @codeSpekSelections.each do |spekId|
                 if spekId != "multiselect-all"

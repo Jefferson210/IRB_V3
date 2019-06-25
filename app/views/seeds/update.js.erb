@@ -1,0 +1,18 @@
+<% if @seed.errors.empty? %>      
+    $('#dialog').modal('toggle');
+    $('#seed_<%= @seed.id %>').replaceWith('<%= j render "seed", seed: @seed %>')
+<% else %>       
+    $(".form-group").removeClass("has-error");
+    $("p.field_with_errors").remove();
+ 
+    <% @seed.errors.full_messages_for(:crossing_id).each do |message| %>          
+        $("#crossing_id").closest(".form-group").addClass("has-error");
+        $("#crossing_id" ).after('<p class="field_with_errors"><%= message %></p>'); 
+    <% end %> 
+
+    <% @seed.errors.full_messages_for(:sowDate).each do |message| %>                     
+        $("#seed_sowDate" ).after('<p class="field_with_errors"><%= message %></p>');              
+        $("#seed_sowDate").closest(".form-group").addClass("has-error");
+    <% end %> 
+<% end %>
+

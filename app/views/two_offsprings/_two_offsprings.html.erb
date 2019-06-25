@@ -1,0 +1,52 @@
+<tr id="two_offsprings_<%= two_offsprings.id %>">
+    <td>
+        <%= two_offsprings.one_offspring.germination.seed.crossing.codeCross+"-#{two_offsprings.one_offspring.individual}" %>
+    </td>
+
+    <td>
+        <% if TwoOffspringPicture.exists?(:id => two_offsprings.PictureId) %>
+        <% arrayImage = TwoOffspringPicture.where(id: two_offsprings.PictureId).to_a %>
+        <% pictureFileName = arrayImage[0][:picture_file_name] %>
+        <%= image_tag("/assets/images/twoOffspring/"+pictureFileName,:class => "img-thumbnail") %>
+        <%else%>
+        N/A
+        <%end%>
+    </td>
+
+    <td>        
+        <%= two_offsprings.color %>        
+    </td>
+
+    <td>
+        <%= two_offsprings.status %>
+    </td>
+
+    <td>
+        <%= two_offsprings.headSize %>
+    </td>
+
+    <td>
+        <%= two_offsprings.flowering %>
+    </td>
+
+    <td>
+        <%= two_offsprings.numPetals %>
+    </td>
+
+    <td>
+        <%= two_offsprings.form %>
+    </td>
+
+    <td>
+        <%= link_to edit_two_offspring_path(two_offsprings), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to '',two_offspring_path(two_offsprings),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>
+    </td>
+    <td>
+        <%= link_to '', two_offsprings, remote: true, :method => :delete, data: {confirm: "Delete two_offsprings: #{two_offsprings.one_offspring.germination.seed.crossing.codeCross} #{two_offsprings.one_offspring.germination.seed.crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
+    </td>
+</tr>

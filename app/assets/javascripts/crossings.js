@@ -3,11 +3,11 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on('turbolinks:load', function () {
   //cargar los elementos a la list box para imprimir codigo de barras
-  $('#crossings').multiselect({
-    buttonWidth: '300px',
-    includeSelectAllOption: true,
-    enableFiltering: true
-  });
+  // $('#crossings').multiselect({
+  //   buttonWidth: '300px',
+  //   includeSelectAllOption: true,
+  //   enableFiltering: true
+  // });
 });
 
 function crossingsValidations(action) { 

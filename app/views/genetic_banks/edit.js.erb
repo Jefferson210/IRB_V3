@@ -1,4 +1,13 @@
-$('<%= j render "form", title: "Genetic Bank" %>').on('hidden.bs.modal', function (e) {
-  $(this).remove();
-  $('.modal-backdrop').remove();
-}).modal();
+// Add the dialog title
+$('#dialog h3').html("<i class=' glyphicon glyphicon-pencil'></i> Edit Genetic Bank");
+ 
+// Render the edit form
+$('.modal-body').html('<%= j render("form") %>');
+ 
+// Show the dynamic dialog
+$('#dialog').modal("show");
+ 
+// Set focus to the first element
+$('#dialog').on('shown.bs.modal', function () {
+    $('.first_input').focus();    
+})

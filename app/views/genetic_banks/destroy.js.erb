@@ -1,7 +1,2 @@
-<% if @genetic_bank.errors.empty? %>
-  $('table tbody tr#<%= @genetic_bank.id %>').remove();
-  $('.alert-success').html("Deleted success").show();
-  $('#geneticBank-modal').modal('hide');
-<% else %>   
-  $('#alertMessage').append('<p class="alert alert-danger"><%= j @genetic_bank.errors.full_messages[0] %></p>');
-<% end %>
+$('#geneticBank_<%= @genetic_bank.id %>').fadeOut();
+sweetAlert('Deleted!', '', 'success');

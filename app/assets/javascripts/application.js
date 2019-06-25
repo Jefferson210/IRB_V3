@@ -12,14 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require dataTables/jquery.dataTables
 //= require turbolinks
 //= require wice_grid
 //= require bootstrap-datepicker
 //= require bootstrap-multiselect
 //= require bootstrap-sprockets
-//= require_tree .
 //= require sweetalert2
 //= require sweet-alert2-rails
+//= require_tree .
+
 
 // para sobrescribir el diseño del dialogo de confirmacion al eliminar
 window.sweetAlertConfirmConfig = {
@@ -32,9 +36,39 @@ window.sweetAlertConfirmConfig = {
 
 $(document).on('turbolinks:load', function () {
     Turbolinks.clearCache();
+
+    $('.filterTable thead tr').clone(true).appendTo('.filterTable thead');
+    $('.filterTable thead tr:eq(1) th').each(function (i) {
+        var title = $(this).text();
+        if (!$(this).hasClass("buttonAction")) {
+            $(this).html('<input class="form-control" size="5" type="text"/>');
+        }
+
+        $('input', this).on('keyup change', function () {
+            if (table.column(i).search() !== this.value) {
+                table
+                    .column(i)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    });
+    var table = $('.filterTable').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true
+    });
+
+    //clear filters
+    $(".clearFilters").click(function (e) {
+        $('.filterable .filters input').val('');
+        table
+            .search('')
+            .columns().search('')
+            .draw();
+    });    
 });
 
-$(document).ready(function () {  
+$(document).ready(function () {
     // boton para ir al inicio de la pagina
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50) {
@@ -50,64 +84,43 @@ $(document).ready(function () {
         }, 500);
         return false;
     });
-    $('#back-to-top').tooltip('show');  
+    $('#back-to-top').tooltip('show');
 });
 
-$(document).on('turbolinks:load', function () {
-    //clear filters     
-    // $("#clearFilters").click(function (e) {
-    //     $('.filterable .filters input').val('');
-    //     /* Ignore tab key */
-    //     var code = e.keyCode || e.which;
-    //     if (code == '9') return;
-    //     /* Useful DOM data and selectors */
-    //     var $input = $(this),
-    //         inputContent = $input.val().toLowerCase(),
-    //         $panel = $input.parents('.filterable'),
-    //         column = $panel.find('.filters th').index($input.parents('th')),
-    //         $table = $panel.find('.table'),
-    //         $rows = $table.find('tbody tr');
-    //     /* Dirtiest filter function ever ;) */
-    //     var $filteredRows = $rows.filter(function () {
-    //         var value = $(this).find('td').eq(column).text().toLowerCase();
-    //         return value.indexOf(inputContent) === -1;
-    //     });
-    //     /* Clean previous no-result if exist */
-    //     $table.find('tbody .no-result').remove();
-    //     /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-    //     $rows.show();
-    //     $filteredRows.hide();
-    //     /* Prepend no-result row if all rows are filtered */
-    //     if ($filteredRows.length === $rows.length) {
-    //         $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
-    //     }
-    // });
+// funcion para cargar el select de codigos de barra
+function reloadBarCodeData(modelToSearch) {    
+    $.ajax({        
+        url: "/loadBarCode/"+modelToSearch,
+        type: "GET",
+        dataType: "json",
+        success: function (result) {
+            var setOptions = {
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                includeSelectAllOption: true
+            };
+            
+            $('#barCodeSelect').multiselect();
 
-    // Filtro en la cabezera de cada columna
-    $('.filterable .filters input').keyup(function (e) {
-        /* Ignore tab key */
-        var code = e.keyCode || e.which;
-        if (code == '9') return;
-        /* Useful DOM data and selectors */
-        var $input = $(this),
-            inputContent = $input.val().toLowerCase(),
-            $panel = $input.parents('.filterable'),
-            column = $panel.find('.filters th').index($input.parents('th')),
-            $table = $panel.find('.table'),
-            $rows = $table.find('tbody tr');
-        /* Dirtiest filter function ever ;) */
-        var $filteredRows = $rows.filter(function () {
-            var value = $(this).find('td').eq(column).text().toLowerCase();
-            return value.indexOf(inputContent) === -1;
-        });
-        /* Clean previous no-result if exist */
-        $table.find('tbody .no-result').remove();
-        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-        $rows.show();
-        $filteredRows.hide();
-        /* Prepend no-result row if all rows are filtered */
-        if ($filteredRows.length === $rows.length) {
-            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
+            var options = [];
+            for (value in result) {
+                if(modelToSearch == "Crossing" || modelToSearch == "Seed" )
+                {
+                    console.log(result);
+                    var values = { label: result[value].codeCross +"-"+result[value].numRepeat , value: result[value].id };
+                }
+                else
+                {
+                    var values = { label: result[value].code, value: result[value].id };
+                }                
+                options.push(values);
+            }
+            $('#barCodeSelect').multiselect('dataprovider', options);
+            $('#barCodeSelect').multiselect('setOptions', setOptions);
+            $('#barCodeSelect').multiselect('rebuild');
+        },
+        error: function (err) {
+            console.log(err);
         }
     });
-});
+}

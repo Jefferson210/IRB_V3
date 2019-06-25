@@ -4,7 +4,7 @@ class ConectiflorSelectionsController < ApplicationController
 
     def generateBarCode
         @barcode = Hash.new
-        @codeConecSelections = params[:conectiflor]           
+        @codeConecSelections = params[:barCodeSelect]           
         if @codeConecSelections != nil
             @codeConecSelections.each do |conectiflorId|
                 if conectiflorId != "multiselect-all"

@@ -35,11 +35,18 @@ class OneOffspringsController < ApplicationController
 
         respond_to do |format|
             if @one_offspring.save
+                if params[:images]              
+                    params[:images].each { |image|
+                      @one_offspring.one_offspring_pictures.create(picture: image)
+                    }
+                end  
                 format.html { redirect_to @one_offspring, notice: 'One offspring was successfully created.' }
                 format.json { render :show, status: :created, location: @one_offspring }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @one_offspring.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -49,11 +56,18 @@ class OneOffspringsController < ApplicationController
     def update
         respond_to do |format|
             if @one_offspring.update(one_offspring_params)
+                if params[:images]              
+                    params[:images].each { |image|                
+                      @one_offspring.one_offspring_pictures.create(picture: image)                                
+                    }
+                end 
                 format.html { redirect_to @one_offspring, notice: 'One offspring was successfully updated.' }
                 format.json { render :show, status: :ok, location: @one_offspring }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @one_offspring.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -66,8 +80,10 @@ class OneOffspringsController < ApplicationController
             respond_to do |format|
                 format.html { redirect_to one_offsprings_url, notice: 'One offspring was successfully destroyed.' }
                 format.json { head :no_content }
+                format.js
             end
         rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
             respond_to do |format|
                 format.html {redirect_to one_offsprings_url, alert: "#{e}"}
             end

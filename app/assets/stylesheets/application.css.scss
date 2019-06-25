@@ -13,7 +13,9 @@
 *= require_tree .
 *= require_self
 *= require sweetalert2
+*= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 */
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "wice_grid";
@@ -21,6 +23,7 @@
 @import "font-awesome";
 @import  "bootstrap-datepicker";
 @import "bootstrap-multiselect";
+
 
 
 //modificacion de los mensajes de error
@@ -56,4 +59,54 @@
     bottom: 0px;
     right: 20px;
     display:none;
+}
+
+// ===================CSS TABLE====================
+table.dataTable thead th {
+    position: relative;
+    background-image: none !important;
+}
+ 
+table.dataTable thead th.sorting:after,
+table.dataTable thead th.sorting_asc:after,
+table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
+}
+
+
+table.dataTable thead th.sorting:after {
+    content: "\f0dc";
+    color: black;
+    font-size: 1.1em;
+    padding-top: 0.0em;
+    padding-bottom: 0.2em;
+}
+table.dataTable thead th.sorting_asc:after {
+    content: "\f0de";
+}
+table.dataTable thead th.sorting_desc:after {
+    content: "\f0dd";
+}
+
+table.dataTable thead th.sorting:after, table.dataTable thead th.sorting_asc:after, table.dataTable thead th.sorting_desc:after {
+    position: absolute;
+    top: 0px;
+    right: 8px;
+    display: block;
+    font-family: FontAwesome;
+}
+
+#DataTables_Table_0_filter{
+    margin-right: 2%;    
+}
+#DataTables_Table_0_length {
+    margin-left: 2%;    
+}
+
+.clearFilters {
+    margin-left: 1%;
 }

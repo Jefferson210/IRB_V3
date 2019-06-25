@@ -62,9 +62,11 @@ class GerminationsController < ApplicationController
             if @germination.save
                 format.html { redirect_to @germination, notice: 'Germination was successfully created.' }
                 format.json { render :show, status: :created, location: @germination }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @germination.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -76,9 +78,11 @@ class GerminationsController < ApplicationController
             if @germination.update(germination_params)
                 format.html { redirect_to @germination, notice: 'Germination was successfully updated.' }
                 format.json { render :show, status: :ok, location: @germination }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @germination.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -91,11 +95,27 @@ class GerminationsController < ApplicationController
             respond_to do |format|
                 format.html { redirect_to germinations_url, notice: 'Germination was successfully destroyed.' }
                 format.json { head :no_content }
+                format.js
             end
         rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("
+            Cannot delete record because of dependent One offsprings", 'Error', persistent: 'Ok!')   
             respond_to do |format|
-                format.html {redirect_to germinations_url, alert: "#{e}"}
+                format.html { redirect_to germinations_url}      
             end
+        end
+    end
+
+    def getSumByCodeCross
+        @CodeCross = Germination.group(:codeCross).sum(:numGerminations)    
+        @numSeedsNumRepeat = Seed.group(:codeCross).sum(:numSeeds)
+        
+        @getCrossing = []
+        @getCrossing<<@CodeCross
+        @getCrossing<<@numSeedsNumRepeat
+
+        respond_to do |format|
+            format.json { render :json => @getCrossing }
         end
     end
 
@@ -115,10 +135,10 @@ class GerminationsController < ApplicationController
         @CodeCross = Germination.group(:codeCrossNumRepeat).sum(:numGerminations) 
     end
 
-    helper_method :sumaCodeCross
-    def sumaCodeCross
-        @CodeCross = Germination.group(:codeCross).sum(:numGerminations)    
-    end
+    # helper_method :sumaCodeCross
+    # def sumaCodeCross
+    #     @CodeCross = Germination.group(:codeCross).sum(:numGerminations)    
+    # end
 
     helper_method :percentajeSeedsNumRepeat
     def percentajeSeedsNumRepeat    

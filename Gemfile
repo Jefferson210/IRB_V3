@@ -61,7 +61,9 @@ gem 'barby', '~> 0.6.2'     #generar codigos de barra
 gem 'chunky_png', '~> 1.3', '>= 1.3.5'   #lee y escribe imagenes PNG
 
 gem 'bootstrap-datepicker-rails' #para uso de datePicker
-gem 'bootstrap-multiselect-rails4', '~> 0.0.1'    #multiselect bootstrap
+# gem 'bootstrap-multiselect-rails4', '~> 0.0.1'    #multiselect bootstrap
+gem 'bootstrap-multiselect-rails', '~> 0.9.9'
+
 
 gem 'cancan', '~> 1.6', '>= 1.6.10'
 
@@ -74,3 +76,5 @@ gem 'sweet-alert2-rails' #para sobrescribir el diseño del dialogo de confirmaci
 gem 'sweetify' #para sobrescribir el diseño del dialogo de confirmacion al eliminar
 
 gem 'remotipart', '~> 1.2'
+
+gem 'jquery-datatables-rails', '~> 3.4.0'

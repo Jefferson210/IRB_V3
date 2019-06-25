@@ -1,4 +1,4 @@
-<%= render 'optionsMenu', model: "Germination" %>
+<!-- <%= render 'optionsMenu', model: "Germination" %>
 <%=
     grid(@germinationsGrid) do |germination|
         germination.column name: "CodeCross", attribute: "codeCross", assoc: :seed do |seedCross|
@@ -35,66 +35,85 @@
             link_to("",germination_path(germinationDelete.id),data: {confirm: "Are you SUre?"},method: :delete,:class => "btn btn-default glyphicon glyphicon-trash")
         end
     end
--%>
+-%> -->
 
-<!--
-<h4>Total CodeCrossNumRepeat = < sumaCodeCrossNumRepeat %></h4>
-<h4>Total CodeCross = < sumaCodeCross %></h4>
-<h4>percentajeSeedsNumRepeat  = < percentajeSeedsNumRepeat %></h4>
-<h4>percentajeSeedscodeCross  = < percentajeSeedscodeCross %></h4>
--->
+<!-- ========================================================== -->
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#generalView">General View</a></li>
+    <li><a data-toggle="tab" href="#resultsGerminations">Results</a></li>
+</ul>
 
-<h2 class="alert alert-info">Results</h2>
-<!--resultadod por codigo(codeCross)-->
-<table class="table">
-    <thead>
-        <tr>
-            <th>CodeCross</th>
-            <th>Total</th>
-            <th>Percentaje</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% sumaCodeCross.each do |item| %>
-        <tr>
-            <td><%= item[0] %></td>
-            <td><%= item[1] %></td>
-            <td>
-                <%percentajeSeedscodeCross.each do |seed|%>
-                <%if seed[0] == item[0]%>
-                <%= (item[1] * 100) / seed[1] %>
-                <%end%>
-                <%end%>%                
-            </td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+<div class="tab-content">
+    <div id="generalView" class="tab-pane fade in active">
+        <br>
+        <%= render 'optionsMenu', model: "Germination" %>
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h2 class="panel-title">Germinations</h2>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped filterTable">
+                    <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+                    </button>
+                    <br>
+                    <br>
+                    <thead>
+                        <tr class="filters">
+                            <th>Code Cross-#Repeat</th>
+                            <th>Week</th>
+                            <th>Father Code</th>
+                            <th>Mother Code</th>
+                            <th>Nro Germinations</th>
+                            <!-- <th>Missing Seeds</th>                             -->
+                            <th class="buttonAction"></th>
+                            <th class="buttonAction"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="germinationsBody">
+                        <% @germinations.each do |germination| %>
+                        <%= render "germination", germination: germination %>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%= render 'dialog' %>
+    </div>
 
-<!--resultados por codigo y numero de repeticion(CodeCrossNumRepeat)-->
-<table class="table">
-    <thead>
-        <tr>
-            <th>CodeCrossNumRepeat</th>
-            <th>Total</th>
-            <th>Percentaje</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% sumaCodeCrossNumRepeat.each do |item| %>
-        <tr>
-            <td><%= item[0] %></td>
-            <td><%= item[1] %></td>
-            <td>
-                <% percentajeSeedsNumRepeat.each do |seed| %>
-                <%if seed[0] == item[0]%>
-                <%= (item[1] * 100) / seed[1]  %>                    
-                <%end%>
-                <%end%>%
-            </td>
-
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-
+    <div id="resultsGerminations" class="tab-pane fade">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h2 class="panel-title">Results by CodeCross</h2>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>CodeCross</th>
+                            <th>Total</th>
+                            <th>Percentaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- < sumaCodeCross.each do |item| >
+                <tr>
+                    <td>< item[0] ></td>
+                    <td>< item[1] ></td>
+                    <td>
+                        < percentajeSeedscodeCross.each do |seed|>
+                        <if seed[0] == item[0]>
+                        < (item[1] * 100) / seed[1] >
+                        <end>
+                        <end>
+                    </td>
+                </tr>
+                < end > -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

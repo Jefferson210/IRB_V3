@@ -25,4 +25,9 @@ class Crossing < ActiveRecord::Base
         self.effective == "yes"
     end
 
+    # mostrar codigo cruzamiento y numero de repeticion para el select de codigos de barra
+    def codeCrossNumRepeat
+        "#{codeCross}-#{numRepeat}"
+    end
+
 end

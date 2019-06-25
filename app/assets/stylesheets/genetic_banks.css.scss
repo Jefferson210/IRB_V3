@@ -419,19 +419,3 @@ img {
         transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -300, -225, 0, 1);
     }
 }
-
-// ===================CSS TABLE====================
-.filterable {
-    margin-top: 15px;
-}
-.filterable .panel-heading .pull-right {
-    margin-top: -20px;
-}
-.filterable .filters input {
-    background-color: #dbe1e6;
-    border: none;
-    cursor: auto;
-    box-shadow: none;
-    padding: 0;
-    height: auto;    
-}

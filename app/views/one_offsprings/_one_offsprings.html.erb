@@ -1,0 +1,50 @@
+<tr id="one_offsprings_<%= one_offsprings.id %>">
+    <td>
+        <%= one_offsprings.germination.seed.crossing.codeCross %> -
+        <%= one_offsprings.germination.seed.crossing.numRepeat %>
+    </td>
+    <td>
+        <% if OneOffspringPicture.exists?(:id => one_offsprings.PictureId) %>
+        <% arrayImage = OneOffspringPicture.where(id: one_offsprings.PictureId).to_a %>
+        <% pictureFileName = arrayImage[0][:picture_file_name] %>
+        <%= image_tag("/assets/images/oneOffspring/"+pictureFileName,:class => "img-thumbnail") %>        
+        <%else%>
+        N/A
+        <%end%>
+    </td>
+    <td>
+        <%= one_offsprings.individual%>
+    </td>
+    <td>
+        <% unless one_offsprings.color.nil? %>
+        <%= one_offsprings.color.colorName %>
+        <%end%>
+    </td>
+    <td>
+        <%= one_offsprings.status %>
+    </td>
+    <td>
+        <%= one_offsprings.headSize %>
+    </td>
+    <td>
+        <%= one_offsprings.flowering %>
+    </td>
+    <td>
+        <%= one_offsprings.numPetals %>
+    </td>
+    <td>
+        <%= one_offsprings.form %>
+    </td>
+    <td>
+        <%= link_to edit_one_offspring_path(one_offsprings), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to '',one_offspring_path(one_offsprings),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>        
+    </td>
+    <td>
+        <%= link_to '', one_offsprings, remote: true, :method => :delete, data: {confirm: "Delete one_offsprings: #{one_offsprings.germination.seed.crossing.codeCross} #{one_offsprings.germination.seed.crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
+    </td>
+</tr>

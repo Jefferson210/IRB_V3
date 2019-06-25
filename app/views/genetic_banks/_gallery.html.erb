@@ -1,0 +1,23 @@
+<%= link_to 'Back', genetic_banks_path, class: "btn btn-default glyphicon glyphicon-arrow-left" %>
+<%= render 'uploadImage', model: "GeneticBank" %>
+<br>
+<div class="panel panel-primary">
+    <div class="panel-heading ">
+        <h3><%= @genetic_bank.code %> Gallery</h3>
+    </div>
+    <div class="panel-body">
+        <div class="gallery">
+            <% @genetic_bank.genetic_bank_pictures.each do |picture| %>
+            <figure>
+                <%if picture.picture.url() != "/pictures/original/missing.png" %>
+                <%= image_tag picture.picture.url()%>
+                <%= picture.picture_file_name %>
+                <%= link_to [picture.genetic_bank,picture],remote: true, method: :delete,data:{confirm: 'Are you sure?'},:class => "btn btn-danger btn-sm" do%>
+                <i class="glyphicon glyphicon-trash"></i>
+                <%end%>
+                <%end%>
+            </figure>
+            <%end%>
+        </div>
+    </div>
+</div>

@@ -3,13 +3,13 @@ class SeedsController < ApplicationController
     before_action :authenticate_user!
 
     def generateBarCode
-        @barcode = Hash.new
-        @codeSeeds = params[:seeds]
+        @barcode = Hash.new        
+        @codeSeeds = params[:barCodeSelect]
         if @codeSeeds != nil            
             @codeSeeds.each do |seedId|
                 if seedId != "multiselect-all"
                     @seed = Seed.find(seedId)
-                    @barcode[@seed.codeCross + @seed.crossing_id.to_s] = barcodeOutPut(@seed); 
+                    @barcode[@seed.codeCross + "-" + @seed.crossing.numRepeat.to_s] = barcodeOutPut(@seed); 
                 end
             end
         end
@@ -70,9 +70,11 @@ class SeedsController < ApplicationController
             if @seed.save
                 format.html { redirect_to @seed, notice: 'Seed was successfully created.' }
                 format.json { render :show, status: :created, location: @seed }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @seed.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -84,9 +86,11 @@ class SeedsController < ApplicationController
             if @seed.update(seed_params)
                 format.html { redirect_to @seed, notice: 'Seed was successfully updated.' }
                 format.json { render :show, status: :ok, location: @seed }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @seed.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -95,16 +99,25 @@ class SeedsController < ApplicationController
     # DELETE /seeds/1.json
     def destroy
         begin
-            @seed.destroy
+            @seed.destroy            
             respond_to do |format|
                 format.html { redirect_to seeds_url, notice: 'Seed was successfully destroyed.' }
                 format.json { head :no_content }
+                format.js
             end
         rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
             respond_to do |format|
-                format.html { redirect_to seeds_url, alert: "#{e}"}
+                format.html { redirect_to seeds_url}                
             end
         end
+    end
+
+    def getSumByCodeCross
+        @sumByCodeCross = Seed.group(:codeCross).sum(:numSeeds)  
+        respond_to do |format|
+            format.json { render :json => @sumByCodeCross }
+        end  
     end
 
     private
@@ -118,15 +131,15 @@ class SeedsController < ApplicationController
         params.require(:seed).permit(:crossing_id, :sowDate, :origin, :numSeeds, :totalWeight, :week, :hydratation, :status, :dateOut, :germination, :codeCrossName, :codeCross,:totalCode, :totalNumRepeat)
     end
 
-    helper_method :sumaCodeCrossNumRepeat
-    def sumaCodeCrossNumRepeat
-        @CodeCrossNumRepeat = Seed.group(:codeCrossName).sum(:numSeeds)    
-    end
+    # helper_method :sumaCodeCrossNumRepeat
+    # def sumaCodeCrossNumRepeat
+    #     @CodeCrossNumRepeat = Seed.group(:codeCrossName).sum(:numSeeds)    
+    # end
 
-    helper_method :sumaCode
-    def sumaCode
-        @CodeCross = Seed.group(:codeCross).sum(:numSeeds)    
-    end
+    # helper_method :sumaCode
+    # def sumaCode
+    #     @CodeCross = Seed.group(:codeCross).sum(:numSeeds)          
+    # end    
 end
 
 

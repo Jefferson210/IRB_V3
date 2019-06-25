@@ -1,0 +1,47 @@
+<tr id="seed_<%= seed.id %>">
+    <td>
+        <%= seed.crossing.codeCross %> - <%= seed.crossing.numRepeat %> 
+    </td>
+    <td>
+        <%=seed.sowDate %>
+    </td>
+    <td>
+        <%=seed.origin %>
+    </td>
+    <td>
+        <%=seed.numSeeds %>
+    </td>
+    <td>
+        <%=seed.totalWeight%>
+    </td>
+    <td>
+        <%=seed.week %>
+    </td>
+    <td>
+        <%=seed.hydratation %>
+    </td>
+    <td>
+        <%=seed.status %>
+    </td>
+    <td>
+        <%=seed.dateOut %>
+    </td>
+    <td>
+        <%=seed.germination %>
+    </td>
+    <td>
+        <%=seed.totalCode %>
+    </td>
+    <td>
+        <%=seed.totalNumRepeat %>
+    </td>
+    <td>
+        <%= link_to edit_seed_path(seed), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>       
+        <%= link_to '', seed, remote: true, :method => :delete, data: {confirm: "Delete seed: #{seed.crossing.codeCross} #{seed.crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
+    </td>
+</tr>

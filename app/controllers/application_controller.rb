@@ -105,9 +105,9 @@ class ApplicationController < ActionController::Base
         when "GeneticBank"
             barcodeString = modelObject.code
         when "Crossing"
-            barcodeString = modelObject.codeCross+"-"+modelObject.numRepeat.to_s
-        when "Seed"
-            barcodeString = modelObject.codeCross+"-"+modelObject.crossing_id.to_s   
+            barcodeString = modelObject.codeCross + "-" + modelObject.numRepeat.to_s            
+        when "Seed"            
+            barcodeString = modelObject.codeCross+"-"+modelObject.crossing.numRepeat.to_s  
         when "IrbSelection"
             barcodeString = modelObject.code 
         when "SpekSelection"
@@ -119,4 +119,25 @@ class ApplicationController < ActionController::Base
         data = barcode.to_image(height: 200, margin: 5).to_data_url        
     end 
 
+    # funcion para cargar el select de codigos de barra
+    def loadBarCodeSelect(modelObject)
+        case modelObject
+            when "GeneticBank"
+                @results = GeneticBank.select("code,id").order(created_at: :desc)
+            when "Crossing"
+                @results = Crossing.select("codeCross,numRepeat,id").order(created_at: :desc)
+            when "Seed"                
+                @results = Seed.joins(:crossing).select("seeds.codeCross,crossings.numRepeat,seeds.id").order(created_at: :desc)
+            when "IrbSelection"
+                @results = IrbSelection.select("code,id").order(created_at: :desc)
+            when "SpekSelection"
+                @results = SpekSelection.select("code,id").order(created_at: :desc)
+            when "ConectiflorSelection"
+                @results = ConectiflorSelection.select("code,id").order(created_at: :desc)            
+        end
+
+        respond_to do |format|
+            format.json { render :json => @results }
+        end        
+    end
 end

@@ -1,8 +1,7 @@
 <% if @genetic_bank.errors.empty? %>  
-  $('table tbody').prepend(' <%= j render "row", geneticBank: @genetic_bank %>');  
-  $('.alert-success').html("Created success").show();
-  $('#geneticBank-modal').modal('hide');
-<% else %>     
+    $('#dialog').modal('toggle');
+    $('#geneticBankBody').append('<%= j render "geneticBank", geneticBank: @genetic_bank %>');              
+<% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();
  
@@ -20,5 +19,17 @@
     $("#genetic_bank_status").closest(".form-group").addClass("has-error");
     $("#genetic_bank_status" ).after('<p class="field_with_errors"><%= message %></p>');              
   <% end %> 
+
+  <% @genetic_bank.errors.full_messages_for(:trademark).each do |message| %>                     
+    $("#genetic_bank_trademark" ).after('<p class="field_with_errors"><%= message %></p>');              
+    $("#genetic_bank_trademark").closest(".form-group").addClass("has-error");
+  <% end %> 
+
+  <% @genetic_bank.errors.full_messages_for(:denomination).each do |message| %>                     
+    $("#genetic_bank_denomination" ).after('<p class="field_with_errors"><%= message %></p>');              
+    $("#genetic_bank_denomination").closest(".form-group").addClass("has-error");
+  <% end %> 
 <% end %>
+
+
 

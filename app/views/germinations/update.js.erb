@@ -1,0 +1,23 @@
+<% if @germination.errors.empty? %>      
+    $('#dialog').modal('toggle');
+    $('#germination_<%= @germination.id %>').replaceWith('<%= j render "germination", germination: @germination %>')
+<% else %>       
+    $(".form-group").removeClass("has-error");
+    $("p.field_with_errors").remove();
+ 
+    <% @germination.errors.full_messages_for(:seed_id).each do |message| %>          
+      $("#seed_id").closest(".form-group").addClass("has-error");
+      $("#seed_id" ).after('<p class="field_with_errors"><%= message %></p>'); 
+    <% end %> 
+  
+    <% @germination.errors.full_messages_for(:week).each do |message| %>          
+      $("#germination_week").closest(".form-group").addClass("has-error");
+      $("#germination_week" ).after('<p class="field_with_errors"><%= message %></p>'); 
+    <% end %> 
+  
+    <% @germination.errors.full_messages_for(:numGerminations).each do |message| %>          
+      $("#numGerminations" ).after('<p class="field_with_errors"><%= message %></p>'); 
+      $("#numGerminations").closest(".form-group").addClass("has-error");
+    <% end %> 
+<% end %>
+

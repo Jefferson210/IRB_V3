@@ -10,8 +10,8 @@
                     <div>
                         <% case model %>
                         <% when "GeneticBank" %>
-                        <%= form_for @genetic_bank,remote: true , :html => { multipart: true } do |f| %>                        
-                        <div class="form-group">                            
+                        <%= form_for @genetic_bank,remote: true , :html => { multipart: true } do |f| %>
+                        <div class="form-group">
                             <%= f.hidden_field :code %>
                             <%= f.label :pictures %>
                             <%= file_field_tag "images[]", type: :file, multiple: true %>
@@ -21,30 +21,33 @@
                         </div>
                         <% end %>
                         <% when "OneOffspring" %>
-                        <%= form_for([@one_offspring, @one_offspring.one_offspring_pictures.build]) do |f| %>
+                        <%= form_for @one_offspring,remote: true , :html => { multipart: true } do |f| %>
                         <div class="form-group">
-                            <%= f.label :picture%>
-                            <%= f.file_field :picture %>
+                            <%= f.hidden_field :germination_id %>
+                            <%= f.label :pictures %>
+                            <%= file_field_tag "images[]", type: :file, multiple: true %>
                         </div>
                         <div class="form-group">
                             <%= f.submit "Add Image",class: "btn btn-success" %>
                         </div>
                         <% end %>
                         <% when "TwoOffspring" %>
-                        <%= form_for([@two_offspring, @two_offspring.two_offspring_pictures.build]) do |f| %>
+                        <%= form_for @two_offspring,remote: true , :html => { multipart: true } do |f| %>
                         <div class="form-group">
-                            <%= f.label :picture%>
-                            <%= f.file_field :picture %>
+                            <%= f.hidden_field :one_offspring_id %>
+                            <%= f.label :pictures %>
+                            <%= file_field_tag "images[]", type: :file, multiple: true %>
                         </div>
                         <div class="form-group">
                             <%= f.submit "Add Image",class: "btn btn-success" %>
                         </div>
                         <% end %>
                         <% when "ThreeOffspring" %>
-                        <%= form_for([@three_offspring, @three_offspring.three_offspring_pictures.build]) do |f| %>
+                        <%= form_for @three_offspring,remote: true , :html => { multipart: true } do |f| %>
                         <div class="form-group">
-                            <%= f.label :picture%>
-                            <%= f.file_field :picture %>
+                            <%= f.hidden_field :two_offspring_id %>
+                            <%= f.label :pictures %>
+                            <%= file_field_tag "images[]", type: :file, multiple: true %>
                         </div>
                         <div class="form-group">
                             <%= f.submit "Add Image",class: "btn btn-success" %>

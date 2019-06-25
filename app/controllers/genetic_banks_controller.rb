@@ -3,8 +3,8 @@ class GeneticBanksController < ApplicationController
     before_action :authenticate_user!
 
     def generateBarCode
-        @barcode = Hash.new
-        @codeGeneticBanks = params[:geneticBank]
+        @barcode = Hash.new        
+        @codeGeneticBanks = params[:barCodeSelect]
         if @codeGeneticBanks != nil
             @codeGeneticBanks.each do |geneticBankId|
                 if geneticBankId != "multiselect-all"
@@ -14,6 +14,11 @@ class GeneticBanksController < ApplicationController
             end
         end
         respondToPDF("GeneticBank")  
+    end
+
+    # funcion para cargar el select de codigos de barra
+    def loadBarCode       
+        loadBarCodeSelect(params[:id]);
     end
 
     # GET /genetic_banks
@@ -93,20 +98,19 @@ class GeneticBanksController < ApplicationController
     # DELETE /genetic_banks/1
     # DELETE /genetic_banks/1.json
     def destroy        
-        begin
-            @genetic_bank.destroy
-            sweetalert_success('', 'Deleted', persistent: 'Ok!')
-            respond_to do |format|
-                format.html {redirect_to genetic_banks_url}
-                format.json {head :no_content}
-                format.js
-            end
-        rescue ActiveRecord::DeleteRestrictionError => e 
-            sweetalert_error('Cannot delete the record because it is a parent in a crossing.', 'Error', persistent: 'Ok!')
-            respond_to do |format|
-                format.html {redirect_to genetic_banks_url}                
-            end
+      begin
+        @genetic_bank.destroy        
+        respond_to do |format|
+            format.html {redirect_to genetic_banks_url, notice: 'Genetic Bank was successfully destroyed.' }
+            format.json {head :no_content}
+            format.js
         end
+      rescue ActiveRecord::DeleteRestrictionError => e 
+        sweetalert_error('Cannot delete the record because it is a parent in a crossing.', 'Error', persistent: 'Ok!')
+        respond_to do |format|
+            format.html {redirect_to genetic_banks_url}                                
+        end
+      end
     end
 
     private

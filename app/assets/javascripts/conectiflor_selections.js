@@ -3,9 +3,9 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 $( document ).on('turbolinks:load', function() {
     //    Configuracion para el modal de codigos de barra
-    $('#conectiflor').multiselect({
-        buttonWidth: '300px',
-        includeSelectAllOption: true,
-        enableFiltering: true
-    }); 
+    // $('#conectiflor').multiselect({
+    //     buttonWidth: '300px',
+    //     includeSelectAllOption: true,
+    //     enableFiltering: true
+    // }); 
 })

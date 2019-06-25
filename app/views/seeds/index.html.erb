@@ -1,74 +1,72 @@
-<%= render 'optionsMenu', model: "Seed" %>
-<%= render 'modalBarCode', model: "Seed" %>
-<%=
-    grid(@seedsGrid) do |seed|
-        seed.column name: "CodeCross", attribute: "codeCross",html: {id: "codeCrossName"}, assoc: :crossing do |seedCrossing|
-            seedCrossing.crossing.codeCross + "-#{seedCrossing.crossing.numRepeat}"
-        end
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#generalView">General View</a></li>
+    <li><a data-toggle="tab" href="#results">Results</a></li>
+</ul>
 
-        seed.column name: "Sowdate", attribute: "sowDate",filter_type: :bootstrap_datepicker
-        seed.column name: "Origin", attribute: "origin"  
-        seed.column name: "Numseeds", attribute: "numSeeds"  
-        seed.column name: "Totalweight", attribute: "totalWeight"  
-        seed.column name: "Week", attribute: "week"  
-        seed.column name: "Hydratation", attribute: "hydratation"  
-        seed.column name: "Status", attribute: "status"  
-        seed.column name: "Dateout", attribute: "dateOut",filter_type: :bootstrap_datepicker  
-        seed.column name: "Germination", attribute: "germination"  
-        #        seed.column name: "totalCode", attribute: "totalCode"  
-        #        seed.column name: "totalNum", attribute: "totalNumRepeat" 
+<div class="tab-content">
+    <div id="generalView" class="tab-pane fade in active">
+        <br>
+        <%= render 'optionsMenu', model: "Seed" %>
+        <%= render 'modalBarCode', model: "Seed" %>
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h2 class="panel-title">Seeds</h2>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-striped filterTable">
+                    <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+                    </button>
+                    <br>
+                    <br>
+                    <thead>
+                        <tr class="filters">
+                            <th>CodeCross</th>
+                            <th>Sowdate</th>
+                            <th>Origin</th>
+                            <th>Numseeds</th>
+                            <th>Totalweight</th>
+                            <th>Week</th>
+                            <th>Hydratation</th>
+                            <th>Status</th>
+                            <th>Dateout</th>
+                            <th>Germination</th>
+                            <th>totalCode</th>
+                            <th>totalNum</th>
+                            <th class="buttonAction"></th>
+                            <th class="buttonAction"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="seedsBody">
+                        <% @seeds.each do |seed| %>
+                        <%= render "seed", seed: seed %>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%= render 'dialog' %>
+    </div>
 
-        seed.column do |seedEdit|
-            link_to("",edit_seed_path(seedEdit.id),:class => "btn btn-default glyphicon glyphicon-pencil")
-        end
-
-        seed.column do |seedShow|
-            link_to("",seed_path(seedShow.id),:class =>"btn btn-default glyphicon glyphicon-eye-open")
-        end
-
-        seed.column do |seedDelete|
-            link_to("",seed_path(seedDelete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
-        end
-    end
--%>
-<!--
-<h4>suma by CodeCrossNumRepeat = < sumaCodeCrossNumRepeat %></h4>
-<h4>suma by Code = < sumaCode %></h4>
--->
-
-<h3 class="alert alert-info">Results</h3>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>CodeCross</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% sumaCode.each do |item| %>
-        <tr>
-            <td><%= item[0] %></td>
-            <td><%= item[1] %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-<table class="table">
-    <thead>
-        <tr>
-            <th>CodeCrossNumRepeat</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% sumaCodeCrossNumRepeat.each do |item| %>
-        <tr>
-            <td><%= item[0] %></td>
-            <td><%= item[1] %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-
-
+    <div id="results" class="tab-pane fade">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h2 class="panel-title">Results by CodeCross</h2>
+            </div>
+            <br>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>CodeCross</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

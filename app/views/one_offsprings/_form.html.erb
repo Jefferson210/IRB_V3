@@ -1,93 +1,61 @@
-<div class="container">
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="list-group">
-                    <%= form_for(@one_offspring,:html=>{:class=>"form-horizontal"}) do |f| %>
-                    <% if @one_offspring.errors.any? %>
-                    <div id="error_explanation">
-                        <h2><%= pluralize(@one_offspring.errors.count, "error") %> prohibited this one_offspring from being saved:</h2>
+<%= form_for(@one_offspring,remote: true, :html=>{ multipart: true ,:role => "form"}) do |f| %>              
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <%= f.label :germination_id,"Germination (codeCross-numRepeat)" %>
+            <%= f.collection_select(:germination_id,Germination.group(:codeCross),:id,:codeCross,{:prompt => "Select"},{:class => "form-control first_input"})%>
+        </div>
 
-                        <ul>
-                            <% @one_offspring.errors.full_messages.each do |message| %>
-                            <li><%= message %></li>
-                            <% end %>
-                        </ul>
-                    </div>
-                    <% end %>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <%= f.label :germination_id,"Germination (codeCross-numRepeat)",:class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.collection_select(:germination_id,Germination.group(:codeCross),:id,:codeCross,{:prompt => "Select"},{:class => "form-control"})%>                    
-                            </div>
-                        </div>
+        <div class="form-group">
+            <%= f.label :individual %>
+            <%= f.number_field :individual ,:class=>"form-control",min: 1 %>
+        </div>
 
-                        <div class="form-group">
-                            <%= f.label :individual, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.number_field :individual ,:class=>"form-control"%>
-                            </div>
-                        </div>
+        <div class="form-group">
+            <%= f.label :color_id %>
+            <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%>
+        </div>
 
-                        <div class="form-group">
-                            <%= f.label :color_id, :class=>"col-md-3" %>
-                            <div class="col-md-4">
-                                <%= f.collection_select(:color_id,Color.all,:id,:colorName,{:prompt => "Select Color"},{:class => "form-control"})%> 
-                            </div>
-                        </div>
+        <div class="form-group">
+            <%= f.label :status %>
+            <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
+        </div>
 
-                        <div class="form-group">
-                            <%= f.label :status, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.select(:status, options_for_select([['Keep','keep'],['Out','out']], :selected => f.object.status), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <%= f.label :headSize, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.text_field :headSize,:class=>"form-control" %>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <%= f.label :flowering, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.number_field :flowering ,:class=>"form-control"%>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <%= f.label :numPetals, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.number_field :numPetals ,:class=>"form-control"%>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <%= f.label :form, :class=>"col-md-3" %>
-                            <div class="col-md-3">
-                                <%= f.select(:form, options_for_select([['Good','good'],['Bad','bad']], :selected => f.object.form), {:prompt => "Select"}, {:class => 'form-control'})  %>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <%= f.label "Main Picture", :class=>"col-md-2 control-label" %>
-                            <div class="col-md-4">
-                                <%= f.collection_select(:PictureId,OneOffspringPicture.where(one_offspring_id: @one_offspring.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="actions">
-                                <%= f.submit class: "btn btn-primary active" %>
-                            </div>
-                        </div>
-                        <% end %>
-                    </div>
-                </ul>
-            </div>
+        <div class="form-group">
+            <%= f.label :headSize %>
+            <%= f.text_field :headSize,:class=>"form-control" %>
         </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <%= f.label :flowering %>
+            <%= f.number_field :flowering ,:class=>"form-control",min: 1 %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :numPetals %>
+            <%= f.number_field :numPetals ,:class=>"form-control",min: 1 %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :form %>
+            <%= f.select(:form, options_for_select([['Good','good'],['Bad','bad']], :selected => f.object.form), {:prompt => "Select"}, {:class => 'form-control'})  %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label "Main Picture" %>
+            <%= f.collection_select(:PictureId,OneOffspringPicture.where(one_offspring_id: @one_offspring.id),:id,:picture_file_name,{:prompt => "Select Image", :include_blank => "None"},{:class => "form-control"})%>
+        </div>
+
+        <div class="form-group">
+            <%= f.label :pictures %>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <%= f.submit class: "btn btn-primary active" %>
+    </div>
 </div>
+<% end %>

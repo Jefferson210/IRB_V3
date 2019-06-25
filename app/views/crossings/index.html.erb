@@ -4,47 +4,34 @@
     <div class="panel-heading">
         <h2 class="panel-title">Crossings</h2>
     </div>
+    <br>
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-striped filterTable">
+            <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+            </button>
+            <br>
+            <br>
             <thead>
-                <tr>
+                <tr class="filters">
                     <th>CodeCross</th>
-                    <th>NumRepeat</th>
+                    <th>N°Repeat</th>
                     <th>Year</th>
                     <th>Status</th>
                     <th>Father Code</th>
                     <th>Mother Code</th>
-                    <th>CrossWeek</th>
+                    <!-- <th>CrossWeek</th> -->
                     <th>Effective</th>
-                    <th>NumCrossings</th>
-                    <th>GoodCrossings</th>
-                    <th>BadCrossings</th>
-                    <th>PercentageEffective</th>
-                    <th>NumSeeds</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr class="filters">
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th><input type="text" class="form-control"></th>
-                    <th>
-                        <span class="glyphicon glyphicon-filter">Filters</span>
-                    </th>
-                    <th>
-                        <button id="clearFilters" class="btn"><i class="glyphicon glyphicon-refresh" title="Clean filters"></i></button>
-                    </th>
-                </tr>
+                    <th>N°Crossings</th>
+                    <th>Good Crossings</th>
+                    <th>Bad Crossings</th>
+                    <th>%Effective</th>
+                    <th>N°Seeds</th>
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>                    
+                </tr>                
             </thead>
-            <tbody id="crossings">
+            <tbody id="crossingsBody">
                 <% @crossings.each do |crossing| %>
                 <%= render "crossing", crossing: crossing %>
                 <% end %>

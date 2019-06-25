@@ -1,0 +1,17 @@
+<tr id="germination_<%= germination.id %>">
+    <td><%= germination.seed.crossing.codeCross %>-<%= germination.seed.crossing.numRepeat %></td>
+    <td><%= germination.week %></td>
+    <td><%= germination.seed.crossing.father.code %></td>
+    <td><%= germination.seed.crossing.mother.code %></td>    
+    <td><%= germination.numGerminations %></td>
+    <!-- <td><%= germination.missingSeed %></td> -->
+    <td>
+        <%= link_to edit_germination_path(germination), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to '', germination, remote: true, :method => :delete, data: {confirm: "Delete Germination: #{germination.seed.crossing.codeCross}-#{germination.seed.crossing.numRepeat}"}, :class => 'btn btn-default glyphicon glyphicon-trash' %>
+    </td>
+</tr>

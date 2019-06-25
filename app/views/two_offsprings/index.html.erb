@@ -1,4 +1,4 @@
-<%= render 'optionsMenu', model: "TwoOffspring" %>
+<!-- <%= render 'optionsMenu', model: "TwoOffspring" %>
 <%=
     grid(@twoOffsprings) do |twoOffspring|
         #        filter only by codeCross
@@ -48,6 +48,44 @@
             link_to('', two_offspring_path(delete.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'btn btn-default glyphicon glyphicon-trash')
         end
     end
--%>
+-%> -->
+
+<%= render 'optionsMenu', model: "TwoOffspring" %>
+<div class="panel panel-primary filterable">
+    <div class="panel-heading">
+        <h2 class="panel-title">Two Offsprings</h2>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped filterTable">
+            <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+            </button>
+            <br>
+            <br>
+            <thead>
+                <tr class="filters">
+                    <th>CodeCross-Individual</th>
+                    <th>Image</th>                    
+                    <th>Color Name</th>
+                    <th>Status</th>
+                    <th>HeadSize</th>
+                    <th>Flowering</th>
+                    <th># Petals</th>
+                    <th>Form</th>                    
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
+                </tr>
+            </thead>
+            <tbody id="twoOffspringsBody">
+                <% @two_offsprings.each do |two_offsprings| %>
+                <%= render "two_offsprings", two_offsprings: two_offsprings %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%= render 'dialog' %>
 
 

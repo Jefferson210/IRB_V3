@@ -5,63 +5,66 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
-$( document ).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function () {    
+    getResuls();
+})
 
-    $("#crossing_id").on('change', function() {
+function seedsValidations(action) {
+    $("#crossing_id").on('change', function () {
         //Funcion para obtener los codeCross con su NumRepeat
-        if(  $("#crossing_id").val() != "" ){
-            var codeCrossName = $( "#crossing_id option:selected" ).text();
+        if ($("#crossing_id").val() != "") {
+            var codeCrossName = $("#crossing_id option:selected").text();
             $("#codeCrossName").val(codeCrossName)
         }
 
         //Funcion para obtener los codeCross y numSeeds
-        if($("#crossing_id").val() != ""){
-            var id = $( "#crossing_id option:selected" ).val();
+        if ($("#crossing_id").val() != "") {
+            var id = $("#crossing_id option:selected").val();
             $.ajax({
-                url: "/getCrossing/"+ id,
+                url: "/getCrossing/" + id,
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
 
                     $("#codeCross").val(result[1].codeCross)
 
-                    if(result[1].numSeeds == null){
+                    if (result[1].numSeeds == null) {
                         $("#numSeeds").val(0)
-                    }else{
-                        $("#numSeeds").val(result[1].numSeeds) 
-                    }  
+                    } else {
+                        $("#numSeeds").val(result[1].numSeeds)
+                    }
 
                     var val2 = 0;
-                    var numRepeat = result[1].codeCross                  
+                    var numRepeat = result[1].codeCross
                     var val1 = result[1].numSeeds
-                    if(result[0][numRepeat] == undefined  ){
+                    if (result[0][numRepeat] == undefined) {
                         val2 = 0;
-                    }else{
+                    } else {
                         val2 = result[0][numRepeat]
                     }
                     var sum = parseInt(val1) + parseInt(val2)
                     $("#totalCode").val(sum)
                 },
-                error: function (err){
+                error: function (err) {
                 }
-            });  
+            });
         }
 
         //Funcion para adquirir el total de numSeeds por NumRepeat al cambiar el valor del select "crossing_id"
-        if($("#crossing_id").val() != ""){
+        if ($("#crossing_id").val() != "") {
             $.ajax({
                 url: "/numSeedsNumRepeat/",
                 type: "GET",
                 dataType: "json",
                 success: function (result) {
                     //                    console.log(result)
-                    if($("#numSeeds").val() != ''){
+                    if ($("#numSeeds").val() != '') {
                         var val2 = 0;
-                        var numRepeat = $( "#crossing_id option:selected" ).text();
+                        var numRepeat = $("#crossing_id option:selected").text();
                         var val1 = $("#numSeeds").val();
-                        if(result[numRepeat] == undefined  ){
+                        if (result[numRepeat] == undefined) {
                             val2 = 0;
-                        }else{
+                        } else {
                             val2 = result[numRepeat]
                         }
                         var sum = parseInt(val1) + parseInt(val2)
@@ -69,19 +72,39 @@ $( document ).on('turbolinks:load', function() {
                     }
 
                 },
-                error: function (err){
+                error: function (err) {
                     //                    alert("Algo salio mal");
                     //                    console.log(err);
                 }
-            });  
+            });
         }
     });
-    $('#seeds').multiselect({
-        buttonWidth: '300px',
-        includeSelectAllOption: true,
-        enableFiltering: true
-    });    
-})
+};
+
+function getResuls() {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        var target = $(e.target).attr("href")
+
+        if (target == "#results") {            
+            $.ajax({
+                url: "/sumByCodeCross",
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    $("#results tbody tr").remove();                    
+                    for(value in result)
+                    {                        
+                        $("#results table tbody").append("<tr><td>"+value+"</td><td>"+result[value]+"</td></tr>");
+                    }    
+                                    
+                },
+                error: function (err) {
+                    console.log(err);                    
+                }
+            });
+        }
+    });
+};
 
 
 

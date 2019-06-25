@@ -65,6 +65,10 @@ Rails.application.routes.draw do
 
     get 'selectColorIrbSelections/:id' => 'irb_selections#selectColor'
 
+    get "sumByCodeCross" => "seeds#getSumByCodeCross"    
+    get "sumByCodeCrossGerminations" => "germinations#getSumByCodeCross"    
+    get "loadBarCode/:id" => "genetic_banks#loadBarCode"
+
     #    =============================ROUTES FOR API========================================
     namespace :api , defaults: {format: 'json'} do
         namespace :v1 do

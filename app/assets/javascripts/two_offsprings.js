@@ -3,37 +3,35 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 //
 
-$( document ).on('turbolinks:load', function() {
-    $("#one_offspring_id").on('change', function() {
-        if(  $("#one_offspring_id").val() != "" ){
-            var id = $( "#one_offspring_id option:selected" ).val();
+function twoOffspringsValidations(action) {
+    $("#one_offspring_id").on('change', function () {
+        if ($("#one_offspring_id").val() != "") {
+            var id = $("#one_offspring_id option:selected").val();
             //            console.log(id)
             $.ajax({
-                url: "/selectColorTwoOffspring/"+ id,
+                url: "/selectColorTwoOffspring/" + id,
                 type: "GET",
                 dataType: "json",
                 //            data : {id: 1},
                 success: function (result) {
                     console.log(result)
-                    if(result == null){
+                    if (result == null) {
                         $("#colorId").val("")
-                    }else{
-                        $("#colorId").val(result.colorName)                        
+                    } else {
+                        $("#colorId").val(result.colorName)
                     }
                 },
-                error: function (err){
+                error: function (err) {
                     //alert("Algo salio mal");
                     //console.log(err);
                 }
             });
-        }else{
+        } else {
             //console.log("Select vacio")
             $("#colorId").val("");
         }
     });
-})
-
-
+}
 
 
 

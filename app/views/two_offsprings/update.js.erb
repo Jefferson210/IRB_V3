@@ -1,0 +1,12 @@
+<% if @two_offspring.errors.empty? %>      
+    $('#dialog').modal('toggle');
+    $('#two_offsprings_<%= @two_offspring.id %>').replaceWith('<%= j render "two_offsprings", two_offsprings: @two_offspring %>')    
+<% else %>       
+    $(".form-group").removeClass("has-error");
+    $("p.field_with_errors").remove();
+    <% @two_offspring.errors.full_messages_for(:one_offspring_id).each do |message| %>          
+        $("#one_offspring_id").closest(".form-group").addClass("has-error");
+        $("#one_offspring_id" ).after('<p class="field_with_errors"><%= message %></p>'); 
+      <% end %>           
+<% end %>
+

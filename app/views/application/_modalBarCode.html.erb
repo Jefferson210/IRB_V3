@@ -10,33 +10,33 @@
                 <div>
                     <% case model %>
                     <% when "GeneticBank" %>
-                    <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "geneticBank", options_from_collection_for_select(GeneticBank.all, "id", "code"),multiple: true %>
+                    <%= form_tag(geneticBankBarCodes_path(format: "pdf"), method: :get) do %>                    
+                    <%= select_tag "barCodeSelect", "",multiple: true%>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%>
                     <% when "Crossing" %>
-                    <%= form_tag(crossingsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "crossings", options_from_collection_for_select(Crossing.all, "id", "codeCross"),multiple: true %>
+                    <%= form_tag(crossingsBarCodes_path(format: "pdf"), method: :get) do %>                    
+                    <%= select_tag "barCodeSelect","",multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%>    
                     <% when "Seed" %>
-                    <%= form_tag(seedsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "seeds", options_from_collection_for_select(Seed.all, "id", :codeCross_numRepeat),multiple: true %>
+                    <%= form_tag(seedsBarCodes_path(format: "pdf"), method: :get) do %>                    
+                    <%= select_tag "barCodeSelect","",multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%>    
                     <% when "IrbSelection" %>
-                    <%= form_tag(irbSelectionsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "irbSelection", options_from_collection_for_select(IrbSelection.all, "id", "code"),multiple: true %>
+                    <%= form_tag(irbSelectionsBarCodes_path(format: "pdf"), method: :get) do %>                                         
+                     <%= select_tag "barCodeSelect","",multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%>  
                     <% when "SpekSelection" %>
-                    <%= form_tag(spekSelectionsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "spekSelection", options_from_collection_for_select(SpekSelection.all, "id", "code"),multiple: true %>
+                    <%= form_tag(spekSelectionsBarCodes_path(format: "pdf"), method: :get) do %>                    
+                    <%= select_tag "barCodeSelect","",multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%> 
                     <% when "ConectiflorSelection" %>
-                    <%= form_tag(conectiflorSelectionsBarCodes_path(format: "pdf"), method: :get) do %>
-                    <%= select_tag "conectiflor", options_from_collection_for_select(ConectiflorSelection.all, "id", "code"),multiple: true %>
+                    <%= form_tag(conectiflorSelectionsBarCodes_path(format: "pdf"), method: :get) do %>                    
+                    <%= select_tag "barCodeSelect","",multiple: true %>
                     <%= submit_tag "Create Bar Codes", class: "btn btn-success"%>
                     <%end%> 
                     <%end%>
