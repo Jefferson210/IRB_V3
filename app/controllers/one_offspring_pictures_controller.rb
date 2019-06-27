@@ -20,12 +20,10 @@ class OneOffspringPicturesController < ApplicationController
     def destroy
         @oneOffspring = OneOffspring.find(params[:one_offspring_id])
         @picture = @oneOffspring.one_offspring_pictures.find(params[:id])
-        if @picture.id == @oneOffspring.PictureId
-            sweetalert_error("The image is selected as the main image and can not be deleted.Change the image in the 'edit' option", 'Error', persistent: 'Ok!')               
-            redirect_to one_offspring_path(@oneOffspring)
+        if @picture.id == @oneOffspring.PictureId            
+            redirect_to one_offspring_path(@oneOffspring), :flash => {:error => "The image is selected as the main image and can not be deleted.Change the image in the 'edit' option"}   
         else
-            @picture.destroy   
-            sweetalert_success("Oops...", "Something went wrong!", "error");        
+            @picture.destroy               
             redirect_to one_offspring_path(@oneOffspring), notice: 'Picture Deleted'
         end
     end

@@ -1,0 +1,56 @@
+<tr id="irbSelection_<%= irbSelection.id %>">
+    <td>
+        <%= irbSelection.code %>
+    </td>
+    <td>
+        <%= irbSelection.location %>
+    </td>
+    <td>
+        <%= irbSelection.trademark %>
+    </td>
+    <td>
+        <%= irbSelection.denomination %>
+    </td>
+
+    <td>
+        <% if IrbSelectionsPicture.exists?(:id => irbSelection.irb_selections_picture_id) %>
+        <% arrayImage = IrbSelectionsPicture.where(id: irbSelection.irb_selections_picture_id).to_a %>
+        <% pictureFileName = arrayImage[0][:picture_file_name] %>
+        <%= image_tag("/assets/images/oneOffspring/:irbSelection.irb_selections_picture_id/"+pictureFileName,:class => "img-thumbnail") %>
+        <%else%>
+        N/A
+        <%end%>
+    </td>
+
+    <td>
+        <%= irbSelection. %>
+    </td>
+    <td>
+        <%= irbSelection. %>
+    </td>
+    <td>
+        <%= irbSelection. %>
+    </td>
+    <td>
+        <%= irbSelection. %>
+    </td>
+    <td>
+        <%= irbSelection. %>
+    </td>
+    <td>
+        <%= irbSelection. %>
+    </td>
+
+    <td>
+        <%= link_to edit_irb_selection_path(irbSelection), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to '',irb_selection_path(irbSelection),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>
+    </td>
+    <td>
+        <%= link_to "", irbSelection, remote: true, method: :delete, data: { confirm: "Delete Code: #{irbSelection.code}"}, class:'delete btn btn-default glyphicon glyphicon-trash' , :title => "Delete"%>
+    </td>
+</tr>
