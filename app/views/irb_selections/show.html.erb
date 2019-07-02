@@ -1,100 +1,19 @@
 <div class="container">
     <div class="row">
         <%= link_to 'Back', irb_selections_path ,class: "btn btn-default glyphicon glyphicon-arrow-left"%>
-        <%= link_to 'Edit', edit_irb_selection_path(@irb_selection), class: "btn btn-default glyphicon glyphicon-pencil" %> 
-        <%= render 'uploadImage', model: "IrbSelection" %>    
+        <%= render 'uploadImage', model: "IrbSelection" %>
         <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2 class="text-left"><%= @irb_selection.code %></h2>
             </div>
-            <div class="panel-body">               
-                <ul class="list-group">
-                    <div class="col-md-6">
-                        <li class="list-group item">CodeCross:
-                            <span><strong> <%= @irb_selection.three_offspring.two_offspring.one_offspring.germination.seed.crossing.codeCross%>-<%=@irb_selection.three_offspring.two_offspring.one_offspring.individual%></strong></span>
-                        </li>
-
-                        <li class="list-group item">Code:
-                            <span><strong> <%= @irb_selection.code %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Location:
-                            <span><strong><%= @irb_selection.location %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Trademark:
-                            <span><strong><%= @irb_selection.trademark %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Denomination:
-                            <span><strong> <%= @irb_selection.denomination %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Year:
-                            <span><strong><%= @irb_selection.year %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Status:
-                            <span><strong>   <%= @irb_selection.status %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Numplants:
-                            <span><strong> <%= @irb_selection.numPlants %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Color:
-                            <span><strong><%= @irb_selection.color%></strong></span>
-                        </li>
-                    </div>
-                    <div class="col-md-6">
-                        <li class="list-group item">Scent:
-                            <span><strong> <%= @irb_selection.scent %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Headsize:
-                            <span><strong><%= @irb_selection.headSize %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Numpetals:
-                            <span><strong><%= @irb_selection.numPetals %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Steamlenght:
-                            <span><strong><%= @irb_selection.steamLenght %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Production:
-                            <span><strong><%= @irb_selection.production %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Opening:
-                            <span><strong>  <%= @irb_selection.opening %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Abnormality:
-                            <span><strong><%= @irb_selection.abnormality %></strong></span>
-                        </li>
-
-                        <li class="list-group item">Remarks:
-                            <span><strong> <%= @irb_selection.remarks %></strong></span>
-                        </li> 
-
-                        <li class="list-group item">Main Picture:
-                            <span><strong> 
-                                <%= @irb_selection.irb_selections_picture ? @irb_selection.irb_selections_picture.picture_file_name : "None" %>
-                                </strong></span>
-                        </li>
-                    </div>
-                </ul>
-            </div>
+            <div class="panel-body"></div>
             <div class="gallery">
                 <% @irb_selection.irb_selections_pictures.each do |picture| %>
                 <figure>
                     <%if picture.picture.url() != "/pictures/original/missing.png" %>
-                    <%= image_tag picture.picture.url(), :class=>"img-thumbnail" %>  
-                    <%= picture.picture_file_name %>   
-                    <%= picture.picture_file_name %>
+                    <%= image_tag picture.picture.url(), :class=>"img-responsive" %>
+                    <%= picture.picture_file_name %>                    
                     <%= link_to [picture.irb_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
                     <i class="glyphicon glyphicon-trash"></i>
                     <%end%>
@@ -102,26 +21,6 @@
                 </figure>
                 <%end%>
             </div>
-            <div class="panel-footer">
-                <%= link_to 'Back', irb_selections_path ,class: "btn btn-default glyphicon glyphicon-arrow-left"%>
-                <%= link_to 'Edit', edit_irb_selection_path(@irb_selection), class: "btn btn-default glyphicon glyphicon-pencil" %> 
-            </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

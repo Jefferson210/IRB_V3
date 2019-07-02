@@ -55,11 +55,18 @@ class IrbSelectionsController < ApplicationController
 
         respond_to do |format|
             if @irb_selection.save
+                if params[:images]              
+                    params[:images].each { |image|
+                      @irb_selection.irb_selection_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @irb_selection, notice: 'Irb selection was successfully created.' }
                 format.json { render :show, status: :created, location: @irb_selection }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @irb_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -69,11 +76,18 @@ class IrbSelectionsController < ApplicationController
     def update
         respond_to do |format|
             if @irb_selection.update(irb_selection_params)
+                if params[:images]              
+                    params[:images].each { |image|
+                      @irb_selection.irb_selection_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @irb_selection, notice: 'Irb selection was successfully updated.' }
                 format.json { render :show, status: :ok, location: @irb_selection }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @irb_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -81,10 +95,18 @@ class IrbSelectionsController < ApplicationController
     # DELETE /irb_selections/1
     # DELETE /irb_selections/1.json
     def destroy
+        begin
         @irb_selection.destroy
         respond_to do |format|
-            format.html { redirect_to irb_selections_url, notice: 'Irb selection was successfully destroyed.' }
+            format.html { redirect_to irb_selections_url, notice: 'IRB Selection was successfully destroyed.' }
             format.json { head :no_content }
+            format.js
+        end
+        rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
+            respond_to do |format|
+                format.html {redirect_to irb_selections_url}
+            end
         end
     end
 

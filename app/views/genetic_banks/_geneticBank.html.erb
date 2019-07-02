@@ -11,6 +11,17 @@
     <td>
         <%= geneticBank.denomination %>
     </td>
+
+    <td>
+        <% if GeneticBankPicture.exists?(:id => geneticBank.PictureId) %>
+        <% arrayImage = GeneticBankPicture.where(id: geneticBank.PictureId).to_a %>
+        <% pictureFileName = arrayImage[0][:picture_file_name] %>
+        <%= image_tag("/assets/images/geneticBank/"+geneticBank.PictureId.to_s+"/"+pictureFileName,:class => "img-responsive") %>
+        <%else%>
+        N/A
+        <%end%>
+    </td>
+
     <td>
         <% unless geneticBank.color.nil? %>
         <%= geneticBank.color.colorName %>
@@ -25,9 +36,9 @@
     <td>
         <%= geneticBank.status %>
     </td>
-    <td>
+    <!-- <td>
         <%= geneticBank.scent %>
-    </td>
+    </td> -->
     <td>
         <%= geneticBank.headSize %>
     </td>
@@ -40,14 +51,14 @@
     <td>
         <% geneticBank.opening %>
     </td> -->
-    <td>        
+    <td>
         <%= link_to edit_genetic_bank_path(geneticBank), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
         <span class="glyphicon glyphicon-pencil"></span>
-        <span class="glyphicon glyphicon-eye-open"></span>             
+        <span class="glyphicon glyphicon-eye-open"></span>
         <% end %>
     </td>
     <td>
-        <%= link_to '',genetic_bank_path(geneticBank),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>        
+        <%= link_to '',genetic_bank_path(geneticBank),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>
     </td>
     <td>
         <%= link_to "", geneticBank, remote: true, method: :delete, data: { confirm: "Delete Code: #{geneticBank.code}"}, class:'delete btn btn-default glyphicon glyphicon-trash' , :title => "Delete"%>

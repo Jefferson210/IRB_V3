@@ -1,0 +1,28 @@
+<% if @irb_selection.errors.empty? %>    
+    $('#dialog').modal('toggle');
+    $('#irbSelectionBody').append('<%= j render "irb_selection", irbSelection: @irb_selection %>');      
+    window.location.reload();
+<% else %>       
+  $(".form-group").removeClass("has-error");
+  $("p.field_with_errors").remove(); 
+
+  <% @irb_selection.errors.full_messages_for(:three_offspring_id).each do |message| %>          
+    $("#three_offspring_id").closest(".form-group").addClass("has-error");
+    $("#three_offspring_id" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+
+  <% @irb_selection.errors.full_messages_for(:code).each do |message| %>          
+    $("#irb_selection_code").closest(".form-group").addClass("has-error");
+    $("#irb_selection_code" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+
+  <% @irb_selection.errors.full_messages_for(:trademark).each do |message| %>          
+    $("#irb_selection_trademark").closest(".form-group").addClass("has-error");
+    $("#irb_selection_trademark" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+
+  <% @irb_selection.errors.full_messages_for(:denomination).each do |message| %>          
+    $("#irb_selection_denomination").closest(".form-group").addClass("has-error");
+    $("#irb_selection_denomination").after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+<% end %>
