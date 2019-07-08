@@ -24,7 +24,7 @@ class ConectiflorSelectionsController < ApplicationController
         @pictures = ConectiflorPicture.all
         @conectiflorSelectionsGrid = initialize_grid(ConectiflorSelection,
             include:[:color])
-        #                        group: ['spek_selections.code'])
+        #                        group: ['conectiflor_selections.code'])
         @conectiflorImagesPath = "/assets/images/conectiflorSelections/"
     end
 
@@ -47,13 +47,20 @@ class ConectiflorSelectionsController < ApplicationController
     def create
         @conectiflor_selection = ConectiflorSelection.new(conectiflor_selection_params)
 
-        respond_to do |format|
+        respond_to do |format|             
             if @conectiflor_selection.save
+                if params[:images]              
+                    params[:images].each { |image|
+                      @conectiflor_selection.conectiflor_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @conectiflor_selection, notice: 'Conectiflor selection was successfully created.' }
                 format.json { render :show, status: :created, location: @conectiflor_selection }
+                format.js
             else
                 format.html { render :new }
                 format.json { render json: @conectiflor_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -63,11 +70,18 @@ class ConectiflorSelectionsController < ApplicationController
     def update
         respond_to do |format|
             if @conectiflor_selection.update(conectiflor_selection_params)
+                if params[:images]              
+                    params[:images].each { |image|
+                      @conectiflor_selection.conectiflor_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @conectiflor_selection, notice: 'Conectiflor selection was successfully updated.' }
                 format.json { render :show, status: :ok, location: @conectiflor_selection }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @conectiflor_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -75,10 +89,17 @@ class ConectiflorSelectionsController < ApplicationController
     # DELETE /conectiflor_selections/1
     # DELETE /conectiflor_selections/1.json
     def destroy
+        begin
         @conectiflor_selection.destroy
         respond_to do |format|
             format.html { redirect_to conectiflor_selections_url, notice: 'Conectiflor selection was successfully destroyed.' }
             format.json { head :no_content }
+        end    
+        rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
+            respond_to do |format|
+                format.html {redirect_to conectiflor_selections_url}
+            end
         end
     end
 

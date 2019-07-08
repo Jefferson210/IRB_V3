@@ -57,7 +57,7 @@ class IrbSelectionsController < ApplicationController
             if @irb_selection.save
                 if params[:images]              
                     params[:images].each { |image|
-                      @irb_selection.irb_selection_pictures.create(picture: image)
+                      @irb_selection.irb_selections_pictures.create(picture: image)
                     }
                 end 
                 format.html { redirect_to @irb_selection, notice: 'Irb selection was successfully created.' }
@@ -78,7 +78,7 @@ class IrbSelectionsController < ApplicationController
             if @irb_selection.update(irb_selection_params)
                 if params[:images]              
                     params[:images].each { |image|
-                      @irb_selection.irb_selection_pictures.create(picture: image)
+                      @irb_selection.irb_selections_pictures.create(picture: image)
                     }
                 end 
                 format.html { redirect_to @irb_selection, notice: 'Irb selection was successfully updated.' }

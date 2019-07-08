@@ -1,0 +1,75 @@
+<tr id="spekSelection_<%= spekSelection.id %>">
+        <td>
+            <%= spekSelection.code %>
+        </td>
+        <td>
+            <%= spekSelection.location %>
+        </td>
+        <!-- <td>
+            <%= spekSelection.trademark %>
+        </td> -->
+        <td>
+            <%= spekSelection.denomination %>
+        </td>
+    
+        <td>
+            <% if SpekSelectionsPicture.exists?(:id => spekSelection.spek_selections_picture_id) %>
+            <% arrayImage = SpekSelectionsPicture.where(id: spekSelection.spek_selections_picture_id).to_a %>
+            <% pictureFileName = arrayImage[0][:picture_file_name] %>
+            <%= image_tag("/assets/images/spekSelections/"+spekSelection.spek_selections_picture_id.to_s+"/"+pictureFileName,:class => "img-responsive") %>
+            <%else%>
+            N/A
+            <%end%>
+        </td>
+    
+        <td>
+            <%= spekSelection.year %>
+        </td>
+        <td>
+            <%= spekSelection.status %>
+        </td>
+        <!-- <td>
+            <%= spekSelection.numPlants %>
+        </td> -->
+        <td>
+            <% unless spekSelection.color.nil? %>
+            <%= spekSelection.color.colorName %>
+            <%end%>
+        </td>       
+        <td>
+            <%= spekSelection.headSize %>
+        </td>
+    
+        <!-- <td>
+            <%= spekSelection.numPetals %>
+        </td> -->   
+    
+        <td>
+            <%= spekSelection.production %>
+        </td>
+    
+        <!-- <td>
+            <%= spekSelection.opening %>
+        </td> -->
+    
+        <!-- <td>
+            <%= spekSelection.abnormality %>
+        </td>  -->
+    
+        <!-- <td>
+            <%= spekSelection.remarks %>
+        </td>     -->
+    
+        <td>
+            <%= link_to edit_spek_selection_path(spekSelection), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-eye-open"></span>
+            <% end %>
+        </td>
+        <td>
+            <%= link_to '',spek_selection_path(spekSelection),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>
+        </td>
+        <td>
+            <%= link_to "", spekSelection, remote: true, method: :delete, data: { confirm: "Delete Code: #{spekSelection.code}"}, class:'delete btn btn-default glyphicon glyphicon-trash' , :title => "Delete"%>
+        </td>
+    </tr>

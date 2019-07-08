@@ -1,0 +1,75 @@
+<tr id="conectiflorSelection_<%= conectiflorSelection.id %>">
+    <td>
+        <%= conectiflorSelection.code %>
+    </td>
+    <td>
+        <%= conectiflorSelection.location %>
+    </td>
+    <!-- <td>
+        <%= conectiflorSelection.trademark %>
+    </td> -->
+    <td>
+        <%= conectiflorSelection.denomination %>
+    </td>
+
+    <td>
+        <% if ConectiflorPicture.exists?(:id => conectiflorSelection.conectiflor_picture_id) %>
+        <% arrayImage = ConectiflorPicture.where(id: conectiflorSelection.conectiflor_picture_id).to_a %>
+        <% pictureFileName = arrayImage[0][:picture_file_name] %>
+        <%= image_tag("/assets/images/conectiflorSelections/"+conectiflorSelection.conectiflor_picture_id.to_s+"/"+pictureFileName,:class => "img-responsive") %>
+        <%else%>
+        N/A
+        <%end%>
+    </td>
+
+    <td>
+        <%= conectiflorSelection.year %>
+    </td>
+    <td>
+        <%= conectiflorSelection.status %>
+    </td>
+    <!-- <td>
+        <%= conectiflorSelection.numPlants %>
+    </td> -->
+    <td>
+        <% unless conectiflorSelection.color.nil? %>
+        <%= conectiflorSelection.color.colorName %>
+        <%end%>
+    </td>       
+    <td>
+        <%= conectiflorSelection.headSize %>
+    </td>
+
+    <!-- <td>
+        <%= conectiflorSelection.numPetals %>
+    </td> -->   
+
+    <td>
+        <%= conectiflorSelection.production %>
+    </td>
+
+    <!-- <td>
+        <%= conectiflorSelection.opening %>
+    </td> -->
+
+    <!-- <td>
+        <%= conectiflorSelection.abnormality %>
+    </td>  -->
+
+    <!-- <td>
+        <%= conectiflorSelection.remarks %>
+    </td>     -->
+
+    <td>
+        <%= link_to edit_conectiflor_selection_path(conectiflorSelection), remote: true,class:"btn btn-default", :title => "Edit/View" do %>
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="glyphicon glyphicon-eye-open"></span>
+        <% end %>
+    </td>
+    <td>
+        <%= link_to '',conectiflor_selection_path(conectiflorSelection),class:"btn btn-default glyphicon glyphicon-picture", :title => "Gallery" %>
+    </td>
+    <td>
+        <%= link_to "", conectiflorSelection, remote: true, method: :delete, data: { confirm: "Delete Code: #{conectiflorSelection.code}"}, class:'delete btn btn-default glyphicon glyphicon-trash' , :title => "Delete"%>
+    </td>
+</tr>

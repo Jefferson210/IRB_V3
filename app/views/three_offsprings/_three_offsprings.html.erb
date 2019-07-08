@@ -7,7 +7,7 @@
         <% if ThreeOffspringPicture.exists?(:id => three_offsprings.PictureId) %>
         <% arrayImage = ThreeOffspringPicture.where(id: three_offsprings.PictureId).to_a %>
         <% pictureFileName = arrayImage[0][:picture_file_name] %>
-        <%= image_tag("/assets/images/threeOffspring/"+pictureFileName,:class => "img-thumbnail") %>
+        <%= image_tag("/assets/images/threeOffspring/"+three_offsprings.PictureId.to_s+"/"+pictureFileName,:class => "img-thumbnail") %>
         <%else%>
         N/A
         <%end%>

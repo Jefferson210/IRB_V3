@@ -61,6 +61,10 @@
             <%= f.label :numPetals %>
             <%= f.number_field :numPetals,:class=>"form-control", :min => 1  %>
         </div>
+        <div class="form-group">
+            <%= f.label :pictures %>
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+        </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">

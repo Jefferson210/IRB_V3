@@ -1,6 +1,6 @@
 class IrbSelection < ActiveRecord::Base    
     belongs_to :three_offspring
-    belongs_to :irb_selections_picture
+    # belongs_to :irb_selections_picture
 
     #    relacion para agregar varias imagenes a una variedad
     has_many :irb_selections_pictures, dependent: :destroy

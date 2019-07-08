@@ -48,11 +48,18 @@ class SpekSelectionsController < ApplicationController
 
         respond_to do |format|
             if @spek_selection.save
+                if params[:images]              
+                    params[:images].each { |image|
+                      @spek_selection.spek_selections_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @spek_selection, notice: 'Spek selection was successfully created.' }
                 format.json { render :show, status: :created, location: @spek_selection }
+                format.js   
             else
                 format.html { render :new }
                 format.json { render json: @spek_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -62,11 +69,18 @@ class SpekSelectionsController < ApplicationController
     def update
         respond_to do |format|
             if @spek_selection.update(spek_selection_params)
+                if params[:images]              
+                    params[:images].each { |image|
+                      @spek_selection.spek_selections_pictures.create(picture: image)
+                    }
+                end 
                 format.html { redirect_to @spek_selection, notice: 'Spek selection was successfully updated.' }
                 format.json { render :show, status: :ok, location: @spek_selection }
+                format.js
             else
                 format.html { render :edit }
                 format.json { render json: @spek_selection.errors, status: :unprocessable_entity }
+                format.js
             end
         end
     end
@@ -74,10 +88,18 @@ class SpekSelectionsController < ApplicationController
     # DELETE /spek_selections/1
     # DELETE /spek_selections/1.json
     def destroy
+        begin
         @spek_selection.destroy
         respond_to do |format|
             format.html { redirect_to spek_selections_url, notice: 'Spek selection was successfully destroyed.' }
             format.json { head :no_content }
+            format.js
+        end
+        rescue ActiveRecord::DeleteRestrictionError => e
+            sweetalert_error("#{e}", 'Error', persistent: 'Ok!')   
+            respond_to do |format|
+                format.html {redirect_to spek_selections_url}
+            end
         end
     end
 

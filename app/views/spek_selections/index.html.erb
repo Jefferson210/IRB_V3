@@ -1,4 +1,4 @@
-<%= render 'optionsMenu', model: "SpekSelection" %>
+<!-- <%= render 'optionsMenu', model: "SpekSelection" %>
 <%= render 'modalBarCode', model: "SpekSelection" %>
 <%=
     grid(@spekSelectionsGrid) do |spek|    
@@ -38,7 +38,45 @@
             link_to("",spek_selection_path(spekSelection.id), data: {confirm: 'Are you sure?'}, method: :delete,:class => 'deleteButton',:class => "btn btn-default glyphicon glyphicon-trash")
         end
     end
--%>
+-%> -->
 
-
+<%= render 'optionsMenu', model: "SpekSelection" %>
+<%= render 'modalBarCode', model: "SpekSelection" %>
+<div class="panel panel-primary filterable">
+    <div class="panel-heading">
+        <h2 class="panel-title">SPEK Selections</h2>
+    </div>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped filterTable">
+            <button type="button" class="btn btn-primary clearFilters" aria-label="Left Align">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset Filters
+            </button>
+            <br>
+            <br>
+            <thead>
+                <tr class="filters">
+                    <th>Code</th>
+                    <th>Location </th>
+                    <th>Denomination</th>
+                    <th>Picture</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                    <th>Color</th>
+                    <th>Head Size</th>                    
+                    <th>Production</th>                    
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
+                    <th class="buttonAction"></th>
+                </tr>
+            </thead>
+            <tbody id="spekSelectionBody">
+                <% @spek_selections.each do |spekSelection| %>
+                <%= render "spek_selection", spekSelection: spekSelection %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<%= render 'dialog' %>
 

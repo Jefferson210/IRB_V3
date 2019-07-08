@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <%= link_to 'Back', spek_selections_path,class: "btn btn-default glyphicon glyphicon-arrow-left" %>
         <%= link_to 'Edit', edit_spek_selection_path(@spek_selection),class: "btn btn-default glyphicon glyphicon-pencil" %> 
@@ -110,20 +110,31 @@
             </div>
         </div>
     </div>
+</div> -->
+<div class="container">
+    <div class="row">
+        <%= link_to 'Back', spek_selections_path ,class: "btn btn-default glyphicon glyphicon-arrow-left"%>
+        <%= render 'uploadImage', model: "SpekSelection" %>
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h2 class="text-left"><%= @spek_selection.code %></h2>
+            </div>
+            <div class="panel-body">
+                <div class="gallery">
+                    <% @spek_selection.spek_selections_pictures.each do |picture| %>
+                    <figure>
+                        <%if picture.picture.url() != "/pictures/original/missing.png" %>
+                        <%= image_tag picture.picture.url(), :class=>"img-responsive" %>
+                        <%= picture.picture_file_name %>
+                        <%= link_to [picture.spek_selection,picture],method: :delete,data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-sm" do %>
+                        <i class="glyphicon glyphicon-trash"></i>
+                        <%end%>
+                        <%end%>
+                    </figure>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

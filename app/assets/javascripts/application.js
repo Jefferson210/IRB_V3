@@ -43,7 +43,7 @@ $(document).on('turbolinks:load', function () {
         if (!$(this).hasClass("buttonAction")) {
             $(this).html('<input class="form-control" size="5" type="text"/>');
         }
-
+        
         $('input', this).on('keyup change', function () {
             if (table.column(i).search() !== this.value) {
                 table

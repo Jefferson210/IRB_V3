@@ -1,0 +1,22 @@
+<% if @conectiflor_selection.errors.empty? %>      
+    $('#dialog').modal('toggle');
+    $('#conectiflorSelection_<%= @conectiflor_selection.id %>').replaceWith('<%= j render "conectiflor_selection", conectiflorSelection: @conectiflor_selection %>')      
+<% else %>       
+    $(".form-group").removeClass("has-error");
+    $("p.field_with_errors").remove();
+     
+    <% @conectiflor_selection.errors.full_messages_for(:code).each do |message| %>          
+        $("#conectiflor_selection_code").closest(".form-group").addClass("has-error");
+        $("#conectiflor_selection_code" ).after('<p class="field_with_errors"><%= message %></p>'); 
+      <% end %>       
+    
+      <% @conectiflor_selection.errors.full_messages_for(:trademark).each do |message| %>          
+        $("#conectiflor_selection_trademark").closest(".form-group").addClass("has-error");
+        $("#conectiflor_selection_trademark" ).after('<p class="field_with_errors"><%= message %></p>'); 
+      <% end %>  
+    
+      <% @conectiflor_selection.errors.full_messages_for(:denomination).each do |message| %>          
+        $("#conectiflor_selection_denomination").closest(".form-group").addClass("has-error");
+        $("#conectiflor_selection_denomination").after('<p class="field_with_errors"><%= message %></p>'); 
+      <% end %> 
+<% end %>

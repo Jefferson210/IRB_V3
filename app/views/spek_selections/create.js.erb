@@ -1,0 +1,23 @@
+<% if @spek_selection.errors.empty? %>    
+    $('#dialog').modal('toggle');
+    $('#spekSelectionBody').append('<%= j render "spek_selection", spekSelection: @spek_selection %>');          
+<% else %>       
+  $(".form-group").removeClass("has-error");
+  $("p.field_with_errors").remove(); 
+
+  <% @spek_selection.errors.full_messages_for(:code).each do |message| %>          
+    $("#spek_selection_code").closest(".form-group").addClass("has-error");
+    $("#spek_selection_code" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+ 
+
+  <% @spek_selection.errors.full_messages_for(:trademark).each do |message| %>          
+    $("#spek_selection_trademark").closest(".form-group").addClass("has-error");
+    $("#spek_selection_trademark" ).after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+
+  <% @spek_selection.errors.full_messages_for(:denomination).each do |message| %>          
+    $("#spek_selection_denomination").closest(".form-group").addClass("has-error");
+    $("#spek_selection_denomination").after('<p class="field_with_errors"><%= message %></p>'); 
+  <% end %>  
+<% end %>
