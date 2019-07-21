@@ -1,7 +1,6 @@
 <% if @crossing.errors.empty? %>    
     $('#dialog').modal('toggle');
-    $('#crossingsBody').append('<%= j render (@crossing) %>');
-    window.location.reload();
+    $('#crossingsBody').append('<%= j render (@crossing) %>');    
 <% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();

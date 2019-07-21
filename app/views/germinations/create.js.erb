@@ -1,7 +1,6 @@
 <% if @germination.errors.empty? %>    
     $('#dialog').modal('toggle');
     $('#germinationsBody').append('<%= j render (@germination) %>');
-    window.location.reload();
 <% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();

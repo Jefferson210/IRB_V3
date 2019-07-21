@@ -1,7 +1,6 @@
 <% if @irb_selection.errors.empty? %>      
     $('#dialog').modal('toggle');
-    $('#irbSelection_<%= @irb_selection.id %>').replaceWith('<%= j render "irb_selection", irbSelection: @irb_selection %>')  
-    window.location.reload();
+    $('#irbSelection_<%= @irb_selection.id %>').replaceWith('<%= j render "irb_selection", irbSelection: @irb_selection %>');  
 <% else %>       
     $(".form-group").removeClass("has-error");
     $("p.field_with_errors").remove();

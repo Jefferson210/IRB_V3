@@ -1,7 +1,6 @@
 <% if @germination.errors.empty? %>      
     $('#dialog').modal('toggle');
     $('#germination_<%= @germination.id %>').replaceWith('<%= j render "germination", germination: @germination %>');
-    window.location.reload();
 <% else %>       
     $(".form-group").removeClass("has-error");
     $("p.field_with_errors").remove();

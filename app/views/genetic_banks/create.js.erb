@@ -1,7 +1,6 @@
 <% if @genetic_bank.errors.empty? %>  
     $('#dialog').modal('toggle');
-    $('#geneticBankBody').append('<%= j render "geneticBank", geneticBank: @genetic_bank %>');    
-    window.location.reload();
+    $('#geneticBankBody').append('<%= j render "geneticBank", geneticBank: @genetic_bank %>');        
 <% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();

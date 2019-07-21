@@ -1,7 +1,6 @@
 <% if @seed.errors.empty? %>    
     $('#dialog').modal('toggle');
-    $('#seedsBody').append('<%= j render (@seed) %>');
-    window.location.reload();
+    $('#seedsBody').append('<%= j render (@seed) %>');    
 <% else %>       
   $(".form-group").removeClass("has-error");
   $("p.field_with_errors").remove();
